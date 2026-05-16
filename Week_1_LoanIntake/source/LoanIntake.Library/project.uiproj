@@ -1,0 +1,6 @@
+{
+  "Name": "LoanIntake.Library",
+  "ProjectType": "Library",
+  "Description": "Blank Reusable workflow library wrapping the three external services consumed by loan intake automation: email parsing, PDF document validation, and core banking customer lookups.",
+  "MainFile": "NewActivity.xaml"
+}

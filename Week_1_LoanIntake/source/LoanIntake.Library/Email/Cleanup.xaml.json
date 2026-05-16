@@ -1,0 +1,33 @@
+{
+  "DisplayName": "Cleanup",
+  "Tooltip": null,
+  "HelpLink": null,
+  "Color": null,
+  "OriginalIconFileName": null,
+  "Arguments": [
+    {
+      "Name": "in_WorkingDirectory",
+      "DisplayName": "in_WorkingDirectory",
+      "Category": null,
+      "Tooltip": null,
+      "Placeholder": null,
+      "Widget": null,
+      "IsRequired": false,
+      "IsPrincipal": true,
+      "ArgumentType": 0,
+      "DataSourceItems": null
+    },
+    {
+      "Name": "in_DeleteFilesOlderThanHours",
+      "DisplayName": "in_DeleteFilesOlderThanHours",
+      "Category": null,
+      "Tooltip": null,
+      "Placeholder": "24",
+      "Widget": null,
+      "IsRequired": false,
+      "IsPrincipal": true,
+      "ArgumentType": 0,
+      "DataSourceItems": null
+    }
+  ]
+}
