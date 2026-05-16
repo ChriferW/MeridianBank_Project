@@ -1,0 +1,6 @@
+{
+  "Name": "ClaimsIntake_DU document processing automation",
+  "MainFile": "Main.xaml",
+  "ProjectType": "Process",
+  "Description": ""
+}

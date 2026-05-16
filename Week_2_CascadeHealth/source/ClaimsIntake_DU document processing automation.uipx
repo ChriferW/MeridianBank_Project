@@ -1,0 +1,10 @@
+{
+  "SolutionId": "2f3a0d26-e1e4-4412-a1be-07656ab1664f",
+  "Projects": [
+    {
+      "Id": "5f312117-0eb6-482c-a745-d3c0a179f841",
+      "Type": "Process",
+      "ProjectRelativePath": "ClaimsIntake_DU document processing automation/project.uiproj"
+    }
+  ]
+}

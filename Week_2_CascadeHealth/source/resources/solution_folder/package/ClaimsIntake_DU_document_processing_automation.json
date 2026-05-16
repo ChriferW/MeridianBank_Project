@@ -1,0 +1,26 @@
+{
+  "docVersion": "1.0.0",
+  "resource": {
+    "name": "ClaimsIntake_DU document processing automation",
+    "kind": "package",
+    "apiVersion": "orchestrator.uipath.com/v1",
+    "projectKey": "5f312117-0eb6-482c-a745-d3c0a179f841",
+    "isOverridable": true,
+    "dependencies": [],
+    "runtimeDependencies": [],
+    "files": [],
+    "folders": [
+      {
+        "fullyQualifiedName": "solution_folder"
+      }
+    ],
+    "spec": {
+      "fileName": null,
+      "fileReference": null,
+      "name": "ClaimsIntake_DU document processing automation",
+      "description": null
+    },
+    "locks": [],
+    "key": "8704726b-8b52-4f19-9560-7d3f6d36b028"
+  }
+}

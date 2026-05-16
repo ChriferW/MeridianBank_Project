@@ -1,0 +1,196 @@
+<Activity mc:Ignorable="sap2010" x:Class="Main"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:njl="clr-namespace:Newtonsoft.Json.Linq;assembly=Newtonsoft.Json"
+ xmlns:p="http://schemas.uipath.com/workflow/activities/intelligentocr"
+ xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib"
+ xmlns:this="clr-namespace:"
+ xmlns:ucas="clr-namespace:UiPath.Core.Activities.Storage;assembly=UiPath.System.Activities"
+ xmlns:ui="http://schemas.uipath.com/workflow/activities"
+ xmlns:uisad="clr-namespace:UiPath.IntelligentOCR.StudioWeb.Activities.DataExtraction;assembly=UiPath.IntelligentOCR.StudioWeb.Activities"
+ xmlns:uisasevb="clr-namespace:UiPath.IntelligentOCR.StudioWeb.Activities.SWEntities.ExtendedExtractionResultsForDocumentData.V1CascadeClaimV1.Bundle;assembly=ExtendedExtractionRe.CustomEntitiesCascadeClaim"
+ xmlns:upr="clr-namespace:UiPath.Platform.ResourceHandling;assembly=UiPath.Platform"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_document_reference" Type="InArgument(x:String)" />
+    <x:Property Name="in_claim_id" Type="InArgument(x:String)" />
+    <x:Property Name="out_claim_id" Type="OutArgument(x:String)" />
+    <x:Property Name="out_member_id" Type="OutArgument(x:String)" />
+    <x:Property Name="out_date_of_birth" Type="OutArgument(s:DateOnly)" />
+    <x:Property Name="out_policy_number" Type="OutArgument(x:String)" />
+    <x:Property Name="out_provider_npi" Type="OutArgument(x:String)" />
+    <x:Property Name="out_provider_name" Type="OutArgument(x:String)" />
+    <x:Property Name="out_provider_narrative" Type="OutArgument(x:String)" />
+    <x:Property Name="out_service_lines" Type="OutArgument(njl:JArray)" />
+    <x:Property Name="out_total_charges" Type="OutArgument(x:Double)" />
+  </x:Members>
+  <this:Main.in_document_reference>
+    <InArgument x:TypeArguments="x:String" />
+  </this:Main.in_document_reference>
+  <this:Main.in_claim_id>
+    <InArgument x:TypeArguments="x:String" />
+  </this:Main.in_claim_id>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="42">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>UiPath.DU.Orchestrator.Client.Models</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>UiPath.IntelligentOCR.StudioWeb.Activities.DataExtraction</x:String>
+      <x:String>UiPath.IntelligentOCR.StudioWeb.Activities.DocumentClassification</x:String>
+      <x:String>UiPath.DocumentProcessing.Contracts.Actions</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>UiPath.IntelligentOCR.Actions.Abstractions</x:String>
+      <x:String>UiPath.IntelligentOCR.StudioWeb.Activities.DataValidation</x:String>
+      <x:String>UiPath.Platform.ResourceHandling</x:String>
+      <x:String>UiPath.DocumentProcessing.Contracts.DataExtraction</x:String>
+      <x:String>UiPath.DocumentProcessing.Contracts.Results</x:String>
+      <x:String>UiPath.DocumentProcessing.Contracts.Dom</x:String>
+      <x:String>UiPath.IntelligentOCR.StudioWeb.Activities</x:String>
+      <x:String>UiPath.DocumentProcessing.Contracts</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>UiPath.DocumentProcessing.Contracts.Classification</x:String>
+      <x:String>UiPath.DocumentUnderstanding.ML.Activities</x:String>
+      <x:String>UiPath.Core.Activities.Storage</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>UiPath.Core.Activities.Orchestrator</x:String>
+      <x:String>UiPath.DU.Shared.DuAppClient</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+      <x:String>UiPath.IntelligentOCR.StudioWeb.Activities.SWEntities.ExtendedExtractionResultsForDocumentData.V1CascadeClaimV1.Bundle</x:String>
+      <x:String>Newtonsoft.Json</x:String>
+      <x:String>Newtonsoft.Json.Linq</x:String>
+      <x:String>System.Collections.Specialized</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="32">
+      <AssemblyReference>ExtendedExtractionRe.CustomEntitiesCascadeClaim</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Net.Primitives</AssemblyReference>
+      <AssemblyReference>System.Runtime.InteropServices</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>UiPath.IntelligentOCR.StudioWeb.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.DocumentProcessing.Contracts</AssemblyReference>
+      <AssemblyReference>UiPath.DocumentUnderstanding.ML.Activities</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic.Core</AssemblyReference>
+      <AssemblyReference>UiPath.IntelligentOCR</AssemblyReference>
+      <AssemblyReference>Newtonsoft.Json</AssemblyReference>
+      <AssemblyReference>System.Linq.Expressions</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:WorkflowViewState.IdRef="Sequence_2">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="scg:IEnumerable(ucas:StorageFileInfo)" Name="sampleFiles" />
+      <Variable x:TypeArguments="upr:ILocalResource" Name="downloadedFile" />
+      <Variable x:TypeArguments="uisad:IDocumentData(uisasevb:V1CascadeClaimV1)" Name="cascadeClaimDocumentData" />
+    </Sequence.Variables>
+    <ui:ManualTrigger Result="{x:Null}" DisplayName="Manual Trigger" sap2010:WorkflowViewState.IdRef="ManualTrigger_1" />
+    <ucas:DownloadStorageFile Destination="{x:Null}" TimeoutMS="{x:Null}" DisplayName="Download sample file" sap2010:WorkflowViewState.IdRef="DownloadStorageFile_1" Path="[in_document_reference]" Result="[downloadedFile]" StorageBucketName="du_ClaimsIntake_DU_resources" />
+    <p:ExtractDocumentDataWithDocumentData x:TypeArguments="uisasevb:V1CascadeClaimV1" DocumentBounds="{x:Null}" DocumentObjectModel="{x:Null}" DocumentPath="{x:Null}" DocumentText="{x:Null}" ExtractorDocumentType="{x:Null}" ExtractorResult="{x:Null}" PersistenceId="{x:Null}" PredictionId="{x:Null}" Prompt="{x:Null}" RuntimeAssetPath="{x:Null}" RuntimeTenantUrl="{x:Null}" ApplyAutoValidation="False" DisplayName="Extract Document Data (CascadeClaim)" DocType="dde6f774-0844-f111-8ef3-0022488ac15f_OneClickMl" ExtractionResults="[cascadeClaimDocumentData]" FileInput="[downloadedFile]" GenerateData="True" sap2010:WorkflowViewState.IdRef="ExtractDocumentDataWithDocumentData`1_1" ModernDocumentTypeId="b1a4e4b9-e943-f111-8ef2-00224888e0ba" ModernDocumentTypeName="CascadeClaim" ProjectId="e189825e-e543-f111-8ef3-6045bdf35767" ProjectTag="Staging" ProjectVersionName="Staging" ProjectVersionNumber="1" TimeoutInSeconds="3600">
+      <p:ExtractDocumentDataWithDocumentData.AutoValidationConfidenceThreshold>
+        <InArgument x:TypeArguments="s:Nullable(x:Int32)">
+          <Literal x:TypeArguments="s:Nullable(x:Int32)" Value="0" />
+        </InArgument>
+      </p:ExtractDocumentDataWithDocumentData.AutoValidationConfidenceThreshold>
+      <p:ExtractDocumentDataWithDocumentData.GptPromptWithVariables>
+        <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
+      </p:ExtractDocumentDataWithDocumentData.GptPromptWithVariables>
+    </p:ExtractDocumentDataWithDocumentData>
+    <Assign DisplayName="Assign Variable Value" sap2010:WorkflowViewState.IdRef="Assign_2">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[out_claim_id]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">[cascadeClaimDocumentData.Data.ClaimId.Value]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <Assign DisplayName="Assign Variable Value 2" sap2010:WorkflowViewState.IdRef="Assign_3">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[out_member_id]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">[cascadeClaimDocumentData.Data.MemberId.Value]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <Assign DisplayName="Assign Variable Value 3" sap2010:WorkflowViewState.IdRef="Assign_4">
+      <Assign.To>
+        <OutArgument x:TypeArguments="s:DateOnly">[out_date_of_birth]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="s:DateOnly">[DateOnly.FromDateTime(cascadeClaimDocumentData.Data.DateOfBirth.Value.Value)]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <Assign DisplayName="Assign Variable Value 4" sap2010:WorkflowViewState.IdRef="Assign_5">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[out_policy_number]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">[cascadeClaimDocumentData.Data.PolicyNumber.Value]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <Assign DisplayName="Assign Variable Value 5" sap2010:WorkflowViewState.IdRef="Assign_6">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[out_provider_npi]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">[cascadeClaimDocumentData.Data.ProviderNpi.Value]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <Assign DisplayName="Assign Variable Value 6" sap2010:WorkflowViewState.IdRef="Assign_7">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[out_provider_name]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">[cascadeClaimDocumentData.Data.ProviderName.Value]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <Assign DisplayName="Assign Variable Value 7" sap2010:WorkflowViewState.IdRef="Assign_8">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:Double">[out_total_charges]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:Double">[cascadeClaimDocumentData.Data.TotalCharges.Value.GetValueOrDefault()]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <Assign DisplayName="Assign Variable Value 8" sap2010:WorkflowViewState.IdRef="Assign_9">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[out_provider_narrative]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">[cascadeClaimDocumentData.Data.ProviderNarrative.Value]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <Assign DisplayName="Assign Variable Value 9" sap2010:WorkflowViewState.IdRef="Assign_10">
+      <Assign.To>
+        <OutArgument x:TypeArguments="njl:JArray">[out_service_lines]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="njl:JArray">[Newtonsoft.Json.Linq.JArray.FromObject(cascadeClaimDocumentData.Data.Items)]</InArgument>
+      </Assign.Value>
+    </Assign>
+  </Sequence>
+</Activity>

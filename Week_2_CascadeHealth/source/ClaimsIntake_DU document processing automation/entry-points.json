@@ -1,0 +1,58 @@
+{
+  "$schema": "https://cloud.uipath.com/draft/2024-12/entry-point",
+  "$id": "entry-points.json",
+  "entryPoints": [
+    {
+      "filePath": "Main.xaml",
+      "uniqueId": "97ee8c42-0f45-47a8-9a6a-196c054e7903",
+      "type": "Process",
+      "input": {
+        "type": "object",
+        "properties": {
+          "in_document_reference": {
+            "type": "string"
+          },
+          "in_claim_id": {
+            "type": "string"
+          }
+        },
+        "required": []
+      },
+      "output": {
+        "type": "object",
+        "properties": {
+          "out_claim_id": {
+            "type": "string"
+          },
+          "out_member_id": {
+            "type": "string"
+          },
+          "out_date_of_birth": {
+            "type": "string",
+            "format": "date"
+          },
+          "out_policy_number": {
+            "type": "string"
+          },
+          "out_provider_npi": {
+            "type": "string"
+          },
+          "out_provider_name": {
+            "type": "string"
+          },
+          "out_provider_narrative": {
+            "type": "string"
+          },
+          "out_service_lines": {
+            "type": "array"
+          },
+          "out_total_charges": {
+            "type": "number",
+            "minimum": -1.7976931348623157E+308,
+            "maximum": 1.7976931348623157E+308
+          }
+        }
+      }
+    }
+  ]
+}
