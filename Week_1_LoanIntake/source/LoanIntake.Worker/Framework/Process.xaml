@@ -1,0 +1,323 @@
+﻿<Activity mc:Ignorable="sap sap2010" x:Class="Process" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:lcb="clr-namespace:LoanIntake_Library.CoreBanking;assembly=LoanIntake.Library" xmlns:ld="clr-namespace:LoanIntake_Library.Documents;assembly=LoanIntake.Library" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:p="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:ss="clr-namespace:System.Security;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:upaf="clr-namespace:UiPath.Persistence.Activities.FormTask;assembly=UiPath.Persistence.Activities" xmlns:upat="clr-namespace:UiPath.Persistence.Activities.Tasks;assembly=UiPath.Persistence.Activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property sap2010:Annotation.AnnotationText="Transaction item to be processed." Name="in_TransactionItem" Type="InArgument(ui:QueueItem)" />
+    <x:Property sap2010:Annotation.AnnotationText="Dictionary structure to store configuration data of the process (settings, constants and assets)." Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+  </x:Members>
+  <VisualBasic.Settings>
+    <x:Null />
+  </VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>818.4,3200</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>ProcessTransaction_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="50">
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Runtime.InteropServices</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Windows.Forms</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>LoanIntake_Library.Documents</x:String>
+      <x:String>LoanIntake_Library.CoreBanking</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.Linq.Expressions</x:String>
+      <x:String>System.Numerics</x:String>
+      <x:String>System.Activities.Runtime.Collections</x:String>
+      <x:String>UiPath.PDF.Activities</x:String>
+      <x:String>UiPath.Persistence.Activities.FormTask</x:String>
+      <x:String>UiPath.Persistence.Activities.Tasks</x:String>
+      <x:String>UiPath.Persistence.Activities.Model.Task</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="80">
+      <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
+      <AssemblyReference>System.Console</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.Private.Uri</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.Windows.Forms</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>UiPath.Workflow</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>LoanIntake.Library</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>System.Reflection.DispatchProxy</AssemblyReference>
+      <AssemblyReference>System.Reflection.TypeExtensions</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>System.Linq.Expressions</AssemblyReference>
+      <AssemblyReference>System.Runtime.Numerics</AssemblyReference>
+      <AssemblyReference>UiPath.PDF.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Persistence.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Form.Activities</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:Annotation.AnnotationText="Process one loan application transaction. Extract data, validate documents, lookup customer, get credit score, route based on amount and credit score." DisplayName="Process Loan Application" sap:VirtualizedContainerService.HintSize="1780,7759.333333333333" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Name="applicantName" />
+      <Variable x:TypeArguments="x:String" Name="ssn" />
+      <Variable x:TypeArguments="x:String" Name="requestedAmountStr" />
+      <Variable x:TypeArguments="x:String" Name="loanPurpose" />
+      <Variable x:TypeArguments="x:String" Name="emailMessageId" />
+      <Variable x:TypeArguments="x:String" Name="attachmentPathsStr" />
+      <Variable x:TypeArguments="x:Int32" Default="0" Name="requestedAmount" />
+      <Variable x:TypeArguments="x:String" Name="firstAttachmentPath" />
+      <Variable x:TypeArguments="x:Boolean" Default="False" Name="pdfIsValid" />
+      <Variable x:TypeArguments="x:String" Name="pdfReason" />
+      <Variable x:TypeArguments="x:Int32" Default="0" Name="pdfPageCount" />
+      <Variable x:TypeArguments="x:String" Name="sessionToken" />
+      <Variable x:TypeArguments="x:Boolean" Default="False" Name="connectSuccess" />
+      <Variable x:TypeArguments="x:Boolean" Default="False" Name="customerFound" />
+      <Variable x:TypeArguments="x:String" Name="customerName" />
+      <Variable x:TypeArguments="x:Int32" Default="0" Name="annualIncome" />
+      <Variable x:TypeArguments="x:Boolean" Default="False" Name="lookupSuccess" />
+      <Variable x:TypeArguments="x:String" Name="lookupErrorType" />
+      <Variable x:TypeArguments="x:String" Name="lookupErrorMessage" />
+      <Variable x:TypeArguments="x:Int32" Default="0" Name="creditScore" />
+      <Variable x:TypeArguments="x:Boolean" Default="False" Name="creditSuccess" />
+      <Variable x:TypeArguments="x:String" Name="creditErrorType" />
+      <Variable x:TypeArguments="x:String" Name="creditErrorMessage" />
+      <Variable x:TypeArguments="x:Boolean" Default="False" Name="disconnectSuccess" />
+      <Variable x:TypeArguments="x:String" Name="decision" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:LogMessage DisplayName="Log Process Start" sap:VirtualizedContainerService.HintSize="492.6666666666667,176.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_Start" Level="Info" Message="[&quot;Processing transaction: &quot; + in_TransactionItem.Reference]" />
+    <Assign DisplayName="Extract ApplicantName" sap:VirtualizedContainerService.HintSize="492.6666666666667,176.66666666666666" sap2010:WorkflowViewState.IdRef="Assign_AppName">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[applicantName]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">[in_TransactionItem.SpecificContent("ApplicantName").ToString().Trim()]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <Assign DisplayName="Extract SSN" sap:VirtualizedContainerService.HintSize="492.6666666666667,176.66666666666666" sap2010:WorkflowViewState.IdRef="Assign_SSN">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[ssn]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">[in_TransactionItem.SpecificContent("SSN").ToString().Trim()]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <Assign DisplayName="Extract RequestedAmount string" sap:VirtualizedContainerService.HintSize="492.6666666666667,176.66666666666666" sap2010:WorkflowViewState.IdRef="Assign_AmountStr">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[requestedAmountStr]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">[in_TransactionItem.SpecificContent("RequestedAmount").ToString().Trim()]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <Assign DisplayName="Parse RequestedAmount" sap:VirtualizedContainerService.HintSize="492.6666666666667,176.66666666666666" sap2010:WorkflowViewState.IdRef="Assign_Amount">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:Int32">[requestedAmount]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:Int32">[CInt(System.Text.RegularExpressions.Regex.Replace(requestedAmountStr, "[^\d]", ""))]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <Assign DisplayName="Extract LoanPurpose" sap:VirtualizedContainerService.HintSize="492.6666666666667,176.66666666666666" sap2010:WorkflowViewState.IdRef="Assign_Purpose">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[loanPurpose]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">[in_TransactionItem.SpecificContent("LoanPurpose").ToString().Trim()]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <Assign DisplayName="Extract EmailMessageId" sap:VirtualizedContainerService.HintSize="492.6666666666667,176.66666666666666" sap2010:WorkflowViewState.IdRef="Assign_MsgId">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[emailMessageId]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">[in_TransactionItem.SpecificContent("EmailMessageId").ToString()]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <Assign DisplayName="Extract AttachmentPaths" sap:VirtualizedContainerService.HintSize="492.6666666666667,176.66666666666666" sap2010:WorkflowViewState.IdRef="Assign_Attachments">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[attachmentPathsStr]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">[in_TransactionItem.SpecificContent("AttachmentPaths").ToString()]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <Assign DisplayName="Get first attachment path" sap:VirtualizedContainerService.HintSize="492.6666666666667,176.66666666666666" sap2010:WorkflowViewState.IdRef="Assign_FirstAttachment">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[firstAttachmentPath]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">[If(String.IsNullOrEmpty(attachmentPathsStr), "", attachmentPathsStr.Split(";"c)(0))]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <ui:LogMessage DisplayName="Log Extracted Fields" sap:VirtualizedContainerService.HintSize="492.6666666666667,176.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_Fields" Level="Info" Message="[&quot;Application: &quot; + applicantName + &quot;, SSN: [&quot; + ssn + &quot;], Amount: $&quot; + requestedAmount.ToString() + &quot;, Purpose: &quot; + loanPurpose]" />
+    <ld:ValidatePdfIsReadable DisplayName="Validate PDF Is Readable" in_FilePath="[firstAttachmentPath]" out_IsValid="[pdfIsValid]" out_PageCount="[pdfPageCount]" out_Reason="[pdfReason]" sap:VirtualizedContainerService.HintSize="492.6666666666667,177.33333333333334" sap2010:WorkflowViewState.IdRef="ValidatePdf_1" />
+    <If Condition="[Not pdfIsValid]" DisplayName="If PDF invalid log warning only" sap:VirtualizedContainerService.HintSize="492.6666666666667,582" sap2010:WorkflowViewState.IdRef="If_PdfInvalid">
+      <If.Then>
+        <Sequence DisplayName="PDF Invalid Sequence" sap:VirtualizedContainerService.HintSize="450,351.3333333333333" sap2010:WorkflowViewState.IdRef="Sequence_PdfInvalid">
+          <ui:LogMessage DisplayName="Log PDF Invalid Warning" sap:VirtualizedContainerService.HintSize="416,176.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_PdfInvalid" Level="Warn" Message="[&quot;PDF validation flagged for &quot; + applicantName + &quot; (reason: &quot; + pdfReason + &quot;) — proceeding to credit checks anyway. TODO: tune validation thresholds.&quot;]" />
+        </Sequence>
+      </If.Then>
+    </If>
+    <lcb:Connect DisplayName="CoreBanking Connect" in_Endpoint="&quot;https://corebanking.internal/api&quot;" in_ApiKey="[New System.Net.NetworkCredential(&quot;&quot;,&quot;mock-api-key&quot;).SecurePassword]" out_SessionToken="[sessionToken]" out_Success="[connectSuccess]" sap:VirtualizedContainerService.HintSize="492.6666666666667,177.33333333333334" sap2010:WorkflowViewState.IdRef="Connect_1" />
+    <lcb:LookupCustomerBySSN DisplayName="Lookup Customer By SSN" in_SessionToken="[sessionToken]" in_SSN="[ssn]" out_Found="[customerFound]" out_CustomerName="[customerName]" out_AnnualIncome="[annualIncome]" out_Success="[lookupSuccess]" out_ErrorType="[lookupErrorType]" out_ErrorMessage="[lookupErrorMessage]" sap:VirtualizedContainerService.HintSize="492.6666666666667,177.33333333333334" sap2010:WorkflowViewState.IdRef="Lookup_1" />
+    <If Condition="[Not lookupSuccess]" DisplayName="If lookup failed handle error" sap:VirtualizedContainerService.HintSize="492.6666666666667,582" sap2010:WorkflowViewState.IdRef="If_LookupFailed">
+      <If.Then>
+        <Sequence DisplayName="Lookup Failed" sap:VirtualizedContainerService.HintSize="450,351.3333333333333" sap2010:WorkflowViewState.IdRef="Sequence_LookupFailed">
+          <ui:LogMessage DisplayName="Log Lookup Error" sap:VirtualizedContainerService.HintSize="416,176.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_LookupErr" Level="Error" Message="[&quot;CoreBanking lookup failed (&quot; + lookupErrorType + &quot;): &quot; + lookupErrorMessage]" />
+          <Throw DisplayName="Throw Lookup Failure" Exception="[New System.Exception(&quot;CoreBanking lookup &quot; + lookupErrorType + &quot;: &quot; + lookupErrorMessage)]" sap:VirtualizedContainerService.HintSize="416,114.66666666666667" sap2010:WorkflowViewState.IdRef="Throw_LookupFailed" />
+        </Sequence>
+      </If.Then>
+    </If>
+    <If Condition="[Not customerFound]" DisplayName="If customer not found throw BusinessRuleException" sap:VirtualizedContainerService.HintSize="492.6666666666667,582" sap2010:WorkflowViewState.IdRef="If_CustomerNotFound">
+      <If.Then>
+        <Sequence DisplayName="Customer Not Found" sap:VirtualizedContainerService.HintSize="450,351.3333333333333" sap2010:WorkflowViewState.IdRef="Sequence_NotFound">
+          <ui:LogMessage DisplayName="Log Customer Not Found" sap:VirtualizedContainerService.HintSize="416,176.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_NotFound" Level="Warn" Message="[&quot;Customer not found for SSN ending &quot; + ssn.Substring(ssn.Length-4) + &quot;. Marking as Business Exception.&quot;]" />
+          <Throw DisplayName="Throw BusinessRuleException NotFound" Exception="[New UiPath.Core.BusinessRuleException(&quot;Customer not found in core banking records.&quot;)]" sap:VirtualizedContainerService.HintSize="416,114.66666666666667" sap2010:WorkflowViewState.IdRef="Throw_NotFound" />
+        </Sequence>
+      </If.Then>
+    </If>
+    <lcb:GetCreditScore DisplayName="Get Credit Score" in_SessionToken="[sessionToken]" in_SSN="[ssn]" out_CreditScore="[creditScore]" out_Success="[creditSuccess]" out_ErrorType="[creditErrorType]" out_ErrorMessage="[creditErrorMessage]" sap:VirtualizedContainerService.HintSize="492.6666666666667,177.33333333333334" sap2010:WorkflowViewState.IdRef="GetCredit_1" />
+    <If Condition="[Not creditSuccess]" DisplayName="If credit score failed handle error" sap:VirtualizedContainerService.HintSize="492.6666666666667,582" sap2010:WorkflowViewState.IdRef="If_CreditFailed">
+      <If.Then>
+        <Sequence DisplayName="Credit Failed" sap:VirtualizedContainerService.HintSize="450,351.3333333333333" sap2010:WorkflowViewState.IdRef="Sequence_CreditFailed">
+          <ui:LogMessage DisplayName="Log Credit Error" sap:VirtualizedContainerService.HintSize="416,176.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_CreditErr" Level="Error" Message="[&quot;Credit bureau lookup failed (&quot; + creditErrorType + &quot;): &quot; + creditErrorMessage]" />
+          <Throw DisplayName="Throw Credit Failure" Exception="[New System.Exception(&quot;Credit bureau &quot; + creditErrorType + &quot;: &quot; + creditErrorMessage)]" sap:VirtualizedContainerService.HintSize="416,114.66666666666667" sap2010:WorkflowViewState.IdRef="Throw_CreditFailed" />
+        </Sequence>
+      </If.Then>
+    </If>
+    <lcb:Disconnect DisplayName="CoreBanking Disconnect" in_SessionToken="[sessionToken]" out_Success="[disconnectSuccess]" sap:VirtualizedContainerService.HintSize="492.6666666666667,177.33333333333334" sap2010:WorkflowViewState.IdRef="Disconnect_1" />
+    <ui:LogMessage DisplayName="Log CoreBanking Complete" sap:VirtualizedContainerService.HintSize="492.6666666666667,176.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_CoreBanking" Level="Info" Message="[&quot;CoreBanking checks complete. Customer: &quot; + customerName + &quot;, Income: $&quot; + annualIncome.ToString() + &quot;, Credit Score: &quot; + creditScore.ToString()]" />
+    <Sequence DisplayName="Routing Decision Logic" sap:VirtualizedContainerService.HintSize="492.6666666666667,2098.6666666666665" sap2010:WorkflowViewState.IdRef="Sequence_Routing">
+      <If Condition="[requestedAmount &gt; 500000]" DisplayName="Check High Value (greater than 500K)" sap:VirtualizedContainerService.HintSize="458.6666666666667,2006.6666666666667" sap2010:WorkflowViewState.IdRef="If_HighValue">
+        <If.Then>
+          <Sequence DisplayName="High Value Branch — Create Action Center Form Task" sap:VirtualizedContainerService.HintSize="456.6666666666667,800" sap2010:WorkflowViewState.IdRef="Sequence_HighValue">
+            <upaf:CreateFormTask BucketFolderPath="{x:Null}" BucketName="{x:Null}" BulkFormLayout="{x:Null}" ExternalTag="{x:Null}" FormLayout="{x:Null}" Group="{x:Null}" Labels="{x:Null}" TaskCatalog="{x:Null}" TaskOutput="{x:Null}" TimeoutMs="{x:Null}" BulkFormLayoutGuid="f8b52a1b-b44d-407a-b305-000e13e096b4" DisplayName="Create Form Task in Action Center" DynamicFormPath="Forms\HighValueLoanApproval.json" EnableBulkEdit="False" EnableDynamicForms="True" EnableV2="False" FormLayoutGuid="800c8ce4-6147-4cf2-8dab-79fbbd2e8bc4" GenerateInputFields="True" sap:VirtualizedContainerService.HintSize="450,400" sap2010:WorkflowViewState.IdRef="CreateFormTask_1" TaskPriority="[UiPath.Persistence.Activities.Model.Task.TaskPriority.High]" TaskTitle="[&quot;High-Value Loan: &quot; + applicantName + &quot; — $&quot; + requestedAmount.ToString(&quot;N0&quot;)]" UserNameOrEmail="&quot;chrisbankingapp@gmail.com&quot;">
+              <upaf:CreateFormTask.AssignmentCriteria>
+                <upat:Criteria Description="SingleUserDescription" Id="SingleUser" Name="Activity_AssignTasks_AssignmentCriteria_SingleUserName" />
+              </upaf:CreateFormTask.AssignmentCriteria>
+              <upaf:CreateFormTask.FormData>
+                <scg:Dictionary x:TypeArguments="x:String, p:Argument">
+                  <p:InArgument x:TypeArguments="x:String" x:Key="applicantName">[applicantName]</p:InArgument>
+                  <p:InArgument x:TypeArguments="x:String" x:Key="customerName">[customerName]</p:InArgument>
+                  <p:InArgument x:TypeArguments="x:String" x:Key="ssn">[ssn]</p:InArgument>
+                  <p:InArgument x:TypeArguments="x:String" x:Key="annualIncome">["$" + annualIncome.ToString("N0")]</p:InArgument>
+                  <p:InArgument x:TypeArguments="x:String" x:Key="requestedAmount">["$" + requestedAmount.ToString("N0")]</p:InArgument>
+                  <p:InArgument x:TypeArguments="x:String" x:Key="loanPurpose">[loanPurpose]</p:InArgument>
+                  <p:InArgument x:TypeArguments="x:String" x:Key="creditScore">[creditScore.ToString()]</p:InArgument>
+                </scg:Dictionary>
+              </upaf:CreateFormTask.FormData>
+            </upaf:CreateFormTask>
+            <Assign DisplayName="Set decision = ESCALATE_PENDING_APPROVAL" sap:VirtualizedContainerService.HintSize="422.6666666666667,176.66666666666666" sap2010:WorkflowViewState.IdRef="Assign_Escalate">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[decision]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">"ESCALATE_PENDING_APPROVAL"</InArgument>
+              </Assign.Value>
+            </Assign>
+            <ui:LogMessage DisplayName="Log Action Center Task Created" sap:VirtualizedContainerService.HintSize="422.6666666666667,167.33333333333334" sap2010:WorkflowViewState.IdRef="LogMessage_Escalate" Level="Warn" Message="[&quot;HIGH VALUE: $&quot; + requestedAmount.ToString() + &quot; for &quot; + applicantName + &quot;. Form Task created in Action Center for human approval. Task awaits review.&quot;]" />
+          </Sequence>
+        </If.Then>
+        <If.Else>
+          <If Condition="[creditScore &lt; 580]" DisplayName="Auto Decline check (credit less than 580)" sap:VirtualizedContainerService.HintSize="456.6666666666667,1450" sap2010:WorkflowViewState.IdRef="If_AutoDecline">
+            <If.Then>
+              <Sequence DisplayName="Auto Decline Branch" sap:VirtualizedContainerService.HintSize="454.6666666666667,404" sap2010:WorkflowViewState.IdRef="Sequence_AutoDecline">
+                <Assign DisplayName="Set decision = AUTO_DECLINE" sap:VirtualizedContainerService.HintSize="420.6666666666667,176.66666666666666" sap2010:WorkflowViewState.IdRef="Assign_AutoDecline">
+                  <Assign.To>
+                    <OutArgument x:TypeArguments="x:String">[decision]</OutArgument>
+                  </Assign.To>
+                  <Assign.Value>
+                    <InArgument x:TypeArguments="x:String">"AUTO_DECLINE"</InArgument>
+                  </Assign.Value>
+                </Assign>
+                <ui:LogMessage DisplayName="Log Auto Decline" sap:VirtualizedContainerService.HintSize="420.6666666666667,167.33333333333334" sap2010:WorkflowViewState.IdRef="LogMessage_AutoDecline" Level="Info" Message="[&quot;AUTO-DECLINED: &quot; + applicantName + &quot; (credit &quot; + creditScore.ToString() + &quot; below 580 floor).&quot;]" />
+              </Sequence>
+            </If.Then>
+            <If.Else>
+              <If Condition="[requestedAmount &lt;= 10000 AndAlso creditScore &gt;= 720]" DisplayName="Auto Approve check (less than 10K AND credit greater than 720)" sap:VirtualizedContainerService.HintSize="454.6666666666667,916" sap2010:WorkflowViewState.IdRef="If_AutoApprove">
+                <If.Then>
+                  <Sequence DisplayName="Auto Approve Branch" sap:VirtualizedContainerService.HintSize="452.6666666666667,404" sap2010:WorkflowViewState.IdRef="Sequence_AutoApprove">
+                    <Assign DisplayName="Set decision = AUTO_APPROVE" sap:VirtualizedContainerService.HintSize="418.6666666666667,176.66666666666666" sap2010:WorkflowViewState.IdRef="Assign_AutoApprove">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="x:String">[decision]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="x:String">"AUTO_APPROVE"</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                    <ui:LogMessage DisplayName="Log Auto Approve" sap:VirtualizedContainerService.HintSize="418.6666666666667,167.33333333333334" sap2010:WorkflowViewState.IdRef="LogMessage_AutoApprove" Level="Info" Message="[&quot;AUTO-APPROVED: $&quot; + requestedAmount.ToString() + &quot; for &quot; + applicantName + &quot; (credit &quot; + creditScore.ToString() + &quot;).&quot;]" />
+                  </Sequence>
+                </If.Then>
+                <If.Else>
+                  <Sequence DisplayName="Manual Review Branch" sap:VirtualizedContainerService.HintSize="452.6666666666667,404" sap2010:WorkflowViewState.IdRef="Sequence_ManualReview">
+                    <Assign DisplayName="Set decision = MANUAL_REVIEW" sap:VirtualizedContainerService.HintSize="418.6666666666667,176.66666666666666" sap2010:WorkflowViewState.IdRef="Assign_ManualReview">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="x:String">[decision]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="x:String">"MANUAL_REVIEW"</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                    <ui:LogMessage DisplayName="Log Manual Review" sap:VirtualizedContainerService.HintSize="418.6666666666667,167.33333333333334" sap2010:WorkflowViewState.IdRef="LogMessage_ManualReview" Level="Info" Message="[&quot;MANUAL REVIEW: $&quot; + requestedAmount.ToString() + &quot; for &quot; + applicantName + &quot; (credit &quot; + creditScore.ToString() + &quot;).&quot;]" />
+                  </Sequence>
+                </If.Else>
+              </If>
+            </If.Else>
+          </If>
+        </If.Else>
+      </If>
+    </Sequence>
+    <ui:LogMessage DisplayName="Log Final Decision" sap:VirtualizedContainerService.HintSize="492.6666666666667,167.33333333333334" sap2010:WorkflowViewState.IdRef="LogMessage_FinalDecision" Level="Info" Message="[&quot;FINAL DECISION for transaction &quot; + in_TransactionItem.Reference + &quot;: &quot; + decision + &quot; — Customer: &quot; + customerName + &quot;, Amount: $&quot; + requestedAmount.ToString() + &quot;, Credit: &quot; + creditScore.ToString()]" />
+    <ui:SetTransactionProgress DisplayName="Set Transaction Progress" Progress="[decision]" TransactionItem="[in_TransactionItem]" sap:VirtualizedContainerService.HintSize="492.6666666666667,100" sap2010:WorkflowViewState.IdRef="SetProgress_1" />
+  </Sequence>
+</Activity>
