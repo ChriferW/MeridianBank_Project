@@ -1,0 +1,12 @@
+{
+  "ApplicantName": "Patricia Nguyen",
+  "Email": "c.williams101198@gmail.com",
+  "DateOfBirth": "1985-02-14",
+  "SSN": "519-44-8866",
+  "EmploymentStatus": "Employed",
+  "AnnualIncome": 82000,
+  "MonthlyDebtPayments": 1500,
+  "CreditScore": 575,
+  "RequestedAmount": 100000,
+  "LoanPurpose": "Business"
+}

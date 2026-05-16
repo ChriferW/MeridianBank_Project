@@ -1,0 +1,12 @@
+{
+  "ApplicantName": "Maria Vasquez",
+  "Email": "c.williams101198@gmail.com",
+  "DateOfBirth": "1981-10-17",
+  "SSN": "619-55-7790",
+  "EmploymentStatus": "Employed",
+  "AnnualIncome": 180000,
+  "MonthlyDebtPayments": 1800,
+  "CreditScore": 710,
+  "RequestedAmount": 550000,
+  "LoanPurpose": "Business"
+}

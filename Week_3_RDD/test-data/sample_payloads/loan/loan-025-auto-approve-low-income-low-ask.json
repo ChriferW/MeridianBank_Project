@@ -1,0 +1,12 @@
+{
+  "ApplicantName": "Felipe Andrade",
+  "Email": "c.williams101198@gmail.com",
+  "DateOfBirth": "1995-01-08",
+  "SSN": "519-88-3367",
+  "EmploymentStatus": "Employed",
+  "AnnualIncome": 28000,
+  "MonthlyDebtPayments": 350,
+  "CreditScore": 730,
+  "RequestedAmount": 3000,
+  "LoanPurpose": "Vehicle"
+}

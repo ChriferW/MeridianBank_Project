@@ -1,0 +1,12 @@
+{
+  "ApplicantName": "Janelle Brooks",
+  "Email": "c.williams101198@gmail.com",
+  "DateOfBirth": "1996-05-19",
+  "SSN": "771-22-4408",
+  "EmploymentStatus": "Employed",
+  "AnnualIncome": 20000,
+  "MonthlyDebtPayments": 250,
+  "CreditScore": 690,
+  "RequestedAmount": 60000,
+  "LoanPurpose": "Debt Consolidation"
+}

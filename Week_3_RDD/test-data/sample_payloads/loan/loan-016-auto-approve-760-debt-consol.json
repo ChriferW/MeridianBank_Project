@@ -1,0 +1,12 @@
+{
+  "ApplicantName": "Naomi Fitzgerald",
+  "Email": "c.williams101198@gmail.com",
+  "DateOfBirth": "1986-07-03",
+  "SSN": "311-88-4477",
+  "EmploymentStatus": "Employed",
+  "AnnualIncome": 88000,
+  "MonthlyDebtPayments": 950,
+  "CreditScore": 760,
+  "RequestedAmount": 8000,
+  "LoanPurpose": "Debt Consolidation"
+}

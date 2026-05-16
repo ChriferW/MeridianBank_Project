@@ -1,0 +1,12 @@
+{
+  "ApplicantName": "Selena Park",
+  "Email": "c.williams101198@gmail.com",
+  "DateOfBirth": "1983-01-28",
+  "SSN": "201-66-4471",
+  "EmploymentStatus": "Self-employed",
+  "AnnualIncome": 95000,
+  "MonthlyDebtPayments": 1700,
+  "CreditScore": 660,
+  "RequestedAmount": 75000,
+  "LoanPurpose": "Business"
+}

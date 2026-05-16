@@ -1,0 +1,12 @@
+{
+  "ApplicantName": "Theodore Whitman",
+  "Email": "c.williams101198@gmail.com",
+  "DateOfBirth": "1972-08-30",
+  "SSN": "401-99-7754",
+  "EmploymentStatus": "Employed",
+  "AnnualIncome": 285000,
+  "MonthlyDebtPayments": 2400,
+  "CreditScore": 760,
+  "RequestedAmount": 750000,
+  "LoanPurpose": "Home Improvement"
+}

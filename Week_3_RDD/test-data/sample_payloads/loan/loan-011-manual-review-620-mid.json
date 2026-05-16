@@ -1,0 +1,12 @@
+{
+  "ApplicantName": "Tyrell Andersson",
+  "Email": "c.williams101198@gmail.com",
+  "DateOfBirth": "1989-06-11",
+  "SSN": "445-33-9120",
+  "EmploymentStatus": "Employed",
+  "AnnualIncome": 72000,
+  "MonthlyDebtPayments": 1300,
+  "CreditScore": 620,
+  "RequestedAmount": 35000,
+  "LoanPurpose": "Vehicle"
+}

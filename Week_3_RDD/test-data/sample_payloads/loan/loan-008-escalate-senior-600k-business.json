@@ -1,0 +1,12 @@
+{
+  "ApplicantName": "Camille Okafor",
+  "Email": "c.williams101198@gmail.com",
+  "DateOfBirth": "1968-12-04",
+  "SSN": "330-88-5519",
+  "EmploymentStatus": "Self-employed",
+  "AnnualIncome": 420000,
+  "MonthlyDebtPayments": 3100,
+  "CreditScore": 740,
+  "RequestedAmount": 600000,
+  "LoanPurpose": "Business"
+}

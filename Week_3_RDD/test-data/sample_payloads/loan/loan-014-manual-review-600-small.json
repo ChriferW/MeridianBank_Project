@@ -1,0 +1,12 @@
+{
+  "ApplicantName": "Renata Holloway",
+  "Email": "c.williams101198@gmail.com",
+  "DateOfBirth": "1990-12-21",
+  "SSN": "118-77-9943",
+  "EmploymentStatus": "Employed",
+  "AnnualIncome": 58000,
+  "MonthlyDebtPayments": 1100,
+  "CreditScore": 600,
+  "RequestedAmount": 25000,
+  "LoanPurpose": "Debt Consolidation"
+}

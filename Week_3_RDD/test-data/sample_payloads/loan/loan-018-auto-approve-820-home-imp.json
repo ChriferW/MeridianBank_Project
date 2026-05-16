@@ -1,0 +1,12 @@
+{
+  "ApplicantName": "Margot Diallo",
+  "Email": "c.williams101198@gmail.com",
+  "DateOfBirth": "1982-11-26",
+  "SSN": "508-99-3344",
+  "EmploymentStatus": "Employed",
+  "AnnualIncome": 112000,
+  "MonthlyDebtPayments": 1100,
+  "CreditScore": 820,
+  "RequestedAmount": 10000,
+  "LoanPurpose": "Home Improvement"
+}

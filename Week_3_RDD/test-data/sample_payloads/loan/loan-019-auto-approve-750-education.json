@@ -1,0 +1,12 @@
+{
+  "ApplicantName": "Quinton Ramirez",
+  "Email": "c.williams101198@gmail.com",
+  "DateOfBirth": "1993-08-14",
+  "SSN": "417-22-6680",
+  "EmploymentStatus": "Employed",
+  "AnnualIncome": 65000,
+  "MonthlyDebtPayments": 550,
+  "CreditScore": 750,
+  "RequestedAmount": 7500,
+  "LoanPurpose": "Education"
+}

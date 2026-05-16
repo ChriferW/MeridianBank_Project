@@ -1,0 +1,12 @@
+{
+  "ApplicantName": "Devon Mitchell",
+  "Email": "c.williams101198@gmail.com",
+  "DateOfBirth": "1992-07-25",
+  "SSN": "604-77-1133",
+  "EmploymentStatus": "Employed",
+  "AnnualIncome": 55000,
+  "MonthlyDebtPayments": 1100,
+  "CreditScore": 520,
+  "RequestedAmount": 50000,
+  "LoanPurpose": "Home Improvement"
+}

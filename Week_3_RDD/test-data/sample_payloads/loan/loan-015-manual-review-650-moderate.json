@@ -1,0 +1,12 @@
+{
+  "ApplicantName": "Joaquin Reyes",
+  "Email": "c.williams101198@gmail.com",
+  "DateOfBirth": "1978-04-09",
+  "SSN": "722-22-1166",
+  "EmploymentStatus": "Employed",
+  "AnnualIncome": 125000,
+  "MonthlyDebtPayments": 2200,
+  "CreditScore": 650,
+  "RequestedAmount": 200000,
+  "LoanPurpose": "Home Improvement"
+}

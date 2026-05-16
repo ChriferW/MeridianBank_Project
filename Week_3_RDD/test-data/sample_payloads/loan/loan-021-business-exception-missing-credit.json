@@ -1,0 +1,11 @@
+{
+  "ApplicantName": "Hugo Marchetti",
+  "Email": "c.williams101198@gmail.com",
+  "DateOfBirth": "1987-02-19",
+  "SSN": "302-44-7715",
+  "EmploymentStatus": "Employed",
+  "AnnualIncome": 70000,
+  "MonthlyDebtPayments": 1100,
+  "RequestedAmount": 20000,
+  "LoanPurpose": "Vehicle"
+}

@@ -1,0 +1,12 @@
+{
+  "ApplicantName": "Beatrix Sterling",
+  "Email": "c.williams101198@gmail.com",
+  "DateOfBirth": "1974-09-12",
+  "SSN": "611-77-4485",
+  "EmploymentStatus": "Employed",
+  "AnnualIncome": 340000,
+  "MonthlyDebtPayments": 1800,
+  "CreditScore": 800,
+  "RequestedAmount": 5000,
+  "LoanPurpose": "Vehicle"
+}

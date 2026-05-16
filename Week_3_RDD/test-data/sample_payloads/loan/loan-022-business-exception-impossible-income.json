@@ -1,0 +1,12 @@
+{
+  "ApplicantName": "Sienna Whittaker",
+  "Email": "c.williams101198@gmail.com",
+  "DateOfBirth": "1985-10-30",
+  "SSN": "806-11-2240",
+  "EmploymentStatus": "Employed",
+  "AnnualIncome": -5000,
+  "MonthlyDebtPayments": 800,
+  "CreditScore": 700,
+  "RequestedAmount": 15000,
+  "LoanPurpose": "Debt Consolidation"
+}

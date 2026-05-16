@@ -1,0 +1,12 @@
+{
+  "ApplicantName": "Howard Petrov",
+  "Email": "c.williams101198@gmail.com",
+  "DateOfBirth": "1956-09-08",
+  "SSN": "227-33-5571",
+  "EmploymentStatus": "Retired",
+  "AnnualIncome": 34000,
+  "MonthlyDebtPayments": 600,
+  "CreditScore": 510,
+  "RequestedAmount": 5000,
+  "LoanPurpose": "Medical"
+}

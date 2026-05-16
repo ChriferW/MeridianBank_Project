@@ -1,0 +1,12 @@
+{
+  "ApplicantName": "Lillian Osei",
+  "Email": "c.williams101198@gmail.com",
+  "DateOfBirth": "1980-05-07",
+  "SSN": "229-33-8851",
+  "EmploymentStatus": "Employed",
+  "AnnualIncome": 94000,
+  "MonthlyDebtPayments": 1200,
+  "CreditScore": 740,
+  "RequestedAmount": 9000,
+  "LoanPurpose": "Medical"
+}

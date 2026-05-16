@@ -1,0 +1,12 @@
+{
+  "ApplicantName": "Reginald Sato",
+  "Email": "c.williams101198@gmail.com",
+  "DateOfBirth": "1965-04-22",
+  "SSN": "508-77-3328",
+  "EmploymentStatus": "Employed",
+  "AnnualIncome": 510000,
+  "MonthlyDebtPayments": 4200,
+  "CreditScore": 785,
+  "RequestedAmount": 1200000,
+  "LoanPurpose": "Home Improvement"
+}

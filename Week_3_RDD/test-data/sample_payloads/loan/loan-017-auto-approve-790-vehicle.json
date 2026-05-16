@@ -1,0 +1,12 @@
+{
+  "ApplicantName": "Ezekiel Tan",
+  "Email": "c.williams101198@gmail.com",
+  "DateOfBirth": "1991-03-18",
+  "SSN": "624-55-7733",
+  "EmploymentStatus": "Employed",
+  "AnnualIncome": 76000,
+  "MonthlyDebtPayments": 700,
+  "CreditScore": 790,
+  "RequestedAmount": 5000,
+  "LoanPurpose": "Vehicle"
+}

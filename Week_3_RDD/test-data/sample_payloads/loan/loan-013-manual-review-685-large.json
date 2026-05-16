@@ -1,0 +1,12 @@
+{
+  "ApplicantName": "Aaron Belmonte",
+  "Email": "c.williams101198@gmail.com",
+  "DateOfBirth": "1976-09-15",
+  "SSN": "550-44-2289",
+  "EmploymentStatus": "Employed",
+  "AnnualIncome": 140000,
+  "MonthlyDebtPayments": 2600,
+  "CreditScore": 685,
+  "RequestedAmount": 150000,
+  "LoanPurpose": "Home Improvement"
+}

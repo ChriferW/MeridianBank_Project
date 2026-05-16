@@ -1,0 +1,12 @@
+{
+  "ApplicantName": "Marcus Aldridge",
+  "Email": "c.williams101198@gmail.com",
+  "DateOfBirth": "1988-03-12",
+  "SSN": "412-55-9821",
+  "EmploymentStatus": "Employed",
+  "AnnualIncome": 62000,
+  "MonthlyDebtPayments": 950,
+  "CreditScore": 540,
+  "RequestedAmount": 25000,
+  "LoanPurpose": "Debt Consolidation"
+}

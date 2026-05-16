@@ -1,0 +1,12 @@
+{
+  "ApplicantName": "Conrad Lindberg",
+  "Email": "c.williams101198@gmail.com",
+  "DateOfBirth": "1979-06-23",
+  "SSN": "INVALID-SSN",
+  "EmploymentStatus": "Employed",
+  "AnnualIncome": 80000,
+  "MonthlyDebtPayments": 1200,
+  "CreditScore": 715,
+  "RequestedAmount": 25000,
+  "LoanPurpose": "Vehicle"
+}
