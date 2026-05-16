@@ -1,0 +1,6 @@
+{
+  "Name": "LoanIntake.Loader",
+  "ProjectType": "Process",
+  "Description": "Attended dispatcher for loan applications. Retrieves emails, parses them via LoanIntake.Library, dispatches to the Loan_Applications_Intake queue.",
+  "MainFile": "Main.xaml"
+}
