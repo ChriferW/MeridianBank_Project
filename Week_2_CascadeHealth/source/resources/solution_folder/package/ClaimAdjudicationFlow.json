@@ -1,0 +1,26 @@
+{
+  "docVersion": "1.0.0",
+  "resource": {
+    "name": "ClaimAdjudicationFlow",
+    "kind": "package",
+    "apiVersion": "orchestrator.uipath.com/v1",
+    "projectKey": "eb0696ad-f29e-4f35-a9b1-a9ab5057f008",
+    "isOverridable": true,
+    "dependencies": [],
+    "runtimeDependencies": [],
+    "files": [],
+    "folders": [
+      {
+        "fullyQualifiedName": "solution_folder"
+      }
+    ],
+    "spec": {
+      "fileName": null,
+      "fileReference": null,
+      "name": "ClaimAdjudicationFlow",
+      "description": null
+    },
+    "locks": [],
+    "key": "2cd35bef-7457-4780-9cc5-d69d5fd9f6ea"
+  }
+}

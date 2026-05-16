@@ -1,0 +1,29 @@
+{
+  "docVersion": "1.0.0",
+  "resource": {
+    "name": "Anthropic Claude",
+    "kind": "connection",
+    "type": "uipath-anthropic-claude",
+    "apiVersion": "integrationservice.uipath.com/v1",
+    "isOverridable": true,
+    "dependencies": [],
+    "runtimeDependencies": [],
+    "files": [],
+    "folders": [
+      {
+        "fullyQualifiedName": "solution_folder"
+      }
+    ],
+    "spec": {
+      "connectorName": "Anthropic Claude",
+      "name": "Anthropic Claude",
+      "description": null,
+      "authenticationType": "AuthenticateAfterDeployment",
+      "connectorVersion": "1.1.0",
+      "connectorKey": "uipath-anthropic-claude",
+      "pollingInterval": 5
+    },
+    "locks": [],
+    "key": "be97a3b0-86d3-4268-802e-3cf81a2fb640"
+  }
+}

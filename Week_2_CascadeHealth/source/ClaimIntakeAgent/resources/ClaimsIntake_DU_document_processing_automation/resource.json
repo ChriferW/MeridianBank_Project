@@ -1,0 +1,42 @@
+{
+  "$resourceType": "tool",
+  "id": "29e4cc97-e8df-414e-8714-bbdaefb34fdb",
+  "referenceKey": "ddf6aafb-6e39-4e36-af2a-9f818a8c6462",
+  "name": "ClaimsIntake_DU_document_processing_automation",
+  "type": "process",
+  "description": "Extracts structured claim data from a CMS-1500 claim PDF using the CascadeClaim Document Understanding model. Call this tool first for any claim processing request to obtain the structured fields (claim_id, member_id, dates, policy info, provider details, charges, service lines) needed for downstream validation and adjudication. Returns a JSON string containing all extracted fields.",
+  "location": "external",
+  "isEnabled": true,
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "in_document_reference": {
+        "type": "string",
+        "description": "Storage bucket reference or file path to the claim PDF document to extract. Pass the document_reference value provided in the user prompt."
+      },
+      "in_claim_id": {
+        "type": "string",
+        "description": "The unique claim identifier (e.g., CHC-100002). Pass the claim_id value provided in the user prompt."
+      }
+    },
+    "required": []
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "out_extraction_json": {
+        "type": "string"
+      }
+    },
+    "required": []
+  },
+  "settings": {},
+  "guardrail": {
+    "policies": []
+  },
+  "argumentProperties": {},
+  "properties": {
+    "processName": "ClaimsIntake_DU.document.processing.automation",
+    "folderPath": "solution_folder"
+  }
+}

@@ -1,0 +1,137 @@
+{
+  "$schema": "https://cloud.uipath.com/draft/2024-12/entry-point",
+  "$id": "entry-points.json",
+  "entryPoints": [
+    {
+      "filePath": "/content/agent.json",
+      "type": "agent",
+      "uniqueId": "2b5a67bd-b3e8-46f5-becd-3edf7792f61d",
+      "input": {
+        "type": "object",
+        "required": [
+          "member_id",
+          "date_of_birth",
+          "policy_number",
+          "provider_npi",
+          "provider_name",
+          "total_charges",
+          "provider_narrative",
+          "service_lines",
+          "confidence_score",
+          "needs_fallback",
+          "consistency_error"
+        ],
+        "properties": {
+          "claim_id": {
+            "type": "string"
+          },
+          "member_id": {
+            "type": "string"
+          },
+          "date_of_birth": {
+            "type": "string",
+            "format": "date"
+          },
+          "policy_number": {
+            "type": "string"
+          },
+          "provider_npi": {
+            "type": "string"
+          },
+          "provider_name": {
+            "type": "string"
+          },
+          "total_charges": {
+            "type": "number"
+          },
+          "provider_narrative": {
+            "type": "string"
+          },
+          "service_lines": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "date_of_service": {
+                  "type": "string",
+                  "format": "date"
+                },
+                "cpt_code": {
+                  "type": "string"
+                },
+                "icd10_code": {
+                  "type": "string"
+                },
+                "charges": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "date_of_service",
+                "cpt_code",
+                "icd10_code",
+                "charges"
+              ]
+            }
+          },
+          "confidence_score": {
+            "type": "number"
+          },
+          "needs_fallback": {
+            "type": "boolean"
+          },
+          "consistency_error": {
+            "type": "boolean"
+          }
+        },
+        "title": "Inputs"
+      },
+      "output": {
+        "type": "object",
+        "properties": {
+          "disposition": {
+            "type": "string"
+          },
+          "escalation_required": {
+            "type": "boolean"
+          },
+          "reasoning": {
+            "type": "string"
+          },
+          "service_line_assessments": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "cpt_code": {
+                  "type": "string"
+                },
+                "icd10_code": {
+                  "type": "string"
+                },
+                "medically_necessary": {
+                  "type": "string"
+                },
+                "justification": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "icd10_code",
+                "medically_necessary",
+                "justification"
+              ]
+            }
+          }
+        },
+        "title": "Outputs",
+        "required": [
+          "disposition",
+          "escalation_required",
+          "reasoning",
+          "service_line_assessments"
+        ]
+      }
+    }
+  ]
+}

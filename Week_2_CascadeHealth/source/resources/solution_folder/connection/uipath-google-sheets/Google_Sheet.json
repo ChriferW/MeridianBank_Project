@@ -1,0 +1,29 @@
+{
+  "docVersion": "1.0.0",
+  "resource": {
+    "name": "Google Sheet",
+    "kind": "connection",
+    "type": "uipath-google-sheets",
+    "apiVersion": "integrationservice.uipath.com/v1",
+    "isOverridable": true,
+    "dependencies": [],
+    "runtimeDependencies": [],
+    "files": [],
+    "folders": [
+      {
+        "fullyQualifiedName": "solution_folder"
+      }
+    ],
+    "spec": {
+      "connectorName": "Google Sheets",
+      "name": "Google Sheet",
+      "description": null,
+      "authenticationType": "AuthenticateAfterDeployment",
+      "connectorVersion": "1.9.38",
+      "connectorKey": "uipath-google-sheets",
+      "pollingInterval": 5
+    },
+    "locks": [],
+    "key": "9f40f80e-8700-4d86-bdcc-9e786366df97"
+  }
+}

@@ -1,0 +1,213 @@
+{
+  "id": "132fd6a7-5915-4436-af6b-442ca3ea4655",
+  "version": "1.1.0",
+  "name": "ClaimIntakeAgent",
+  "metadata": {
+    "storageVersion": "50.0.0",
+    "isConversational": false,
+    "targetRuntime": "pythonAgent",
+    "showProjectCreationExperience": false
+  },
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are the Claim Intake Agent for Cascade Health, a health insurance subsidiary of Meridian Bank. Your job is to receive an inbound health insurance claim, extract structured data using the CascadeClaim Document Understanding model, validate the extracted data for internal consistency, and emit a structured claim record with a confidence score.\n\nYou operate under three hard rules:\n\n1. Never invent or infer field values that are not clearly present in the document. If a required field is missing or unreadable, mark it as null and lower the overall confidence score.\n\n2. If the Document Understanding model returns any field with a confidence below 0.85, set the needs_fallback flag to true. The downstream RPA bot will handle low-confidence cases. Do not attempt to fix or guess corrupted values.\n\n3. Validate that total_charges equals the sum of charges across all service_lines. If they disagree by more than $1.00, flag this as a consistency_error in the output and lower the confidence score by 0.1.\n\nYour output is consumed by the Adjudication Agent downstream. Be precise. Do not add commentary, narrative summaries, or recommendations about the claim itself. That is the Adjudication Agent's job, not yours.",
+      "contentTokens": [
+        {
+          "type": "simpleText",
+          "rawString": "You are the Claim Intake Agent for Cascade Health, a health insurance subsidiary of Meridian Bank. Your job is to receive an inbound health insurance claim, extract structured data using the CascadeClaim Document Understanding model, validate the extracted data for internal consistency, and emit a structured claim record with a confidence score.\n\nYou operate under three hard rules:\n\n1. Never invent or infer field values that are not clearly present in the document. If a required field is missing or unreadable, mark it as null and lower the overall confidence score.\n\n2. If the Document Understanding model returns any field with a confidence below 0.85, set the needs_fallback flag to true. The downstream RPA bot will handle low-confidence cases. Do not attempt to fix or guess corrupted values.\n\n3. Validate that total_charges equals the sum of charges across all service_lines. If they disagree by more than $1.00, flag this as a consistency_error in the output and lower the confidence score by 0.1.\n\nYour output is consumed by the Adjudication Agent downstream. Be precise. Do not add commentary, narrative summaries, or recommendations about the claim itself. That is the Adjudication Agent's job, not yours."
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": "Process the claim located at the provided document reference. Extract all fields defined in the CascadeClaim schema. Return the structured claim record per the output schema.\n\nDocument reference: {{document_reference}}",
+      "contentTokens": [
+        {
+          "type": "simpleText",
+          "rawString": "Process the claim located at the provided document reference. Extract all fields defined in the CascadeClaim schema. Return the structured claim record per the output schema.\n\nDocument reference: "
+        },
+        {
+          "type": "variable",
+          "rawString": "input.document_reference"
+        }
+      ]
+    }
+  ],
+  "inputSchema": {
+    "type": "object",
+    "required": [
+      "document_reference"
+    ],
+    "properties": {
+      "document_reference": {
+        "type": "string",
+        "description": "Storage reference or path to the claim PDF.",
+        "definitions": {
+          "job-attachment": {
+            "type": "object",
+            "properties": {
+              "ID": {
+                "type": "string",
+                "description": "Orchestrator attachment key"
+              },
+              "FullName": {
+                "type": "string",
+                "description": "File name"
+              },
+              "MimeType": {
+                "type": "string",
+                "description": "The MIME type of the content, such as \"application/json\" or \"image/png\""
+              },
+              "Metadata": {
+                "type": "object",
+                "description": "Dictionary<string, string> of metadata",
+                "additionalProperties": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "ID"
+            ],
+            "x-uipath-resource-kind": "JobAttachment"
+          }
+        }
+      }
+    },
+    "title": "Inputs"
+  },
+  "outputSchema": {
+    "type": "object",
+    "required": [
+      "claim_id",
+      "member_id",
+      "date_of_birth",
+      "policy_number",
+      "provider_npi",
+      "provider_name",
+      "total_charges",
+      "provider_narrative",
+      "service_lines",
+      "confidence_score",
+      "needs_fallback",
+      "consistency_error"
+    ],
+    "properties": {
+      "claim_id": {
+        "type": "string"
+      },
+      "member_id": {
+        "type": "string"
+      },
+      "date_of_birth": {
+        "type": "string",
+        "format": "date"
+      },
+      "policy_number": {
+        "type": "string"
+      },
+      "provider_npi": {
+        "type": "string"
+      },
+      "provider_name": {
+        "type": "string"
+      },
+      "total_charges": {
+        "type": "number"
+      },
+      "provider_narrative": {
+        "type": "string"
+      },
+      "service_lines": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": [
+            "date_of_service",
+            "cpt_code",
+            "icd10_code",
+            "charges"
+          ],
+          "properties": {
+            "date_of_service": {
+              "type": "string",
+              "format": "date"
+            },
+            "cpt_code": {
+              "type": "string"
+            },
+            "icd10_code": {
+              "type": "string"
+            },
+            "charges": {
+              "type": "number"
+            }
+          }
+        }
+      },
+      "confidence_score": {
+        "type": "number"
+      },
+      "needs_fallback": {
+        "type": "boolean"
+      },
+      "consistency_error": {
+        "type": "boolean"
+      }
+    }
+  },
+  "settings": {
+    "model": "gpt-4o-2024-11-20-community-agents",
+    "maxTokens": 16384,
+    "temperature": 0,
+    "engine": "basic-v2",
+    "maxIterations": 25,
+    "mode": "standard"
+  },
+  "resources": [
+    {
+      "$resourceType": "tool",
+      "name": "ClaimsIntake_DU_document_processing_automation",
+      "description": "Extracts structured claim data from a CMS-1500 claim PDF using the CascadeClaim Document Understanding model. Call this tool first for any claim processing request to obtain the structured fields (claim_id, member_id, dates, policy info, provider details, charges, service lines) needed for downstream validation and adjudication. Returns a JSON string containing all extracted fields.",
+      "location": "external",
+      "type": "process",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "in_document_reference": {
+            "type": "string",
+            "description": "Storage bucket reference or file path to the claim PDF document to extract. Pass the document_reference value provided in the user prompt."
+          },
+          "in_claim_id": {
+            "type": "string",
+            "description": "The unique claim identifier (e.g., CHC-100002). Pass the claim_id value provided in the user prompt."
+          }
+        },
+        "required": []
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "out_extraction_json": {
+            "type": "string"
+          }
+        },
+        "required": []
+      },
+      "settings": {},
+      "properties": {
+        "folderPath": "solution_folder",
+        "processName": "ClaimsIntake_DU.document.processing.automation"
+      },
+      "guardrail": {
+        "policies": []
+      },
+      "id": "29e4cc97-e8df-414e-8714-bbdaefb34fdb",
+      "referenceKey": "ddf6aafb-6e39-4e36-af2a-9f818a8c6462",
+      "isEnabled": true,
+      "argumentProperties": {}
+    }
+  ],
+  "features": []
+}

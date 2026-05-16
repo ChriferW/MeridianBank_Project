@@ -1,0 +1,54 @@
+{
+  "docVersion": "1.0.0",
+  "resource": {
+    "name": "ClaimAdjudicationFlow",
+    "kind": "process",
+    "type": "processOrchestration",
+    "apiVersion": "orchestrator.uipath.com/v1",
+    "projectKey": "eb0696ad-f29e-4f35-a9b1-a9ab5057f008",
+    "isOverridable": true,
+    "dependencies": [
+      {
+        "name": "ClaimAdjudicationFlow",
+        "kind": "package"
+      }
+    ],
+    "runtimeDependencies": [],
+    "files": [],
+    "folders": [
+      {
+        "fullyQualifiedName": "solution_folder"
+      }
+    ],
+    "spec": {
+      "entryPointUniqueId": null,
+      "inputArgumentsSchema": null,
+      "inputArgumentsSchemaV2": null,
+      "type": "ProcessOrchestration",
+      "name": "ClaimAdjudicationFlow",
+      "description": null,
+      "package": {
+        "key": "2cd35bef-7457-4780-9cc5-d69d5fd9f6ea"
+      },
+      "packageName": "CascadeClaimsAdjudication.agentic.ClaimAdjudicationFlow",
+      "packageVersion": null,
+      "entryPointName": null,
+      "inputArguments": "{}",
+      "hiddenForAttendedUser": false,
+      "alwaysRunning": false,
+      "autoStartProcess": false,
+      "targetFrameworkValue": "Portable",
+      "retentionAction": "Delete",
+      "retentionPeriod": 30,
+      "retentionBucketRef": null,
+      "staleRetentionAction": "Delete",
+      "staleRetentionPeriod": 180,
+      "staleRetentionBucketRef": null,
+      "entryPoints": null,
+      "connections": null,
+      "tags": []
+    },
+    "locks": [],
+    "key": "8dfd9102-7c44-45f9-abd7-b0e447e26c97"
+  }
+}

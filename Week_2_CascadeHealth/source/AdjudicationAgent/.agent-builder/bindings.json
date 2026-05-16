@@ -1,0 +1,22 @@
+{
+  "version": "2.0",
+  "resources": [
+    {
+      "resource": "connection",
+      "key": "be97a3b0-86d3-4268-802e-3cf81a2fb640",
+      "value": {
+        "connectionId": {
+          "defaultValue": "be97a3b0-86d3-4268-802e-3cf81a2fb640",
+          "isExpression": false,
+          "displayName": "Connection ID"
+        }
+      },
+      "metadata": {
+        "connector": "uipath-anthropic-claude",
+        "useConnectionService": "true",
+        "bindingsVersion": "2.2",
+        "solutionsSupport": "true"
+      }
+    }
+  ]
+}

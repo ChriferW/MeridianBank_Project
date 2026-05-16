@@ -1,0 +1,26 @@
+{
+  "docVersion": "1.0.0",
+  "resource": {
+    "name": "AdjudicationAgent",
+    "kind": "package",
+    "apiVersion": "orchestrator.uipath.com/v1",
+    "projectKey": "c73c6ee1-fc82-4b52-a8e3-2d9ef3e5c41d",
+    "isOverridable": true,
+    "dependencies": [],
+    "runtimeDependencies": [],
+    "files": [],
+    "folders": [
+      {
+        "fullyQualifiedName": "solution_folder"
+      }
+    ],
+    "spec": {
+      "fileName": null,
+      "fileReference": null,
+      "name": "AdjudicationAgent",
+      "description": null
+    },
+    "locks": [],
+    "key": "94aa2a16-3a94-42c9-90fc-d316ebce06af"
+  }
+}

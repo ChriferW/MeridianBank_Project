@@ -1,0 +1,62 @@
+{
+  "docVersion": "1.0.0",
+  "resource": {
+    "name": "ClaimsIntake_DU.document.processing.automation",
+    "kind": "process",
+    "type": "process",
+    "apiVersion": "orchestrator.uipath.com/v1",
+    "isOverridable": true,
+    "dependencies": [
+      {
+        "name": "ClaimsIntake_DU.document.processing.automation",
+        "kind": "Package"
+      }
+    ],
+    "runtimeDependencies": [],
+    "files": [],
+    "folders": [
+      {
+        "fullyQualifiedName": "solution_folder"
+      }
+    ],
+    "spec": {
+      "type": "Process",
+      "jobPriority": "Medium",
+      "jobRecording": "Disabled",
+      "duration": 40,
+      "frequency": 500,
+      "quality": 100,
+      "remoteControlAccess": "None",
+      "name": "ClaimsIntake_DU.document.processing.automation",
+      "package": {
+        "name": "ClaimsIntake_DU.document.processing.automation",
+        "key": "ClaimsIntake_DU.document.processing.automation:1.0.4"
+      },
+      "packageName": "ClaimsIntake_DU.document.processing.automation",
+      "packageVersion": "1.0.4",
+      "entryPointUniqueId": "97ee8c42-0f45-47a8-9a6a-196c054e7903",
+      "entryPointName": "Main.xaml",
+      "inputArguments": null,
+      "inputArgumentsSchema": "[\n  {\n    \u0022name\u0022: \u0022in_document_reference\u0022,\n    \u0022type\u0022: \u0022System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e\u0022,\n    \u0022required\u0022: false,\n    \u0022hasDefault\u0022: false\n  },\n  {\n    \u0022name\u0022: \u0022in_claim_id\u0022,\n    \u0022type\u0022: \u0022System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e\u0022,\n    \u0022required\u0022: false,\n    \u0022hasDefault\u0022: false\n  }\n]",
+      "outputArgumentsSchema": "[\n  {\n    \u0022name\u0022: \u0022out_claim_id\u0022,\n    \u0022type\u0022: \u0022System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e\u0022\n  },\n  {\n    \u0022name\u0022: \u0022out_member_id\u0022,\n    \u0022type\u0022: \u0022System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e\u0022\n  },\n  {\n    \u0022name\u0022: \u0022out_date_of_birth\u0022,\n    \u0022type\u0022: \u0022System.DateOnly, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e\u0022\n  },\n  {\n    \u0022name\u0022: \u0022out_policy_number\u0022,\n    \u0022type\u0022: \u0022System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e\u0022\n  },\n  {\n    \u0022name\u0022: \u0022out_provider_npi\u0022,\n    \u0022type\u0022: \u0022System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e\u0022\n  },\n  {\n    \u0022name\u0022: \u0022out_provider_name\u0022,\n    \u0022type\u0022: \u0022System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e\u0022\n  },\n  {\n    \u0022name\u0022: \u0022out_provider_narrative\u0022,\n    \u0022type\u0022: \u0022System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e\u0022\n  },\n  {\n    \u0022name\u0022: \u0022out_service_lines\u0022,\n    \u0022type\u0022: \u0022Newtonsoft.Json.Linq.JArray, Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed\u0022\n  },\n  {\n    \u0022name\u0022: \u0022out_total_charges\u0022,\n    \u0022type\u0022: \u0022System.Double, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e\u0022\n  }\n]",
+      "inputArgumentsSchemaV2": null,
+      "outputArgumentsSchemaV2": null,
+      "hiddenForAttendedUser": false,
+      "alwaysRunning": false,
+      "autoStartProcess": false,
+      "targetFrameworkValue": "Portable",
+      "retentionAction": "Delete",
+      "retentionPeriod": 30,
+      "retentionBucketRef": null,
+      "staleRetentionAction": "Delete",
+      "staleRetentionPeriod": 180,
+      "staleRetentionBucketRef": null,
+      "entryPoints": null,
+      "connections": null,
+      "tags": [],
+      "description": "N/A"
+    },
+    "locks": [],
+    "key": "ddf6aafb-6e39-4e36-af2a-9f818a8c6462"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "version": "2.0",
+  "resources": [
+    {
+      "resource": "process",
+      "key": "ClaimsIntake_DU.document.processing.automation",
+      "value": {
+        "name": {
+          "defaultValue": "ClaimsIntake_DU.document.processing.automation",
+          "isExpression": false,
+          "displayName": "Process name"
+        }
+      },
+      "metadata": {
+        "subType": "process",
+        "bindingsVersion": "2.2",
+        "solutionsSupport": "true"
+      }
+    }
+  ]
+}

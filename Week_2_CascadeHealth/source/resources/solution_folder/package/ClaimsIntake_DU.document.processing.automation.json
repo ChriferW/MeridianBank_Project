@@ -1,0 +1,33 @@
+{
+  "docVersion": "1.0.0",
+  "resource": {
+    "name": "ClaimsIntake_DU.document.processing.automation",
+    "kind": "package",
+    "apiVersion": "orchestrator.uipath.com/v1",
+    "isOverridable": true,
+    "dependencies": [],
+    "runtimeDependencies": [],
+    "files": [
+      {
+        "name": "ClaimsIntake_DU.document.processing.automation.1.0.4.nupkg",
+        "kind": "Package",
+        "version": "1.0.4",
+        "url": "https://cloud.uipath.com/07a58ca3-544b-4982-aeb9-0b81246c0843/b557f3d5-efd0-4ed9-a7d1-a51eaa24a20a/orchestrator_/odata/Processes/UiPath.Server.Configuration.OData.DownloadPackage(key=\u0027ClaimsIntake_DU.document.processing.automation:1.0.4\u0027)?feedId=933f3ad8-2880-40fb-b54f-55c7b16740e5",
+        "key": "ClaimsIntake_DU.document.processing.automation_1.0.4"
+      }
+    ],
+    "folders": [
+      {
+        "fullyQualifiedName": "solution_folder"
+      }
+    ],
+    "spec": {
+      "fileName": "ClaimsIntake_DU.document.processing.automation.1.0.4.nupkg",
+      "fileReference": "ClaimsIntake_DU.document.processing.automation_1.0.4",
+      "name": "ClaimsIntake_DU.document.processing.automation",
+      "description": null
+    },
+    "locks": [],
+    "key": "ClaimsIntake_DU.document.processing.automation:1.0.4"
+  }
+}

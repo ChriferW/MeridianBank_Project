@@ -1,0 +1,33 @@
+{
+  "DocVersion": "1.0.0",
+  "StudioMinVersion": "2025.04.0",
+  "SolutionId": "ece7ddee-2ce1-43ba-2b0f-08dea5f0aa6e",
+  "Projects": [
+    {
+      "Type": "Agent",
+      "ProjectRelativePath": "ClaimIntakeAgent/project.uiproj",
+      "Id": "f61babb9-fbfb-49f8-bfb9-a528f3e54819"
+    },
+    {
+      "Type": "Agent",
+      "ProjectRelativePath": "AdjudicationAgent/project.uiproj",
+      "Id": "c73c6ee1-fc82-4b52-a8e3-2d9ef3e5c41d"
+    },
+    {
+      "Type": "ProcessOrchestration",
+      "ProjectRelativePath": "ClaimAdjudicationFlow/project.uiproj",
+      "Id": "eb0696ad-f29e-4f35-a9b1-a9ab5057f008"
+    },
+    {
+      "Type": "Process",
+      "ProjectRelativePath": "UploadAttachmentToBucket/project.uiproj",
+      "Id": "5dae4b35-4130-4958-a06d-cafc7390d65a"
+    },
+    {
+      "Type": "WebApp",
+      "ProjectRelativePath": "SimpleApprovalApp/project.uiproj",
+      "Id": "365ae58c-db66-42d9-98cb-5b1ca72d8bb3"
+    }
+  ],
+  "AutomationHubIdeaUrl": null
+}

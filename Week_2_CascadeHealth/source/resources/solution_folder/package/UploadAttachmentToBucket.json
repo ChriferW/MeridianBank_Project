@@ -1,0 +1,26 @@
+{
+  "docVersion": "1.0.0",
+  "resource": {
+    "name": "UploadAttachmentToBucket",
+    "kind": "package",
+    "apiVersion": "orchestrator.uipath.com/v1",
+    "projectKey": "5dae4b35-4130-4958-a06d-cafc7390d65a",
+    "isOverridable": true,
+    "dependencies": [],
+    "runtimeDependencies": [],
+    "files": [],
+    "folders": [
+      {
+        "fullyQualifiedName": "solution_folder"
+      }
+    ],
+    "spec": {
+      "fileName": null,
+      "fileReference": null,
+      "name": "UploadAttachmentToBucket",
+      "description": null
+    },
+    "locks": [],
+    "key": "8284a76a-a2b8-43e8-8d17-50c64c6ed743"
+  }
+}

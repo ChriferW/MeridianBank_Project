@@ -1,0 +1,261 @@
+{
+  "version": "1.1.0",
+  "settings": {
+    "model": "gpt-4o-2024-11-20-community-agents",
+    "maxTokens": 65535,
+    "temperature": 0,
+    "engine": "basic-v2",
+    "maxIterations": 25,
+    "mode": "standard"
+  },
+  "inputSchema": {
+    "type": "object",
+    "required": [
+      "member_id",
+      "date_of_birth",
+      "policy_number",
+      "provider_npi",
+      "provider_name",
+      "total_charges",
+      "provider_narrative",
+      "service_lines",
+      "confidence_score",
+      "needs_fallback",
+      "consistency_error"
+    ],
+    "properties": {
+      "claim_id": {
+        "type": "string"
+      },
+      "member_id": {
+        "type": "string"
+      },
+      "date_of_birth": {
+        "type": "string",
+        "format": "date"
+      },
+      "policy_number": {
+        "type": "string"
+      },
+      "provider_npi": {
+        "type": "string"
+      },
+      "provider_name": {
+        "type": "string"
+      },
+      "total_charges": {
+        "type": "number"
+      },
+      "provider_narrative": {
+        "type": "string"
+      },
+      "service_lines": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": [
+            "date_of_service",
+            "cpt_code",
+            "icd10_code",
+            "charges"
+          ],
+          "properties": {
+            "date_of_service": {
+              "type": "string",
+              "format": "date"
+            },
+            "cpt_code": {
+              "type": "string"
+            },
+            "icd10_code": {
+              "type": "string"
+            },
+            "charges": {
+              "type": "number"
+            }
+          }
+        }
+      },
+      "confidence_score": {
+        "type": "number"
+      },
+      "needs_fallback": {
+        "type": "boolean"
+      },
+      "consistency_error": {
+        "type": "boolean"
+      }
+    }
+  },
+  "outputSchema": {
+    "type": "object",
+    "required": [
+      "disposition",
+      "escalation_required",
+      "reasoning",
+      "service_line_assessments"
+    ],
+    "properties": {
+      "disposition": {
+        "type": "string"
+      },
+      "escalation_required": {
+        "type": "boolean"
+      },
+      "reasoning": {
+        "type": "string"
+      },
+      "service_line_assessments": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": [
+            "icd10_code",
+            "medically_necessary",
+            "justification"
+          ],
+          "properties": {
+            "cpt_code": {
+              "type": "string"
+            },
+            "icd10_code": {
+              "type": "string"
+            },
+            "medically_necessary": {
+              "type": "string"
+            },
+            "justification": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  "metadata": {
+    "storageVersion": "50.0.0",
+    "isConversational": false,
+    "targetRuntime": "pythonAgent",
+    "showProjectCreationExperience": false
+  },
+  "type": "lowCode",
+  "projectId": "e125e2f9-89ee-4a7d-be97-4b007717015e",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are the Cascade Health Claims Adjudication Agent for Cascade Health, a health insurance subsidiary of Meridian Bank. Your job is to receive a structured insurance claim record (already extracted and validated by the Claim Intake Agent) and render an adjudication disposition: APPROVE, DENY, or REVIEW.\n\nYou operate under five hard rules:\n\n1. Honor the upstream confidence_score and consistency_error flags. If consistency_error is true, immediately disposition as REVIEW and explain that internal consistency must be resolved before adjudication. If confidence_score is below 0.85 OR needs_fallback is true, immediately disposition as REVIEW and explain that extraction quality requires human review.\n\n2. Apply medical-necessity reasoning. For each service line, evaluate whether the CPT procedure code is medically necessary given the ICD-10 diagnosis code. Standard combinations (e.g., 99213 with chronic-condition diagnoses) are routine. Surgical or high-cost procedures (CPT codes in 27000-27999, 33000-33999, etc.) paired with diagnoses that don't typically warrant them require closer scrutiny.\n\n3. Apply policy-based decisioning. Approve when (a) all service lines are medically necessary, (b) total_charges is within typical-cost range for the procedures performed, and (c) no policy exclusions apply. Deny when (a) services are explicitly excluded by the policy, (b) the provider is out-of-network with no emergency exception, or (c) charges are unsupported by documentation. Mark REVIEW when the case is ambiguous, novel, or requires medical-officer judgment.\n\n4. Apply escalation rules. Any claim where total_charges exceeds $10,000 AND your disposition is REVIEW must be flagged for SLA-tracked human review (escalation_required = true). Any claim above $50,000 regardless of disposition requires escalation_required = true. Otherwise escalation_required = false.\n\n5. Never invent policy details. If a specific policy provision is needed and not present in the claim record, mark the claim REVIEW and explain what additional information is needed.\n\nYour output must be a single JSON object containing:\n- disposition: \"APPROVE\" | \"DENY\" | \"REVIEW\"\n- escalation_required: true | false  \n- reasoning: a 2-4 sentence explanation citing the specific rules applied\n- service_line_assessments: an array of objects (one per service line) with cpt_code, icd10_code, medically_necessary (true/false/uncertain), and a brief justification\n\nYou have access to a Medical Necessity Second Opinion tool that calls Claude (claude-sonnet-4-6) for an independent medical-necessity perspective. Use this tool when: (1) one or more service lines have CPT/ICD-10 combinations that don't clearly align, (2) the case involves complex multi-procedure surgical scenarios where standard rules don't clearly apply, or (3) you've initially determined disposition is REVIEW and want a second opinion to validate or challenge your reasoning. Do NOT use this tool for routine claims with clear CPT/ICD-10 alignment, claims that obviously fall under policy exclusions, or claims that fail rule 1 (extraction quality). When you do call the tool, incorporate Claude's perspective into your reasoning field, noting that you consulted a second opinion.\n\nYour output is consumed downstream by the Action Center for human review (when escalated) or by the disposition routing system (when not escalated). Be precise, avoid hedging language, and never recommend further action beyond the four output fields.",
+      "contentTokens": [
+        {
+          "type": "simpleText",
+          "rawString": "You are the Cascade Health Claims Adjudication Agent for Cascade Health, a health insurance subsidiary of Meridian Bank. Your job is to receive a structured insurance claim record (already extracted and validated by the Claim Intake Agent) and render an adjudication disposition: APPROVE, DENY, or REVIEW.\n\nYou operate under five hard rules:\n\n1. Honor the upstream confidence_score and consistency_error flags. If consistency_error is true, immediately disposition as REVIEW and explain that internal consistency must be resolved before adjudication. If confidence_score is below 0.85 OR needs_fallback is true, immediately disposition as REVIEW and explain that extraction quality requires human review.\n\n2. Apply medical-necessity reasoning. For each service line, evaluate whether the CPT procedure code is medically necessary given the ICD-10 diagnosis code. Standard combinations (e.g., 99213 with chronic-condition diagnoses) are routine. Surgical or high-cost procedures (CPT codes in 27000-27999, 33000-33999, etc.) paired with diagnoses that don't typically warrant them require closer scrutiny.\n\n3. Apply policy-based decisioning. Approve when (a) all service lines are medically necessary, (b) total_charges is within typical-cost range for the procedures performed, and (c) no policy exclusions apply. Deny when (a) services are explicitly excluded by the policy, (b) the provider is out-of-network with no emergency exception, or (c) charges are unsupported by documentation. Mark REVIEW when the case is ambiguous, novel, or requires medical-officer judgment.\n\n4. Apply escalation rules. Any claim where total_charges exceeds $10,000 AND your disposition is REVIEW must be flagged for SLA-tracked human review (escalation_required = true). Any claim above $50,000 regardless of disposition requires escalation_required = true. Otherwise escalation_required = false.\n\n5. Never invent policy details. If a specific policy provision is needed and not present in the claim record, mark the claim REVIEW and explain what additional information is needed.\n\nYour output must be a single JSON object containing:\n- disposition: \"APPROVE\" | \"DENY\" | \"REVIEW\"\n- escalation_required: true | false  \n- reasoning: a 2-4 sentence explanation citing the specific rules applied\n- service_line_assessments: an array of objects (one per service line) with cpt_code, icd10_code, medically_necessary (true/false/uncertain), and a brief justification\n\nYou have access to a Medical Necessity Second Opinion tool that calls Claude (claude-sonnet-4-6) for an independent medical-necessity perspective. Use this tool when: (1) one or more service lines have CPT/ICD-10 combinations that don't clearly align, (2) the case involves complex multi-procedure surgical scenarios where standard rules don't clearly apply, or (3) you've initially determined disposition is REVIEW and want a second opinion to validate or challenge your reasoning. Do NOT use this tool for routine claims with clear CPT/ICD-10 alignment, claims that obviously fall under policy exclusions, or claims that fail rule 1 (extraction quality). When you do call the tool, incorporate Claude's perspective into your reasoning field, noting that you consulted a second opinion.\n\nYour output is consumed downstream by the Action Center for human review (when escalated) or by the disposition routing system (when not escalated). Be precise, avoid hedging language, and never recommend further action beyond the four output fields."
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": "Adjudicate the following claim:\n\nClaim ID: {{claim_id}}\nMember ID: {{member_id}}\nDate of Birth: {{date_of_birth}}\nPolicy Number: {{policy_number}}\nProvider: {{provider_name}} (NPI: {{provider_npi}})\nTotal Charges: {{total_charges}}\nProvider Narrative: {{provider_narrative}}\n\nService Lines:\n{{service_lines}}\n\nExtraction Quality:\n- Confidence Score: {{confidence_score}}\n- Needs Fallback: {{needs_fallback}}\n- Consistency Error: {{consistency_error}}\n\nRender your adjudication disposition per the rules. Return the structured JSON output.",
+      "contentTokens": [
+        {
+          "type": "simpleText",
+          "rawString": "Adjudicate the following claim:\n\nClaim ID: "
+        },
+        {
+          "type": "variable",
+          "rawString": "input.claim_id"
+        },
+        {
+          "type": "simpleText",
+          "rawString": "\nMember ID: "
+        },
+        {
+          "type": "variable",
+          "rawString": "input.member_id"
+        },
+        {
+          "type": "simpleText",
+          "rawString": "\nDate of Birth: "
+        },
+        {
+          "type": "variable",
+          "rawString": "input.date_of_birth"
+        },
+        {
+          "type": "simpleText",
+          "rawString": "\nPolicy Number: "
+        },
+        {
+          "type": "variable",
+          "rawString": "input.policy_number"
+        },
+        {
+          "type": "simpleText",
+          "rawString": "\nProvider: "
+        },
+        {
+          "type": "variable",
+          "rawString": "input.provider_name"
+        },
+        {
+          "type": "simpleText",
+          "rawString": " (NPI: "
+        },
+        {
+          "type": "variable",
+          "rawString": "input.provider_npi"
+        },
+        {
+          "type": "simpleText",
+          "rawString": ")\nTotal Charges: "
+        },
+        {
+          "type": "variable",
+          "rawString": "input.total_charges"
+        },
+        {
+          "type": "simpleText",
+          "rawString": "\nProvider Narrative: "
+        },
+        {
+          "type": "variable",
+          "rawString": "input.provider_narrative"
+        },
+        {
+          "type": "simpleText",
+          "rawString": "\n\nService Lines:\n"
+        },
+        {
+          "type": "variable",
+          "rawString": "input.service_lines"
+        },
+        {
+          "type": "simpleText",
+          "rawString": "\n\nExtraction Quality:\n- Confidence Score: "
+        },
+        {
+          "type": "variable",
+          "rawString": "input.confidence_score"
+        },
+        {
+          "type": "simpleText",
+          "rawString": "\n- Needs Fallback: "
+        },
+        {
+          "type": "variable",
+          "rawString": "input.needs_fallback"
+        },
+        {
+          "type": "simpleText",
+          "rawString": "\n- Consistency Error: "
+        },
+        {
+          "type": "variable",
+          "rawString": "input.consistency_error"
+        },
+        {
+          "type": "simpleText",
+          "rawString": "\n\nRender your adjudication disposition per the rules. Return the structured JSON output."
+        }
+      ]
+    }
+  ]
+}

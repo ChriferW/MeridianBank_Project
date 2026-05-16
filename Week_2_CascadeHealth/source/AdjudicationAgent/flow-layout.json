@@ -1,0 +1,16 @@
+{
+  "zoom": 1.22,
+  "agentPosition": {
+    "x": 0,
+    "y": 0
+  },
+  "resourceNodes": [
+    {
+      "id": "agent=>Medical Necessity Second Opinion:65daa583-537b-43b0-b56c-a8c81134931e",
+      "position": {
+        "x": 256,
+        "y": 304
+      }
+    }
+  ]
+}

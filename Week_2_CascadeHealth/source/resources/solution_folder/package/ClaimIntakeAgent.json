@@ -1,0 +1,26 @@
+{
+  "docVersion": "1.0.0",
+  "resource": {
+    "name": "ClaimIntakeAgent",
+    "kind": "package",
+    "apiVersion": "orchestrator.uipath.com/v1",
+    "projectKey": "f61babb9-fbfb-49f8-bfb9-a528f3e54819",
+    "isOverridable": true,
+    "dependencies": [],
+    "runtimeDependencies": [],
+    "files": [],
+    "folders": [
+      {
+        "fullyQualifiedName": "solution_folder"
+      }
+    ],
+    "spec": {
+      "fileName": null,
+      "fileReference": null,
+      "name": "ClaimIntakeAgent",
+      "description": null
+    },
+    "locks": [],
+    "key": "7ea9c9c3-3b27-46a8-a4fb-bfb940fbcadc"
+  }
+}

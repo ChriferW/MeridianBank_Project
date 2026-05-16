@@ -1,0 +1,637 @@
+{
+  "id": "e125e2f9-89ee-4a7d-be97-4b007717015e",
+  "version": "1.1.0",
+  "name": "AdjudicationAgent",
+  "metadata": {
+    "storageVersion": "50.0.0",
+    "isConversational": false,
+    "targetRuntime": "pythonAgent",
+    "showProjectCreationExperience": false
+  },
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are the Cascade Health Claims Adjudication Agent for Cascade Health, a health insurance subsidiary of Meridian Bank. Your job is to receive a structured insurance claim record (already extracted and validated by the Claim Intake Agent) and render an adjudication disposition: APPROVE, DENY, or REVIEW.\n\nYou operate under five hard rules:\n\n1. Honor the upstream confidence_score and consistency_error flags. If consistency_error is true, immediately disposition as REVIEW and explain that internal consistency must be resolved before adjudication. If confidence_score is below 0.85 OR needs_fallback is true, immediately disposition as REVIEW and explain that extraction quality requires human review.\n\n2. Apply medical-necessity reasoning. For each service line, evaluate whether the CPT procedure code is medically necessary given the ICD-10 diagnosis code. Standard combinations (e.g., 99213 with chronic-condition diagnoses) are routine. Surgical or high-cost procedures (CPT codes in 27000-27999, 33000-33999, etc.) paired with diagnoses that don't typically warrant them require closer scrutiny.\n\n3. Apply policy-based decisioning. Approve when (a) all service lines are medically necessary, (b) total_charges is within typical-cost range for the procedures performed, and (c) no policy exclusions apply. Deny when (a) services are explicitly excluded by the policy, (b) the provider is out-of-network with no emergency exception, or (c) charges are unsupported by documentation. Mark REVIEW when the case is ambiguous, novel, or requires medical-officer judgment.\n\n4. Apply escalation rules. Any claim where total_charges exceeds $10,000 AND your disposition is REVIEW must be flagged for SLA-tracked human review (escalation_required = true). Any claim above $50,000 regardless of disposition requires escalation_required = true. Otherwise escalation_required = false.\n\n5. Never invent policy details. If a specific policy provision is needed and not present in the claim record, mark the claim REVIEW and explain what additional information is needed.\n\nYour output must be a single JSON object containing:\n- disposition: \"APPROVE\" | \"DENY\" | \"REVIEW\"\n- escalation_required: true | false  \n- reasoning: a 2-4 sentence explanation citing the specific rules applied\n- service_line_assessments: an array of objects (one per service line) with cpt_code, icd10_code, medically_necessary (true/false/uncertain), and a brief justification\n\nYou have access to a Medical Necessity Second Opinion tool that calls Claude (claude-sonnet-4-6) for an independent medical-necessity perspective. Use this tool when: (1) one or more service lines have CPT/ICD-10 combinations that don't clearly align, (2) the case involves complex multi-procedure surgical scenarios where standard rules don't clearly apply, or (3) you've initially determined disposition is REVIEW and want a second opinion to validate or challenge your reasoning. Do NOT use this tool for routine claims with clear CPT/ICD-10 alignment, claims that obviously fall under policy exclusions, or claims that fail rule 1 (extraction quality). When you do call the tool, incorporate Claude's perspective into your reasoning field, noting that you consulted a second opinion.\n\nYour output is consumed downstream by the Action Center for human review (when escalated) or by the disposition routing system (when not escalated). Be precise, avoid hedging language, and never recommend further action beyond the four output fields.",
+      "contentTokens": [
+        {
+          "type": "simpleText",
+          "rawString": "You are the Cascade Health Claims Adjudication Agent for Cascade Health, a health insurance subsidiary of Meridian Bank. Your job is to receive a structured insurance claim record (already extracted and validated by the Claim Intake Agent) and render an adjudication disposition: APPROVE, DENY, or REVIEW.\n\nYou operate under five hard rules:\n\n1. Honor the upstream confidence_score and consistency_error flags. If consistency_error is true, immediately disposition as REVIEW and explain that internal consistency must be resolved before adjudication. If confidence_score is below 0.85 OR needs_fallback is true, immediately disposition as REVIEW and explain that extraction quality requires human review.\n\n2. Apply medical-necessity reasoning. For each service line, evaluate whether the CPT procedure code is medically necessary given the ICD-10 diagnosis code. Standard combinations (e.g., 99213 with chronic-condition diagnoses) are routine. Surgical or high-cost procedures (CPT codes in 27000-27999, 33000-33999, etc.) paired with diagnoses that don't typically warrant them require closer scrutiny.\n\n3. Apply policy-based decisioning. Approve when (a) all service lines are medically necessary, (b) total_charges is within typical-cost range for the procedures performed, and (c) no policy exclusions apply. Deny when (a) services are explicitly excluded by the policy, (b) the provider is out-of-network with no emergency exception, or (c) charges are unsupported by documentation. Mark REVIEW when the case is ambiguous, novel, or requires medical-officer judgment.\n\n4. Apply escalation rules. Any claim where total_charges exceeds $10,000 AND your disposition is REVIEW must be flagged for SLA-tracked human review (escalation_required = true). Any claim above $50,000 regardless of disposition requires escalation_required = true. Otherwise escalation_required = false.\n\n5. Never invent policy details. If a specific policy provision is needed and not present in the claim record, mark the claim REVIEW and explain what additional information is needed.\n\nYour output must be a single JSON object containing:\n- disposition: \"APPROVE\" | \"DENY\" | \"REVIEW\"\n- escalation_required: true | false  \n- reasoning: a 2-4 sentence explanation citing the specific rules applied\n- service_line_assessments: an array of objects (one per service line) with cpt_code, icd10_code, medically_necessary (true/false/uncertain), and a brief justification\n\nYou have access to a Medical Necessity Second Opinion tool that calls Claude (claude-sonnet-4-6) for an independent medical-necessity perspective. Use this tool when: (1) one or more service lines have CPT/ICD-10 combinations that don't clearly align, (2) the case involves complex multi-procedure surgical scenarios where standard rules don't clearly apply, or (3) you've initially determined disposition is REVIEW and want a second opinion to validate or challenge your reasoning. Do NOT use this tool for routine claims with clear CPT/ICD-10 alignment, claims that obviously fall under policy exclusions, or claims that fail rule 1 (extraction quality). When you do call the tool, incorporate Claude's perspective into your reasoning field, noting that you consulted a second opinion.\n\nYour output is consumed downstream by the Action Center for human review (when escalated) or by the disposition routing system (when not escalated). Be precise, avoid hedging language, and never recommend further action beyond the four output fields."
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": "Adjudicate the following claim:\n\nClaim ID: {{claim_id}}\nMember ID: {{member_id}}\nDate of Birth: {{date_of_birth}}\nPolicy Number: {{policy_number}}\nProvider: {{provider_name}} (NPI: {{provider_npi}})\nTotal Charges: {{total_charges}}\nProvider Narrative: {{provider_narrative}}\n\nService Lines:\n{{service_lines}}\n\nExtraction Quality:\n- Confidence Score: {{confidence_score}}\n- Needs Fallback: {{needs_fallback}}\n- Consistency Error: {{consistency_error}}\n\nRender your adjudication disposition per the rules. Return the structured JSON output.",
+      "contentTokens": [
+        {
+          "type": "simpleText",
+          "rawString": "Adjudicate the following claim:\n\nClaim ID: "
+        },
+        {
+          "type": "variable",
+          "rawString": "input.claim_id"
+        },
+        {
+          "type": "simpleText",
+          "rawString": "\nMember ID: "
+        },
+        {
+          "type": "variable",
+          "rawString": "input.member_id"
+        },
+        {
+          "type": "simpleText",
+          "rawString": "\nDate of Birth: "
+        },
+        {
+          "type": "variable",
+          "rawString": "input.date_of_birth"
+        },
+        {
+          "type": "simpleText",
+          "rawString": "\nPolicy Number: "
+        },
+        {
+          "type": "variable",
+          "rawString": "input.policy_number"
+        },
+        {
+          "type": "simpleText",
+          "rawString": "\nProvider: "
+        },
+        {
+          "type": "variable",
+          "rawString": "input.provider_name"
+        },
+        {
+          "type": "simpleText",
+          "rawString": " (NPI: "
+        },
+        {
+          "type": "variable",
+          "rawString": "input.provider_npi"
+        },
+        {
+          "type": "simpleText",
+          "rawString": ")\nTotal Charges: "
+        },
+        {
+          "type": "variable",
+          "rawString": "input.total_charges"
+        },
+        {
+          "type": "simpleText",
+          "rawString": "\nProvider Narrative: "
+        },
+        {
+          "type": "variable",
+          "rawString": "input.provider_narrative"
+        },
+        {
+          "type": "simpleText",
+          "rawString": "\n\nService Lines:\n"
+        },
+        {
+          "type": "variable",
+          "rawString": "input.service_lines"
+        },
+        {
+          "type": "simpleText",
+          "rawString": "\n\nExtraction Quality:\n- Confidence Score: "
+        },
+        {
+          "type": "variable",
+          "rawString": "input.confidence_score"
+        },
+        {
+          "type": "simpleText",
+          "rawString": "\n- Needs Fallback: "
+        },
+        {
+          "type": "variable",
+          "rawString": "input.needs_fallback"
+        },
+        {
+          "type": "simpleText",
+          "rawString": "\n- Consistency Error: "
+        },
+        {
+          "type": "variable",
+          "rawString": "input.consistency_error"
+        },
+        {
+          "type": "simpleText",
+          "rawString": "\n\nRender your adjudication disposition per the rules. Return the structured JSON output."
+        }
+      ]
+    }
+  ],
+  "inputSchema": {
+    "type": "object",
+    "required": [
+      "member_id",
+      "date_of_birth",
+      "policy_number",
+      "provider_npi",
+      "provider_name",
+      "total_charges",
+      "provider_narrative",
+      "service_lines",
+      "confidence_score",
+      "needs_fallback",
+      "consistency_error"
+    ],
+    "properties": {
+      "claim_id": {
+        "type": "string"
+      },
+      "member_id": {
+        "type": "string"
+      },
+      "date_of_birth": {
+        "type": "string",
+        "format": "date"
+      },
+      "policy_number": {
+        "type": "string"
+      },
+      "provider_npi": {
+        "type": "string"
+      },
+      "provider_name": {
+        "type": "string"
+      },
+      "total_charges": {
+        "type": "number"
+      },
+      "provider_narrative": {
+        "type": "string"
+      },
+      "service_lines": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": [
+            "date_of_service",
+            "cpt_code",
+            "icd10_code",
+            "charges"
+          ],
+          "properties": {
+            "date_of_service": {
+              "type": "string",
+              "format": "date"
+            },
+            "cpt_code": {
+              "type": "string"
+            },
+            "icd10_code": {
+              "type": "string"
+            },
+            "charges": {
+              "type": "number"
+            }
+          }
+        }
+      },
+      "confidence_score": {
+        "type": "number"
+      },
+      "needs_fallback": {
+        "type": "boolean"
+      },
+      "consistency_error": {
+        "type": "boolean"
+      }
+    }
+  },
+  "outputSchema": {
+    "type": "object",
+    "required": [
+      "disposition",
+      "escalation_required",
+      "reasoning",
+      "service_line_assessments"
+    ],
+    "properties": {
+      "disposition": {
+        "type": "string"
+      },
+      "escalation_required": {
+        "type": "boolean"
+      },
+      "reasoning": {
+        "type": "string"
+      },
+      "service_line_assessments": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": [
+            "icd10_code",
+            "medically_necessary",
+            "justification"
+          ],
+          "properties": {
+            "cpt_code": {
+              "type": "string"
+            },
+            "icd10_code": {
+              "type": "string"
+            },
+            "medically_necessary": {
+              "type": "string"
+            },
+            "justification": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  "settings": {
+    "model": "gpt-4o-2024-11-20-community-agents",
+    "maxTokens": 65535,
+    "temperature": 0,
+    "engine": "basic-v2",
+    "maxIterations": 25,
+    "mode": "standard"
+  },
+  "resources": [
+    {
+      "$resourceType": "tool",
+      "name": "Medical Necessity Second Opinion",
+      "description": "Call this tool when a claim's medical necessity assessment is ambiguous or uncertain. Specifically use this tool when: (1) one or more service lines have CPT/ICD-10 combinations that don't clearly align (e.g., a procedure code unrelated to the diagnosis), (2) the case involves complex multi-procedure surgical scenarios where standard rules don't clearly apply, or (3) you've already determined disposition is REVIEW but want a second opinion to validate or challenge your reasoning before finalizing. Send the relevant claim details and your initial assessment, and Claude will provide an independent medical-necessity perspective. Do NOT call this tool for routine claims with clear CPT/ICD-10 alignment or for claims that obviously fall under policy exclusions.",
+      "location": "external",
+      "type": "integration",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "model": {
+            "type": "string",
+            "title": "Model",
+            "description": "The Claude model to use for generating the message",
+            "enum": [
+              "claude-sonnet-4-6"
+            ],
+            "oneOf": [
+              {
+                "const": "claude-opus-4-6",
+                "title": "claude-opus-4-6"
+              },
+              {
+                "const": "claude-sonnet-4-6",
+                "title": "claude-sonnet-4-6"
+              },
+              {
+                "const": "claude-haiku-4-5",
+                "title": "claude-haiku-4-5"
+              },
+              {
+                "const": "claude-haiku-4-5-20251001",
+                "title": "claude-haiku-4-5-20251001"
+              },
+              {
+                "const": "claude-opus-4-5",
+                "title": "claude-opus-4-5"
+              },
+              {
+                "const": "claude-opus-4-5-20251101",
+                "title": "claude-opus-4-5-20251101"
+              },
+              {
+                "const": "claude-sonnet-4-5",
+                "title": "claude-sonnet-4-5"
+              },
+              {
+                "const": "claude-sonnet-4-5-20250929",
+                "title": "claude-sonnet-4-5-20250929"
+              },
+              {
+                "const": "claude-opus-4-1",
+                "title": "claude-opus-4-1"
+              },
+              {
+                "const": "claude-opus-4-1-20250805",
+                "title": "claude-opus-4-1-20250805"
+              },
+              {
+                "const": "claude-opus-4-0",
+                "title": "claude-opus-4-0"
+              },
+              {
+                "const": "claude-opus-4-20250514",
+                "title": "claude-opus-4-20250514"
+              },
+              {
+                "const": "claude-sonnet-4-0",
+                "title": "claude-sonnet-4-0"
+              },
+              {
+                "const": "claude-sonnet-4-20250514",
+                "title": "claude-sonnet-4-20250514"
+              },
+              {
+                "const": "claude-3-haiku-20240307",
+                "title": "claude-3-haiku-20240307"
+              }
+            ]
+          },
+          "prompt": {
+            "type": "string",
+            "title": "Prompt",
+            "description": "You are providing a second medical-necessity opinion for a health insurance claim adjudication. Be concise and decisive.\n\nClaim details:\n- Procedures: {{cpt_codes_and_diagnoses}}\n- Provider narrative: {{provider_narrative}}\n- Total charges: {{total_charges}}\n\nInitial assessment from primary adjudicator (gpt-4o):\n{{initial_assessment}}\n\nProvide your independent medical-necessity assessment. For each procedure-diagnosis pairing, state whether it is medically necessary, not medically necessary, or uncertain, with a one-sentence justification. If you disagree with the primary adjudicator's assessment, explain why. End with a recommended disposition (APPROVE / DENY / REVIEW) and brief rationale."
+          },
+          "maxTokens": {
+            "type": "integer",
+            "title": "Max tokens",
+            "description": "The maximum number of tokens to generate before stopping"
+          },
+          "systemPrompt": {
+            "type": "string",
+            "title": "System prompt",
+            "description": "System prompt providing context and instructions to Claude",
+            "enum": [
+              "You are a helpful assistant."
+            ]
+          },
+          "temperature": {
+            "type": "number",
+            "title": "Temperature",
+            "description": "Amount of randomness injected into the response (0.0-1.0)",
+            "enum": [
+              0.3
+            ]
+          },
+          "topP": {
+            "type": "number",
+            "title": "Top P",
+            "description": "Use nucleus sampling"
+          },
+          "topK": {
+            "type": "integer",
+            "title": "Top K",
+            "description": "Only sample from the top K options for each subsequent token"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "model",
+          "prompt",
+          "maxTokens"
+        ]
+      },
+      "outputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "model": {
+            "title": "Model",
+            "type": "string",
+            "description": "The Claude model to use for generating the message"
+          },
+          "text": {
+            "title": "Generated text",
+            "type": "string",
+            "description": "The text generated by Claude"
+          },
+          "id": {
+            "title": "Message ID",
+            "type": "string",
+            "description": "The unique message identifier"
+          },
+          "stopReason": {
+            "title": "Stop reason",
+            "type": "string",
+            "description": "The reason the model stopped generating (end_turn, max_tokens, stop_sequence)"
+          },
+          "inputTokens": {
+            "title": "Input tokens",
+            "type": "integer",
+            "description": "The number of input tokens consumed"
+          },
+          "outputTokens": {
+            "title": "Output tokens",
+            "type": "integer",
+            "description": "The number of output tokens generated"
+          }
+        },
+        "definitions": {}
+      },
+      "settings": {},
+      "properties": {
+        "toolPath": "/messages",
+        "objectName": "messages",
+        "toolDisplayName": "Generate Message",
+        "toolDescription": "Generate message responses using Anthropic Claude based on a given prompt.",
+        "method": "POST",
+        "connection": {
+          "id": "be97a3b0-86d3-4268-802e-3cf81a2fb640",
+          "name": "Anthropic Claude",
+          "elementInstanceId": 0,
+          "apiBaseUri": "",
+          "state": "enabled",
+          "isDefault": false,
+          "connector": {
+            "key": "uipath-anthropic-claude",
+            "name": "Anthropic Claude",
+            "image": "https://cloud.uipath.com/elements_/scaleunit_/58cb4f17-4581-4130-a2ae-52448b37dc03/v3/element/elements/uipath-anthropic-claude/image",
+            "enabled": true
+          },
+          "folder": {
+            "key": "fa3d85eb-7756-4983-b2f1-0f771101a5ff",
+            "path": "9b33393e-4c0c-4d20-8a69-5fec549726a7.fa3d85eb-7756-4983-b2f1-0f771101a5ff"
+          },
+          "solutionProperties": {
+            "resourceKey": "be97a3b0-86d3-4268-802e-3cf81a2fb640"
+          }
+        },
+        "parameters": [
+          {
+            "name": "model",
+            "displayName": "Model",
+            "type": "string",
+            "fieldLocation": "body",
+            "value": "claude-sonnet-4-6",
+            "description": "",
+            "position": "primary",
+            "sortOrder": 1,
+            "required": true,
+            "fieldVariant": "static",
+            "isCascading": false,
+            "dynamic": true,
+            "enumValues": [
+              {
+                "value": "claude-opus-4-6"
+              },
+              {
+                "value": "claude-sonnet-4-6"
+              },
+              {
+                "value": "claude-haiku-4-5"
+              },
+              {
+                "value": "claude-haiku-4-5-20251001"
+              },
+              {
+                "value": "claude-opus-4-5"
+              },
+              {
+                "value": "claude-opus-4-5-20251101"
+              },
+              {
+                "value": "claude-sonnet-4-5"
+              },
+              {
+                "value": "claude-sonnet-4-5-20250929"
+              },
+              {
+                "value": "claude-opus-4-1"
+              },
+              {
+                "value": "claude-opus-4-1-20250805"
+              },
+              {
+                "value": "claude-opus-4-0"
+              },
+              {
+                "value": "claude-opus-4-20250514"
+              },
+              {
+                "value": "claude-sonnet-4-0"
+              },
+              {
+                "value": "claude-sonnet-4-20250514"
+              },
+              {
+                "value": "claude-3-haiku-20240307"
+              }
+            ],
+            "loadReferenceOptionsByDefault": null,
+            "dynamicBehavior": [],
+            "reference": null
+          },
+          {
+            "name": "prompt",
+            "displayName": "Prompt",
+            "type": "string",
+            "fieldLocation": "body",
+            "value": "{{prompt}}",
+            "description": "You are providing a second medical-necessity opinion for a health insurance claim adjudication. Be concise and decisive.\n\nClaim details:\n- Procedures: {{cpt_codes_and_diagnoses}}\n- Provider narrative: {{provider_narrative}}\n- Total charges: {{total_charges}}\n\nInitial assessment from primary adjudicator (gpt-4o):\n{{initial_assessment}}\n\nProvide your independent medical-necessity assessment. For each procedure-diagnosis pairing, state whether it is medically necessary, not medically necessary, or uncertain, with a one-sentence justification. If you disagree with the primary adjudicator's assessment, explain why. End with a recommended disposition (APPROVE / DENY / REVIEW) and brief rationale.",
+            "position": "primary",
+            "sortOrder": 2,
+            "required": true,
+            "fieldVariant": "dynamic",
+            "isCascading": false,
+            "dynamic": true,
+            "enumValues": null,
+            "loadReferenceOptionsByDefault": null,
+            "dynamicBehavior": [],
+            "reference": null
+          },
+          {
+            "name": "maxTokens",
+            "displayName": "Max tokens",
+            "type": "integer",
+            "fieldLocation": "body",
+            "value": 2048,
+            "description": "",
+            "position": "primary",
+            "sortOrder": 4,
+            "required": true,
+            "fieldVariant": "static",
+            "isCascading": false,
+            "dynamic": true,
+            "enumValues": null,
+            "loadReferenceOptionsByDefault": null,
+            "dynamicBehavior": [],
+            "reference": null
+          },
+          {
+            "name": "systemPrompt",
+            "displayName": "System prompt",
+            "type": "string",
+            "fieldLocation": "body",
+            "value": "You are a helpful assistant.",
+            "description": "",
+            "position": "secondary",
+            "sortOrder": 5,
+            "required": false,
+            "fieldVariant": "static",
+            "isCascading": false,
+            "dynamic": true,
+            "enumValues": null,
+            "loadReferenceOptionsByDefault": null,
+            "dynamicBehavior": [],
+            "reference": null
+          },
+          {
+            "name": "temperature",
+            "displayName": "Temperature",
+            "type": "number",
+            "fieldLocation": "body",
+            "value": 0.3,
+            "description": "",
+            "position": "secondary",
+            "sortOrder": 6,
+            "required": false,
+            "fieldVariant": "static",
+            "isCascading": false,
+            "dynamic": true,
+            "enumValues": null,
+            "loadReferenceOptionsByDefault": null,
+            "dynamicBehavior": [],
+            "reference": null
+          },
+          {
+            "name": "topP",
+            "displayName": "Top P",
+            "type": "number",
+            "fieldLocation": "body",
+            "description": "",
+            "position": "secondary",
+            "sortOrder": 7,
+            "required": false,
+            "fieldVariant": "static",
+            "isCascading": false,
+            "dynamic": true,
+            "enumValues": null,
+            "loadReferenceOptionsByDefault": null,
+            "dynamicBehavior": [],
+            "reference": null
+          },
+          {
+            "name": "topK",
+            "displayName": "Top K",
+            "type": "integer",
+            "fieldLocation": "body",
+            "value": 1,
+            "description": "",
+            "position": "secondary",
+            "sortOrder": 8,
+            "required": false,
+            "fieldVariant": "static",
+            "isCascading": false,
+            "dynamic": true,
+            "enumValues": null,
+            "loadReferenceOptionsByDefault": null,
+            "dynamicBehavior": [],
+            "reference": null
+          }
+        ],
+        "bodyStructure": {
+          "contentType": "json"
+        }
+      },
+      "guardrail": {
+        "policies": []
+      },
+      "iconUrl": "https://cloud.uipath.com/elements_/scaleunit_/58cb4f17-4581-4130-a2ae-52448b37dc03/v3/element/elements/uipath-anthropic-claude/image",
+      "id": "65daa583-537b-43b0-b56c-a8c81134931e",
+      "isPreview": true,
+      "isEnabled": true
+    }
+  ],
+  "features": []
+}

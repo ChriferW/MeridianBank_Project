@@ -1,0 +1,16 @@
+{
+  "zoom": 1.22,
+  "agentPosition": {
+    "x": 0,
+    "y": 0
+  },
+  "resourceNodes": [
+    {
+      "id": "agent=>ClaimsIntake_DU_document_processing_automation:29e4cc97-e8df-414e-8714-bbdaefb34fdb",
+      "position": {
+        "x": 256,
+        "y": 304
+      }
+    }
+  ]
+}

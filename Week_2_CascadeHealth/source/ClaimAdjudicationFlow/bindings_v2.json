@@ -1,0 +1,176 @@
+{
+  "version": "2.0",
+  "resources": [
+    {
+      "resource": "EventTrigger",
+      "key": "91abdeec-5596-4b24-9bee-0731e658d58c",
+      "id": "EventTrigger91abdeec-5596-4b24-9bee-0731e658d58c",
+      "value": {
+        "ConnectionId": {
+          "defaultValue": "91abdeec-5596-4b24-9bee-0731e658d58c",
+          "isExpression": false
+        },
+        "EntryPointUniqueId": {
+          "defaultValue": "9783a17b-da74-4fce-a107-21caffe27e39",
+          "isExpression": false
+        }
+      },
+      "metadata": {
+        "UseConnectionService": "true",
+        "Connector": "uipath-google-gmail",
+        "ActivityName": "Claim Email Received",
+        "BindingsVersion": "2.2",
+        "ObjectName": "Message",
+        "Operation": "EMAIL_RECEIVED",
+        "FilterExpression": "(ParentFolders[?ID == 'INBOX']) && ((contains(Subject, '[CASCADE-CLAIM]') && HasAttachments == `true`))"
+      }
+    },
+    {
+      "resource": "Property",
+      "key": "EMAIL_RECEIVED",
+      "value": {
+        "ParentFolders[*].ID": {
+          "defaultValue": "INBOX",
+          "isExpression": false
+        }
+      },
+      "metadata": {
+        "TriggerCreateParameters": "ParentFolders[*].ID",
+        "DebugQueryParameters": "ParentFolders[*].ID",
+        "BindingsVersion": "2.2",
+        "ObjectName": "Message",
+        "ActivityName": "Claim Email Received",
+        "ParentResourceKey": "EventTrigger.91abdeec-5596-4b24-9bee-0731e658d58c"
+      },
+      "id": "Property_Event_start"
+    },
+    {
+      "resource": "Connection",
+      "key": "d94da30b-36a5-4f1e-bbff-c4b5fc072fc8",
+      "id": "Connectiond94da30b-36a5-4f1e-bbff-c4b5fc072fc8",
+      "value": {
+        "ConnectionId": {
+          "defaultValue": "91abdeec-5596-4b24-9bee-0731e658d58c",
+          "isExpression": false,
+          "displayName": "uipath-google-gmail connection"
+        }
+      },
+      "metadata": {
+        "ActivityName": "Claim Email Received",
+        "BindingsVersion": "2.2",
+        "DisplayLabel": "uipath-google-gmail connection",
+        "UseConnectionService": "true",
+        "Connector": "uipath-google-gmail"
+      }
+    },
+    {
+      "resource": "process",
+      "key": "UploadAttachmentToBucket",
+      "id": "processUploadAttachmentToBucket",
+      "value": {
+        "folderPath": {
+          "isExpression": false,
+          "displayName": "Folder path"
+        },
+        "name": {
+          "defaultValue": "UploadAttachmentToBucket",
+          "isExpression": false,
+          "displayName": "Process name"
+        }
+      },
+      "metadata": {
+        "ActivityName": "Save Attachment",
+        "BindingsVersion": "2.2",
+        "DisplayLabel": "name",
+        "SolutionsSupport": "true"
+      }
+    },
+    {
+      "resource": "process",
+      "key": "ClaimIntakeAgent",
+      "id": "processClaimIntakeAgent",
+      "value": {
+        "folderPath": {
+          "isExpression": false,
+          "displayName": "Folder path"
+        },
+        "name": {
+          "defaultValue": "ClaimIntakeAgent",
+          "isExpression": false,
+          "displayName": "Process name"
+        }
+      },
+      "metadata": {
+        "ActivityName": "Process Document",
+        "BindingsVersion": "2.2",
+        "DisplayLabel": "name",
+        "SolutionsSupport": "true",
+        "subType": "Agent"
+      }
+    },
+    {
+      "resource": "process",
+      "key": "AdjudicationAgent",
+      "id": "processAdjudicationAgent",
+      "value": {
+        "folderPath": {
+          "isExpression": false,
+          "displayName": "Folder path"
+        },
+        "name": {
+          "defaultValue": "AdjudicationAgent",
+          "isExpression": false,
+          "displayName": "Process name"
+        }
+      },
+      "metadata": {
+        "ActivityName": "Adjudicate Claim",
+        "BindingsVersion": "2.2",
+        "DisplayLabel": "name",
+        "SolutionsSupport": "true",
+        "subType": "Agent"
+      }
+    },
+    {
+      "resource": "Connection",
+      "key": "9f40f80e-8700-4d86-bdcc-9e786366df97",
+      "id": "Connection9f40f80e-8700-4d86-bdcc-9e786366df97",
+      "value": {
+        "ConnectionId": {
+          "defaultValue": "9089db7f-1d26-4715-ae7a-277a21ee1c0d",
+          "isExpression": false,
+          "displayName": "uipath-google-sheets connection"
+        }
+      },
+      "metadata": {
+        "ActivityName": "Log Denied",
+        "BindingsVersion": "2.2",
+        "DisplayLabel": "uipath-google-sheets connection",
+        "UseConnectionService": "true",
+        "Connector": "uipath-google-sheets"
+      }
+    },
+    {
+      "resource": "app",
+      "key": "SimpleApprovalApp",
+      "id": "appSimpleApprovalApp",
+      "value": {
+        "folderPath": {
+          "isExpression": false,
+          "displayName": "Folder path"
+        },
+        "name": {
+          "defaultValue": "SimpleApprovalApp",
+          "isExpression": false,
+          "displayName": "App name"
+        }
+      },
+      "metadata": {
+        "ActivityName": "Send to Action Center",
+        "BindingsVersion": "2.2",
+        "DisplayLabel": "name",
+        "SolutionsSupport": "true"
+      }
+    }
+  ]
+}
