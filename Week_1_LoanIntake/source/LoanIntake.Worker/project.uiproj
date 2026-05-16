@@ -1,0 +1,6 @@
+{
+  "Name": "LoanIntake.Worker",
+  "ProjectType": "Process",
+  "Description": "Unattended REFramework Worker. Consumes queue items from Loan_Applications_Intake, processes loan applications using LoanIntake.Library, routes based on amount and credit score.",
+  "MainFile": "Main.xaml"
+}
