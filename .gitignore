@@ -19,3 +19,6 @@ desktop.ini
 **/.entities/
 **/.tmh/
 **/project.json.lock
+
+# UiPath per-machine Studio settings (regenerated on open)
+**/.settings/
