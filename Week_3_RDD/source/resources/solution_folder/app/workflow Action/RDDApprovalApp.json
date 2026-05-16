@@ -1,0 +1,44 @@
+{
+  "docVersion": "1.0.0",
+  "resource": {
+    "name": "RDDApprovalApp",
+    "kind": "app",
+    "type": "workflow Action",
+    "apiVersion": "apps.uipath.com/v1",
+    "projectKey": "3415a8dd-c752-434e-b14c-ca2bd20807cf",
+    "isOverridable": true,
+    "dependencies": [
+      {
+        "name": "RDDApprovalApp",
+        "kind": "appVersion"
+      },
+      {
+        "name": "RDDApprovalApp",
+        "kind": "process"
+      }
+    ],
+    "runtimeDependencies": [],
+    "files": [],
+    "folders": [
+      {
+        "fullyQualifiedName": "solution_folder"
+      }
+    ],
+    "spec": {
+      "name": "RDDApprovalApp",
+      "description": null,
+      "type": "workflow Action",
+      "version": null,
+      "appSystemName": null,
+      "appVersionRef": {
+        "key": "f4f3598e-24c5-465d-b7b3-e4ab479dd406"
+      },
+      "codeBehindProcess": {
+        "key": "47f07e78-6f7c-4984-83d6-1c258a04496c"
+      },
+      "actionSchema": null
+    },
+    "locks": [],
+    "key": "56f74938-dd8c-4482-a5ad-dfdb71b29713"
+  }
+}

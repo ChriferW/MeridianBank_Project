@@ -1,0 +1,26 @@
+{
+  "docVersion": "1.0.0",
+  "resource": {
+    "name": "CustomerDisclosureAgent",
+    "kind": "package",
+    "apiVersion": "orchestrator.uipath.com/v1",
+    "projectKey": "dc79f0c7-f80c-4e4d-a1ff-bdc107155bbf",
+    "isOverridable": true,
+    "dependencies": [],
+    "runtimeDependencies": [],
+    "files": [],
+    "folders": [
+      {
+        "fullyQualifiedName": "solution_folder"
+      }
+    ],
+    "spec": {
+      "fileName": null,
+      "fileReference": null,
+      "name": "CustomerDisclosureAgent",
+      "description": null
+    },
+    "locks": [],
+    "key": "6b2f5f75-bb59-4a97-b9b9-1e4d564932f9"
+  }
+}

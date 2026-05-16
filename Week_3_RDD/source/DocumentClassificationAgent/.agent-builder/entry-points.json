@@ -1,0 +1,48 @@
+{
+  "$schema": "https://cloud.uipath.com/draft/2024-12/entry-point",
+  "$id": "entry-points.json",
+  "entryPoints": [
+    {
+      "filePath": "/content/agent.json",
+      "type": "agent",
+      "uniqueId": "1b5333c5-0ad3-4098-8b43-847d8c1648d9",
+      "input": {
+        "type": "object",
+        "properties": {
+          "payload": {
+            "type": "object",
+            "description": "Structured customer submission as JSON, post-privacy-boundary. May be a loan application, insurance claim, or other inbound event.",
+            "properties": {}
+          }
+        },
+        "title": "Inputs",
+        "required": [
+          "payload"
+        ]
+      },
+      "output": {
+        "type": "object",
+        "properties": {
+          "event_type": {
+            "type": "string",
+            "description": "One of three values: \"loan_application\", \"insurance_claim\", or \"unknown\". Used by the Orchestrator BPMN to route the submission to the appropriate downstream pipeline."
+          },
+          "confidence": {
+            "type": "number",
+            "description": "Confidence score between 0.0 and 1.0. Below 0.70 forces classification to \"unknown\". Used for governance reporting and threshold-based human review triggers."
+          },
+          "reasoning": {
+            "type": "string",
+            "description": "Brief explanation of the signals that drove the classification decision. Required per SR 11-7 model auditability standards."
+          }
+        },
+        "title": "Outputs",
+        "required": [
+          "event_type",
+          "confidence",
+          "reasoning"
+        ]
+      }
+    }
+  ]
+}

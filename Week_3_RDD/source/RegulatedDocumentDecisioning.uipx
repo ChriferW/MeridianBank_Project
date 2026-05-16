@@ -1,0 +1,48 @@
+{
+  "DocVersion": "1.0.0",
+  "StudioMinVersion": "2025.04.0",
+  "SolutionId": "49b0e2d6-30e7-49e5-41a1-08deab726893",
+  "Projects": [
+    {
+      "Type": "Agent",
+      "ProjectRelativePath": "ClaimsAdjudicationAgent/project.uiproj",
+      "Id": "51534208-ad0e-4df5-8a5e-441757b49df4"
+    },
+    {
+      "Type": "Process",
+      "ProjectRelativePath": "UploadPDFtoBucket/project.uiproj",
+      "Id": "d2e0cf0d-9d76-4f0b-a1da-9c428d87898d"
+    },
+    {
+      "Type": "Process",
+      "ProjectRelativePath": "DownloadPDFfromBucket/project.uiproj",
+      "Id": "b7196231-a389-4763-8f44-62fadf601baa"
+    },
+    {
+      "Type": "WebApp",
+      "ProjectRelativePath": "RDDApprovalApp/project.uiproj",
+      "Id": "3415a8dd-c752-434e-b14c-ca2bd20807cf"
+    },
+    {
+      "Type": "ProcessOrchestration",
+      "ProjectRelativePath": "Orchestrator/project.uiproj",
+      "Id": "c2fdaf60-05f2-4243-9ac2-a042928ff002"
+    },
+    {
+      "Type": "Agent",
+      "ProjectRelativePath": "DocumentClassificationAgent/project.uiproj",
+      "Id": "83bd0bd5-e758-4e6d-8882-e046534ef2b9"
+    },
+    {
+      "Type": "Agent",
+      "ProjectRelativePath": "CustomerDisclosureAgent/project.uiproj",
+      "Id": "dc79f0c7-f80c-4e4d-a1ff-bdc107155bbf"
+    },
+    {
+      "Type": "Agent",
+      "ProjectRelativePath": "RegulatoryComplianceAgent/project.uiproj",
+      "Id": "40b5a71f-debd-403c-be15-d0c284b4cec5"
+    }
+  ],
+  "AutomationHubIdeaUrl": null
+}

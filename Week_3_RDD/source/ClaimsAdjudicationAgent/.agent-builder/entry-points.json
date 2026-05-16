@@ -1,0 +1,113 @@
+{
+  "$schema": "https://cloud.uipath.com/draft/2024-12/entry-point",
+  "$id": "entry-points.json",
+  "entryPoints": [
+    {
+      "filePath": "/content/agent.json",
+      "type": "agent",
+      "uniqueId": "56c76724-b319-4080-a4c1-b857d8e72336",
+      "input": {
+        "type": "object",
+        "properties": {
+          "member_id": {
+            "type": "string"
+          },
+          "policy_number": {
+            "type": "string"
+          },
+          "provider_name": {
+            "type": "string"
+          },
+          "claim_amount": {
+            "type": "number"
+          },
+          "claim_type": {
+            "type": "string"
+          },
+          "coverage_type": {
+            "type": "string"
+          },
+          "date_of_incident": {
+            "type": "string"
+          },
+          "claim_description": {
+            "type": "string"
+          },
+          "intake_status": {
+            "type": "string"
+          },
+          "data_quality_issues": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "title": "Inputs",
+        "required": [
+          "member_id",
+          "policy_number",
+          "provider_name",
+          "claim_amount",
+          "claim_type",
+          "coverage_type",
+          "date_of_incident",
+          "claim_description",
+          "intake_status",
+          "data_quality_issues"
+        ]
+      },
+      "output": {
+        "type": "object",
+        "properties": {
+          "disposition": {
+            "type": "string"
+          },
+          "escalation_required": {
+            "type": "boolean"
+          },
+          "reasoning": {
+            "type": "string"
+          },
+          "claim_assessments": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "claim_type": {
+                  "type": "string"
+                },
+                "coverage_type": {
+                  "type": "string"
+                },
+                "medically_necessary": {
+                  "type": "string"
+                },
+                "justification": {
+                  "type": "string"
+                },
+                "coverage_status": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "claim_type",
+                "coverage_type",
+                "medically_necessary",
+                "justification",
+                "coverage_status"
+              ]
+            }
+          }
+        },
+        "title": "Outputs",
+        "required": [
+          "disposition",
+          "escalation_required",
+          "reasoning",
+          "claim_assessments"
+        ]
+      }
+    }
+  ]
+}

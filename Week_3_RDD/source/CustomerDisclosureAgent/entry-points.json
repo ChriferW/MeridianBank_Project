@@ -1,0 +1,165 @@
+{
+  "$schema": "https://cloud.uipath.com/draft/2024-12/entry-point",
+  "$id": "entry-points.json",
+  "entryPoints": [
+    {
+      "filePath": "/content/agent.json",
+      "type": "agent",
+      "uniqueId": "8bb049dd-8970-47cb-a568-7ea72817dedf",
+      "input": {
+        "type": "object",
+        "required": [
+          "event_type",
+          "branch_origin",
+          "final_disposition",
+          "applicant_or_member_name",
+          "amount",
+          "risk_decision_type",
+          "risk_reasoning",
+          "adverse_action_required",
+          "disclosures_required",
+          "compliance_findings",
+          "human_touchpoints",
+          "reference_number"
+        ],
+        "properties": {
+          "event_type": {
+            "type": "string"
+          },
+          "branch_origin": {
+            "type": "string"
+          },
+          "final_disposition": {
+            "type": "string"
+          },
+          "applicant_or_member_name": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "number"
+          },
+          "risk_decision_type": {
+            "type": "string"
+          },
+          "risk_reasoning": {
+            "type": "string"
+          },
+          "adverse_action_required": {
+            "type": "boolean"
+          },
+          "disclosures_required": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "compliance_findings": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "framework": {
+                  "type": "string"
+                },
+                "requirement": {
+                  "type": "string"
+                },
+                "status": {
+                  "type": "string"
+                },
+                "notes": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "human_touchpoints": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "reviewer_action": {
+                  "type": "string"
+                },
+                "reviewer_comment": {
+                  "type": "string"
+                },
+                "reviewed_at": {
+                  "type": "string"
+                },
+                "agent_decision_at_review": {
+                  "type": "string"
+                },
+                "was_override": {
+                  "type": "boolean"
+                },
+                "agent_abstained": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "reference_number": {
+            "type": "string"
+          }
+        },
+        "title": "Inputs"
+      },
+      "output": {
+        "type": "object",
+        "required": [
+          "customer_email_subject",
+          "customer_email_body",
+          "pdf_letter_title",
+          "pdf_letter_opening",
+          "pdf_letter_reasons",
+          "pdf_letter_next_steps",
+          "pdf_letter_disclosures_notice",
+          "notification_channel",
+          "required_attachments",
+          "communication_priority",
+          "drafted_reasoning"
+        ],
+        "properties": {
+          "customer_email_subject": {
+            "type": "string"
+          },
+          "customer_email_body": {
+            "type": "string"
+          },
+          "pdf_letter_title": {
+            "type": "string"
+          },
+          "pdf_letter_opening": {
+            "type": "string"
+          },
+          "pdf_letter_reasons": {
+            "type": "string"
+          },
+          "pdf_letter_next_steps": {
+            "type": "string"
+          },
+          "pdf_letter_disclosures_notice": {
+            "type": "string"
+          },
+          "notification_channel": {
+            "type": "string"
+          },
+          "required_attachments": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "communication_priority": {
+            "type": "string"
+          },
+          "drafted_reasoning": {
+            "type": "string"
+          }
+        },
+        "title": "Outputs"
+      }
+    }
+  ]
+}

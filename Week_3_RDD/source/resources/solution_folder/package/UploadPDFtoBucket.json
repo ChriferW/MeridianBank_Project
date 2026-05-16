@@ -1,0 +1,26 @@
+{
+  "docVersion": "1.0.0",
+  "resource": {
+    "name": "UploadPDFtoBucket",
+    "kind": "package",
+    "apiVersion": "orchestrator.uipath.com/v1",
+    "projectKey": "d2e0cf0d-9d76-4f0b-a1da-9c428d87898d",
+    "isOverridable": true,
+    "dependencies": [],
+    "runtimeDependencies": [],
+    "files": [],
+    "folders": [
+      {
+        "fullyQualifiedName": "solution_folder"
+      }
+    ],
+    "spec": {
+      "fileName": null,
+      "fileReference": null,
+      "name": "UploadPDFtoBucket",
+      "description": null
+    },
+    "locks": [],
+    "key": "549d7ed1-811c-4240-bf42-6fa67b02f1d7"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "docVersion": "1.0.0",
+  "resource": {
+    "name": "rdd-decision-letters-archive",
+    "kind": "bucket",
+    "type": "orchestratorBucket",
+    "apiVersion": "orchestrator.uipath.com/v1",
+    "isOverridable": true,
+    "dependencies": [],
+    "runtimeDependencies": [],
+    "files": [],
+    "folders": [
+      {
+        "fullyQualifiedName": "solution_folder"
+      }
+    ],
+    "spec": {
+      "name": "rdd-decision-letters-archive",
+      "description": null,
+      "type": "Orchestrator",
+      "options": null,
+      "tags": []
+    },
+    "locks": [],
+    "key": "e6a65bda-284d-4674-932c-5b90435f3a4e"
+  }
+}

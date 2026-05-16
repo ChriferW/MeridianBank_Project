@@ -1,0 +1,113 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Main"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:isactr="http://schemas.uipath.com/workflow/integration-service-activities/isactr"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib"
+ xmlns:this="clr-namespace:"
+ xmlns:ucas="clr-namespace:UiPath.Core.Activities.Storage;assembly=UiPath.System.Activities"
+ xmlns:ui="http://schemas.uipath.com/workflow/activities"
+ xmlns:upr="clr-namespace:UiPath.Platform.ResourceHandling;assembly=UiPath.Platform"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_DocumentId" Type="InArgument(x:String)" />
+    <x:Property Name="in_Filename" Type="InArgument(x:String)" />
+    <x:Property Name="out_BucketPath" Type="OutArgument(x:String)" />
+  </x:Members>
+  <this:Main.in_DocumentId>
+    <InArgument x:TypeArguments="x:String" />
+  </this:Main.in_DocumentId>
+  <this:Main.in_Filename>
+    <InArgument x:TypeArguments="x:String" />
+  </this:Main.in_Filename>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="28">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>UiPath.Platform.ResourceHandling</x:String>
+      <x:String>UiPath.Core.Activities.Storage</x:String>
+      <x:String>UiPath.Core.Activities.Orchestrator</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>UiPath.IntegrationService.Activities.Runtime.Models.FilterBuilder</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>UiPath.IntegrationService.Activities.Runtime.Models</x:String>
+      <x:String>UiPath.IntegrationService.Activities.Runtime.Activities</x:String>
+      <x:String>UiPath.Platform.Activities</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>UiPath.Shared.Activities</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>Newtonsoft.Json</x:String>
+      <x:String>Newtonsoft.Json.Linq</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="16">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Net.Primitives</AssemblyReference>
+      <AssemblyReference>System.Runtime.InteropServices</AssemblyReference>
+      <AssemblyReference>Newtonsoft.Json</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>UiPath.IntegrationService.Activities.Runtime</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap:VirtualizedContainerService.HintSize="356,732" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="upr:IResource" Name="downloadFile">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:String x:Key="SourceIdRef">ConnectorActivity_1</x:String>
+            <x:String x:Key="SourcePropertyName">fileDownload</x:String>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </Variable>
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:ManualTrigger Result="{x:Null}" DisplayName="Manual Trigger" sap2010:WorkflowViewState.IdRef="ManualTrigger_1" />
+    <isactr:ConnectorActivity Configuration="H4sIAAAAAAAAA4VTwXLaMBD9FUZnQ4AApb4VKK2nofEEmkun01msBavYkiutk7gM/941tgkNyfRka3ffat97q72YK0ykmxpNoDRa4e/FEsFGMawTrJLC//7DE4HOcjoF9uIrpCh8oaTwxEy5LIGiDs1MlKeoqRXMyhy6yKqMlNGcW8XI4ZbZtIj/ZF3JZasiK7GOrNJbPi+NpVsry4l6nrjD37myKIVPNkevmvrGRFC3DYFiBgVugRQbGYLlUagEl/UHHv82p1fn36gEZ+ZRJwZeY1IlWnOuuuDyMltTMBEhtZkIQiqq0dGR8DeQOCzPLjPaYUOlOU9zC/Q2w2r+iiM71aCOZQ3Lgye+abVRKMtR2NQ0Yzj72DQNtCPQEZ70caXf9/ytLul1up0u38HroDEiY79gweFccZ+4nclNavQOi+c/rv0QkXpQVNTsGxqs+PoX96iVlLVWP88s/0yUVX5xwSekSRFIwRxK1on6g7Jp/dKN2XOPKUQxsk5ml2f3kLDSzOjQxCfWPDq0AWFax0OrUrAF86rXOoRoB1s816A/+leE+vpwNl80pE+5c1yvMzzRfmOPztj/V57bDG3j/h3yu8AHvFDt40p41fb74uqiy9VeycPxMSV52Ym3xuQ2wqDEXl+Pxz1AbL9bQ7c9GA9l+/1oNGj3h4MRoIQR9jeMvQG9zVkhRqDm8wKeQj4u2SDh97tdngjchJd9xw93GnN16UG97Ct8okliot1R7cNfryCEmm8EAAA=" ConnectionId="33881aee-7ba0-485d-9664-2546aeda6e2f" DisplayName="Download Document" sap2010:WorkflowViewState.IdRef="ConnectorActivity_1" UiPathActivityTypeId="5ba31979-a4af-3602-802e-df5b7d954594">
+      <isactr:ConnectorActivity.FieldObjects>
+        <isactr:FieldObject Name="id" Type="FieldArgument">
+          <isactr:FieldObject.Value>
+            <InArgument x:TypeArguments="x:String">[string.Format("{0}", in_DocumentId)]</InArgument>
+          </isactr:FieldObject.Value>
+        </isactr:FieldObject>
+        <isactr:FieldObject Name="fileDownload" Type="FieldArgument">
+          <isactr:FieldObject.Value>
+            <OutArgument x:TypeArguments="upr:IResource">[downloadFile]</OutArgument>
+          </isactr:FieldObject.Value>
+        </isactr:FieldObject>
+      </isactr:ConnectorActivity.FieldObjects>
+    </isactr:ConnectorActivity>
+    <ucas:UploadStorageFile Path="{x:Null}" TimeoutMS="{x:Null}" Destination="[&quot;adverse-actions/&quot; + in_Filename]" DisplayName="Upload Storage File" FileResource="[downloadFile]" sap2010:WorkflowViewState.IdRef="UploadStorageFile_1" StorageBucketName="rdd-decision-letters-archive" />
+    <Assign DisplayName="Assign Variable Value" sap2010:WorkflowViewState.IdRef="Assign_1">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[out_BucketPath]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">["adverse-actions/" + in_Filename]</InArgument>
+      </Assign.Value>
+    </Assign>
+  </Sequence>
+</Activity>

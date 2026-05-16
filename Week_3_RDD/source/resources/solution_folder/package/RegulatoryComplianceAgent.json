@@ -1,0 +1,26 @@
+{
+  "docVersion": "1.0.0",
+  "resource": {
+    "name": "RegulatoryComplianceAgent",
+    "kind": "package",
+    "apiVersion": "orchestrator.uipath.com/v1",
+    "projectKey": "40b5a71f-debd-403c-be15-d0c284b4cec5",
+    "isOverridable": true,
+    "dependencies": [],
+    "runtimeDependencies": [],
+    "files": [],
+    "folders": [
+      {
+        "fullyQualifiedName": "solution_folder"
+      }
+    ],
+    "spec": {
+      "fileName": null,
+      "fileReference": null,
+      "name": "RegulatoryComplianceAgent",
+      "description": null
+    },
+    "locks": [],
+    "key": "b9c339f9-630d-4d62-8579-ba04b769e112"
+  }
+}

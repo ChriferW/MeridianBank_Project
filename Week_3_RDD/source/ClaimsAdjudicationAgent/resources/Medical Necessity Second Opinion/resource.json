@@ -1,0 +1,368 @@
+{
+  "$resourceType": "tool",
+  "name": "Medical Necessity Second Opinion",
+  "description": "Call this tool when a claim's medical necessity assessment is ambiguous or uncertain. Specifically use this tool when: (1) the claim_description narrative is insufficient or ambiguous   to clearly assess medical necessity, (2) the claim_amount is unusually high relative to the claim_type and coverage_type, or (3) you've already determined disposition is REVIEW but  want a second opinion to validate or challenge your reasoning before finalizing. Send the relevant claim details and your initial assessment, and Claude will provide an independent  medical-necessity perspective. Do NOT call this tool for routine claims with clear narrative-coverage alignment or for claims that obviously fall under policy exclusions or fail rule  1 (intake quality).",
+  "location": "external",
+  "type": "integration",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "model": {
+        "type": "string",
+        "title": "Model",
+        "description": "The Claude model to use for generating the message",
+        "enum": [
+          "claude-sonnet-4-6"
+        ],
+        "oneOf": [
+          {
+            "const": "claude-opus-4-6",
+            "title": "claude-opus-4-6"
+          },
+          {
+            "const": "claude-sonnet-4-6",
+            "title": "claude-sonnet-4-6"
+          },
+          {
+            "const": "claude-haiku-4-5",
+            "title": "claude-haiku-4-5"
+          },
+          {
+            "const": "claude-haiku-4-5-20251001",
+            "title": "claude-haiku-4-5-20251001"
+          },
+          {
+            "const": "claude-opus-4-5",
+            "title": "claude-opus-4-5"
+          },
+          {
+            "const": "claude-opus-4-5-20251101",
+            "title": "claude-opus-4-5-20251101"
+          },
+          {
+            "const": "claude-sonnet-4-5",
+            "title": "claude-sonnet-4-5"
+          },
+          {
+            "const": "claude-sonnet-4-5-20250929",
+            "title": "claude-sonnet-4-5-20250929"
+          },
+          {
+            "const": "claude-opus-4-1",
+            "title": "claude-opus-4-1"
+          },
+          {
+            "const": "claude-opus-4-1-20250805",
+            "title": "claude-opus-4-1-20250805"
+          },
+          {
+            "const": "claude-opus-4-0",
+            "title": "claude-opus-4-0"
+          },
+          {
+            "const": "claude-opus-4-20250514",
+            "title": "claude-opus-4-20250514"
+          },
+          {
+            "const": "claude-sonnet-4-0",
+            "title": "claude-sonnet-4-0"
+          },
+          {
+            "const": "claude-sonnet-4-20250514",
+            "title": "claude-sonnet-4-20250514"
+          },
+          {
+            "const": "claude-3-haiku-20240307",
+            "title": "claude-3-haiku-20240307"
+          }
+        ]
+      },
+      "prompt": {
+        "type": "string",
+        "title": "Prompt",
+        "description": "You are providing a second medical-necessity opinion for a health insurance claim adjudication. Be concise and decisive.\n\n  Claim details:\n  - Claim Type: {{claim_type}}\n  - Coverage Type: {{coverage_type}}\n  - Provider Narrative: {{claim_description}}\n  - Claim Amount: {{claim_amount}}\n\n  Initial assessment from primary adjudicator (gpt-4o):\n  {{initial_assessment}}\n\n  Provide your independent medical-necessity assessment based on the claim narrative. State whether the described service is medically necessary, not medically necessary, or uncertain,\n  with a one-sentence justification. If you disagree with the primary adjudicator's assessment, explain why. End with a recommended disposition (APPROVE / DENY / REVIEW) and brief\n  rationale.\n\n  Note: this claim originated from a portal-submitted record without coded data (no CPT or ICD-10 codes). Reason from the narrative text and claim characteristics."
+      },
+      "maxTokens": {
+        "type": "integer",
+        "title": "Max tokens",
+        "description": "The maximum number of tokens to generate before stopping"
+      },
+      "systemPrompt": {
+        "type": "string",
+        "title": "System prompt",
+        "description": "System prompt providing context and instructions to Claude"
+      },
+      "temperature": {
+        "type": "number",
+        "title": "Temperature",
+        "description": "Amount of randomness injected into the response (0.0-1.0)"
+      },
+      "topP": {
+        "type": "number",
+        "title": "Top P",
+        "description": "Use nucleus sampling"
+      },
+      "topK": {
+        "type": "integer",
+        "title": "Top K",
+        "description": "Only sample from the top K options for each subsequent token"
+      }
+    },
+    "additionalProperties": false,
+    "required": [
+      "model",
+      "prompt",
+      "maxTokens"
+    ]
+  },
+  "outputSchema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+      "model": {
+        "title": "Model",
+        "type": "string",
+        "description": "The Claude model to use for generating the message"
+      },
+      "text": {
+        "title": "Generated text",
+        "type": "string",
+        "description": "The text generated by Claude"
+      },
+      "id": {
+        "title": "Message ID",
+        "type": "string",
+        "description": "The unique message identifier"
+      },
+      "stopReason": {
+        "title": "Stop reason",
+        "type": "string",
+        "description": "The reason the model stopped generating (end_turn, max_tokens, stop_sequence)"
+      },
+      "inputTokens": {
+        "title": "Input tokens",
+        "type": "integer",
+        "description": "The number of input tokens consumed"
+      },
+      "outputTokens": {
+        "title": "Output tokens",
+        "type": "integer",
+        "description": "The number of output tokens generated"
+      }
+    },
+    "definitions": {}
+  },
+  "settings": {},
+  "properties": {
+    "toolPath": "/messages",
+    "objectName": "messages",
+    "toolDisplayName": "Generate Message",
+    "toolDescription": "Generate message responses using Anthropic Claude based on a given prompt.",
+    "method": "POST",
+    "connection": {
+      "id": "be97a3b0-86d3-4268-802e-3cf81a2fb640",
+      "name": "Anthropic Claude",
+      "elementInstanceId": 0,
+      "apiBaseUri": "",
+      "state": "enabled",
+      "isDefault": false,
+      "connector": {
+        "key": "uipath-anthropic-claude",
+        "name": "Anthropic Claude",
+        "image": "https://cloud.uipath.com/elements_/scaleunit_/58cb4f17-4581-4130-a2ae-52448b37dc03/v3/element/elements/uipath-anthropic-claude/image",
+        "enabled": true
+      },
+      "folder": {
+        "key": "fa3d85eb-7756-4983-b2f1-0f771101a5ff",
+        "path": "9b33393e-4c0c-4d20-8a69-5fec549726a7.fa3d85eb-7756-4983-b2f1-0f771101a5ff"
+      },
+      "solutionProperties": {
+        "resourceKey": "be97a3b0-86d3-4268-802e-3cf81a2fb640"
+      }
+    },
+    "parameters": [
+      {
+        "name": "model",
+        "displayName": "Model",
+        "type": "string",
+        "fieldLocation": "body",
+        "value": "claude-sonnet-4-6",
+        "description": "",
+        "position": "primary",
+        "sortOrder": 1,
+        "required": true,
+        "fieldVariant": "static",
+        "isCascading": false,
+        "dynamic": true,
+        "enumValues": [
+          {
+            "value": "claude-opus-4-6"
+          },
+          {
+            "value": "claude-sonnet-4-6"
+          },
+          {
+            "value": "claude-haiku-4-5"
+          },
+          {
+            "value": "claude-haiku-4-5-20251001"
+          },
+          {
+            "value": "claude-opus-4-5"
+          },
+          {
+            "value": "claude-opus-4-5-20251101"
+          },
+          {
+            "value": "claude-sonnet-4-5"
+          },
+          {
+            "value": "claude-sonnet-4-5-20250929"
+          },
+          {
+            "value": "claude-opus-4-1"
+          },
+          {
+            "value": "claude-opus-4-1-20250805"
+          },
+          {
+            "value": "claude-opus-4-0"
+          },
+          {
+            "value": "claude-opus-4-20250514"
+          },
+          {
+            "value": "claude-sonnet-4-0"
+          },
+          {
+            "value": "claude-sonnet-4-20250514"
+          },
+          {
+            "value": "claude-3-haiku-20240307"
+          }
+        ],
+        "loadReferenceOptionsByDefault": null,
+        "dynamicBehavior": [],
+        "reference": null
+      },
+      {
+        "name": "prompt",
+        "displayName": "Prompt",
+        "type": "string",
+        "fieldLocation": "body",
+        "value": "{{prompt}}",
+        "description": "You are providing a second medical-necessity opinion for a health insurance claim adjudication. Be concise and decisive.\n\n  Claim details:\n  - Claim Type: {{claim_type}}\n  - Coverage Type: {{coverage_type}}\n  - Provider Narrative: {{claim_description}}\n  - Claim Amount: {{claim_amount}}\n\n  Initial assessment from primary adjudicator (gpt-4o):\n  {{initial_assessment}}\n\n  Provide your independent medical-necessity assessment based on the claim narrative. State whether the described service is medically necessary, not medically necessary, or uncertain,\n  with a one-sentence justification. If you disagree with the primary adjudicator's assessment, explain why. End with a recommended disposition (APPROVE / DENY / REVIEW) and brief\n  rationale.\n\n  Note: this claim originated from a portal-submitted record without coded data (no CPT or ICD-10 codes). Reason from the narrative text and claim characteristics.",
+        "position": "primary",
+        "sortOrder": 2,
+        "required": true,
+        "fieldVariant": "dynamic",
+        "isCascading": false,
+        "dynamic": true,
+        "enumValues": null,
+        "loadReferenceOptionsByDefault": null,
+        "dynamicBehavior": [],
+        "reference": null
+      },
+      {
+        "name": "maxTokens",
+        "displayName": "Max tokens",
+        "type": "integer",
+        "fieldLocation": "body",
+        "value": 2048,
+        "description": "",
+        "position": "primary",
+        "sortOrder": 4,
+        "required": true,
+        "fieldVariant": "static",
+        "isCascading": false,
+        "dynamic": true,
+        "enumValues": null,
+        "loadReferenceOptionsByDefault": null,
+        "dynamicBehavior": [],
+        "reference": null
+      },
+      {
+        "name": "systemPrompt",
+        "displayName": "System prompt",
+        "type": "string",
+        "fieldLocation": "body",
+        "value": "{{prompt}}",
+        "description": "System prompt providing context and instructions to Claude",
+        "position": "secondary",
+        "sortOrder": 5,
+        "required": false,
+        "fieldVariant": "dynamic",
+        "isCascading": false,
+        "dynamic": true,
+        "enumValues": null,
+        "loadReferenceOptionsByDefault": null,
+        "dynamicBehavior": [],
+        "reference": null
+      },
+      {
+        "name": "temperature",
+        "displayName": "Temperature",
+        "type": "number",
+        "fieldLocation": "body",
+        "value": "{{prompt}}",
+        "description": "Amount of randomness injected into the response (0.0-1.0)",
+        "position": "secondary",
+        "sortOrder": 6,
+        "required": false,
+        "fieldVariant": "dynamic",
+        "isCascading": false,
+        "dynamic": true,
+        "enumValues": null,
+        "loadReferenceOptionsByDefault": null,
+        "dynamicBehavior": [],
+        "reference": null
+      },
+      {
+        "name": "topP",
+        "displayName": "Top P",
+        "type": "number",
+        "fieldLocation": "body",
+        "value": "{{prompt}}",
+        "description": "Use nucleus sampling",
+        "position": "secondary",
+        "sortOrder": 7,
+        "required": false,
+        "fieldVariant": "dynamic",
+        "isCascading": false,
+        "dynamic": true,
+        "enumValues": null,
+        "loadReferenceOptionsByDefault": null,
+        "dynamicBehavior": [],
+        "reference": null
+      },
+      {
+        "name": "topK",
+        "displayName": "Top K",
+        "type": "integer",
+        "fieldLocation": "body",
+        "value": "{{prompt}}",
+        "description": "Only sample from the top K options for each subsequent token",
+        "position": "secondary",
+        "sortOrder": 8,
+        "required": false,
+        "fieldVariant": "dynamic",
+        "isCascading": false,
+        "dynamic": true,
+        "enumValues": null,
+        "loadReferenceOptionsByDefault": null,
+        "dynamicBehavior": [],
+        "reference": null
+      }
+    ],
+    "bodyStructure": {
+      "contentType": "json"
+    }
+  },
+  "guardrail": {
+    "policies": []
+  },
+  "iconUrl": "https://cloud.uipath.com/elements_/scaleunit_/58cb4f17-4581-4130-a2ae-52448b37dc03/v3/element/elements/uipath-anthropic-claude/image",
+  "id": "76ba5459-72e7-4cd6-b478-838cccf44ee5",
+  "isPreview": true,
+  "isEnabled": true
+}

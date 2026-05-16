@@ -1,0 +1,26 @@
+{
+  "docVersion": "1.0.0",
+  "resource": {
+    "name": "ClaimsAdjudicationAgent",
+    "kind": "package",
+    "apiVersion": "orchestrator.uipath.com/v1",
+    "projectKey": "51534208-ad0e-4df5-8a5e-441757b49df4",
+    "isOverridable": true,
+    "dependencies": [],
+    "runtimeDependencies": [],
+    "files": [],
+    "folders": [
+      {
+        "fullyQualifiedName": "solution_folder"
+      }
+    ],
+    "spec": {
+      "fileName": null,
+      "fileReference": null,
+      "name": "ClaimsAdjudicationAgent",
+      "description": null
+    },
+    "locks": [],
+    "key": "637d6633-ec2a-44f5-9893-761c21fc8fc3"
+  }
+}

@@ -1,0 +1,1281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:uipath="http://uipath.org/schema/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="x-uipath-initial-diagram" targetNamespace="http://www.omg.org/spec/BPMN/20100524/MODEL" exporter="UiPath Studio Web (https://uipath.com)" exporterVersion="50727843">
+  <bpmn:process id="Process_1" name="Process" isExecutable="false">
+    <bpmn:extensionElements>
+      <uipath:variables version="v1">
+        <uipath:inputOutput id="error" name="Error" type="jsonSchema" elementId="Activity_yyh2BX"><![CDATA[{"type":"object","properties":{"code":{"type":"string"},"message":{"type":"string"},"detail":{"type":"string"},"category":{"type":"string"},"status":{"type":"number"},"element":{"type":"string"}}}]]></uipath:inputOutput>
+        <uipath:inputOutput id="eventType" name="event_type" type="string" elementId="Activity_yyh2BX" />
+        <uipath:inputOutput id="confidence" name="confidence" type="number" elementId="Activity_yyh2BX" />
+        <uipath:inputOutput id="reasoning" name="reasoning" type="string" elementId="Activity_yyh2BX" />
+        <uipath:inputOutput id="scriptResponse" name="scriptResponse" type="jsonSchema" elementId="Activity_J9nSWo" />
+        <uipath:inputOutput id="error3" name="Error" type="jsonSchema" elementId="Activity_J9nSWo"><![CDATA[{"type":"object","properties":{"code":{"type":"string"},"message":{"type":"string"},"detail":{"type":"string"},"category":{"type":"string"},"status":{"type":"number"},"element":{"type":"string"}}}]]></uipath:inputOutput>
+        <uipath:inputOutput id="payload" name="payload" type="jsonSchema" elementId="Process_1" default="" custom="true"><![CDATA[{"type":"object","$schema":"http://json-schema.org/draft-07/schema#"}]]></uipath:inputOutput>
+        <uipath:inputOutput id="dcaEventType" name="dcaEventType" type="string" elementId="Process_1" default="" custom="true" />
+        <uipath:inputOutput id="dcaConfidence" name="dcaConfidence" type="float" elementId="Process_1" default="" custom="true" />
+        <uipath:inputOutput id="dcaReasoning" name="dcaReasoning" type="string" elementId="Process_1" default="" custom="true" />
+        <uipath:inputOutput id="scriptResponse4" name="scriptResponse" type="jsonSchema" elementId="Activity_tKIAf0" />
+        <uipath:inputOutput id="error6" name="Error" type="jsonSchema" elementId="Activity_tKIAf0"><![CDATA[{"type":"object","properties":{"code":{"type":"string"},"message":{"type":"string"},"detail":{"type":"string"},"category":{"type":"string"},"status":{"type":"number"},"element":{"type":"string"}}}]]></uipath:inputOutput>
+        <uipath:inputOutput id="scriptResponse6" name="scriptResponse" type="jsonSchema" elementId="Activity_iQuyyS"><![CDATA[{"type":"object","properties":{"risk_output":{"type":"object","properties":{"decision_type":{"type":"string"},"escalation_required":{"type":"string"},"reasoning":{"type":"string"},"claim_assessments":{"type":"string"},"branch_origin":{"type":"string"},"policy_version":{"type":"string"},"decision_completed_at":{"type":"string"}}}},"$schema":"http://json-schema.org/draft-07/schema#"}]]></uipath:inputOutput>
+        <uipath:inputOutput id="error9" name="Error" type="jsonSchema" elementId="Activity_iQuyyS"><![CDATA[{"type":"object","properties":{"code":{"type":"string"},"message":{"type":"string"},"detail":{"type":"string"},"category":{"type":"string"},"status":{"type":"number"},"element":{"type":"string"}}}]]></uipath:inputOutput>
+        <uipath:inputOutput id="scriptResponse7" name="scriptResponse" type="jsonSchema" elementId="Activity_v5hZAa" />
+        <uipath:inputOutput id="error11" name="Error" type="jsonSchema" elementId="Activity_v5hZAa"><![CDATA[{"type":"object","properties":{"code":{"type":"string"},"message":{"type":"string"},"detail":{"type":"string"},"category":{"type":"string"},"status":{"type":"number"},"element":{"type":"string"}}}]]></uipath:inputOutput>
+        <uipath:inputOutput id="error10" name="Error" type="jsonSchema" elementId="Activity_nB46VC"><![CDATA[{"type":"object","properties":{"code":{"type":"string"},"message":{"type":"string"},"detail":{"type":"string"},"category":{"type":"string"},"status":{"type":"number"},"element":{"type":"string"}}}]]></uipath:inputOutput>
+        <uipath:inputOutput id="comment" name="Comment" type="string" elementId="Activity_nB46VC" />
+        <uipath:inputOutput id="action" name="Action" type="string" elementId="Activity_nB46VC" />
+        <uipath:inputOutput id="hitlTask" name="hitlTask" type="jsonSchema" elementId="Activity_nB46VC"><![CDATA[{"type":"object","displayName":"All Task Properties","properties":{"Id":{"type":"integer","description":"Task identifier"},"Key":{"type":"string","description":"Unique task identifier (UUID)"},"Title":{"type":"string","description":"Task title"},"Status":{"type":"string","description":"Task status: Unassigned, Pending, or Completed"},"Action":{"type":"string","description":"Action taken on the task"},"ActionLabel":{"type":"string","description":"Action display label"},"Priority":{"type":"string","description":"Task priority: Low, Medium, High, or Critical"},"Type":{"type":"string","description":"Task type (e.g. FormTask, AppTask, QuickFormTask)"},"Data":{"type":"object","description":"Task form field values"},"CompletedByUser":{"type":"object","description":"User who completed the task","properties":{"Id":{"type":"integer"},"Name":{"type":"string"},"Surname":{"type":"string"},"UserName":{"type":"string"},"EmailAddress":{"type":"string"},"DisplayName":{"type":"string"},"Type":{"type":"string","description":"User, Robot, DirectoryUser, DirectoryGroup, DirectoryRobot, or DirectoryExternalApplication"},"AuthenticationSource":{"type":"string"}}},"AssignedToUser":{"type":"object","description":"User currently assigned to the task","properties":{"Id":{"type":"integer"},"Name":{"type":"string"},"Surname":{"type":"string"},"UserName":{"type":"string"},"EmailAddress":{"type":"string"},"DisplayName":{"type":"string"},"Type":{"type":"string","description":"User, Robot, DirectoryUser, DirectoryGroup, DirectoryRobot, or DirectoryExternalApplication"},"AuthenticationSource":{"type":"string"}}},"AssignedToUserId":{"type":"integer","description":"ID of the assigned user"},"TaskAssignmentCriteria":{"type":"string","description":"Assignment criteria: SingleUser, Workload, AllUsers, RoundRobin, or Hierarchy"},"TaskAssignees":{"type":"array","description":"List of users assigned to the task","items":{"type":"object","properties":{"Id":{"type":"integer"},"Name":{"type":"string"},"Surname":{"type":"string"},"UserName":{"type":"string"},"EmailAddress":{"type":"string"},"DisplayName":{"type":"string"},"Type":{"type":"string","description":"User, Robot, DirectoryUser, DirectoryGroup, DirectoryRobot, or DirectoryExternalApplication"},"AuthenticationSource":{"type":"string"}}}},"CompletionTime":{"type":"string","description":"Task completion timestamp"},"CreationTime":{"type":"string","description":"Task creation timestamp"},"LastModificationTime":{"type":"string","description":"Last modification timestamp"},"LastAssignedTime":{"type":"string","description":"Last assignment timestamp"},"OrganizationUnitId":{"type":"integer","description":"Folder/organization unit ID"},"OrganizationUnitFullyQualifiedName":{"type":"string","description":"Fully qualified folder name"},"ParentOperationId":{"type":"string","description":"Operation ID that created this task"},"CreatorJobKey":{"type":"string","description":"Key of the job that created this task (UUID)"},"ExternalTag":{"type":"string","description":"External system identifier"},"ProcessingTime":{"type":"integer","description":"Time spent in assigned state"},"WaitJobState":{"type":"string","description":"State of the waiting job"},"WaitJobKey":{"type":"string","description":"Key of the waiting job (UUID)"},"TaskSchemaKey":{"type":"string","description":"Schema key for QuickFormTask (UUID)"},"IsDeleted":{"type":"boolean"},"IsCurrentUserInAllUserAssignedGroup":{"type":"boolean"},"CreatorUserId":{"type":"integer","description":"ID of the user who created the task"},"LastModifierUserId":{"type":"integer","description":"ID of the last user to modify the task"},"DeleterUserId":{"type":"integer"},"DeletionTime":{"type":"string"},"Tags":{"type":"array","description":"Tags associated to the task","items":{"type":"object","properties":{"Name":{"type":"string"},"DisplayName":{"type":"string"},"Value":{"type":"string"},"DisplayValue":{"type":"string"}}}},"TaskDefinitionPropertiesId":{"type":"integer","description":"Task definition properties ID"},"AppTasksMetadata":{"type":"object","description":"App task metadata","properties":{"Id":{"type":"integer"},"AppId":{"type":"string","description":"Associated App ID"},"AppVersion":{"type":"integer","description":"Associated App version"},"AppProcessKey":{"type":"string","description":"App process key (UUID)"},"FolderKey":{"type":"string","description":"Folder key (UUID)"},"Runtime":{"type":"string","description":"Serverless or Unattended"},"AppType":{"type":"string","description":"Custom or Dynamic"},"CreationTime":{"type":"string"},"CreatorUserId":{"type":"integer"},"CreatorUserKey":{"type":"string","description":"Creator user key (UUID)"}}},"TaskSlaDetails":{"type":"array","description":"Task SLA details","items":{"type":"object","properties":{"ExpiryTime":{"type":"string","description":"SLA expiry timestamp"},"StartCriteria":{"type":"string","description":"TaskCreated, TaskAssigned, or TaskCompleted"},"EndCriteria":{"type":"string","description":"TaskCreated, TaskAssigned, or TaskCompleted"},"Status":{"type":"string","description":"OverdueLater, OverdueSoon, Overdue, or CompletedInTime"}}}},"TaskSource":{"type":"object","description":"Task source information","properties":{"SourceName":{"type":"string","description":"Agent, Workflow, Maestro, CaseManagement, or Default"},"SourceId":{"type":"string"},"JobId":{"type":"string"}}}},"$schema":"http://json-schema.org/draft-07/schema#"}]]></uipath:inputOutput>
+        <uipath:inputOutput id="humanReviewerDecision" name="humanReviewerDecision" type="string" elementId="Process_1" default="" custom="true" />
+        <uipath:inputOutput id="humanReviewerComment" name="humanReviewerComment" type="string" elementId="Process_1" default="" custom="true" />
+        <uipath:inputOutput id="error8" name="Error" type="jsonSchema" elementId="Activity_pD89wQ"><![CDATA[{"type":"object","properties":{"code":{"type":"string"},"message":{"type":"string"},"detail":{"type":"string"},"category":{"type":"string"},"status":{"type":"number"},"element":{"type":"string"}}}]]></uipath:inputOutput>
+        <uipath:inputOutput id="disposition" name="disposition" type="string" elementId="Activity_pD89wQ" />
+        <uipath:inputOutput id="escalationRequired" name="escalation_required" type="boolean" elementId="Activity_pD89wQ" />
+        <uipath:inputOutput id="reasoning2" name="reasoning" type="string" elementId="Activity_pD89wQ" />
+        <uipath:inputOutput id="claimAssessments" name="claim_assessments" type="jsonSchema" subType="object" elementId="Activity_pD89wQ"><![CDATA[{"type":"array","items":{"type":"object","properties":{"claim_type":{"type":"string"},"coverage_type":{"type":"string"},"medically_necessary":{"type":"string"},"justification":{"type":"string"},"coverage_status":{"type":"string"}}},"$schema":"http://json-schema.org/draft-07/schema#"}]]></uipath:inputOutput>
+        <uipath:inputOutput id="caaDisposition" name="caaDisposition" type="string" elementId="Process_1" default="" custom="true" />
+        <uipath:inputOutput id="caaEscalationRequired" name="caaEscalationRequired" type="boolean" elementId="Process_1" default="" custom="true" />
+        <uipath:inputOutput id="caaReasoning" name="caaReasoning" type="string" elementId="Process_1" default="" custom="true" />
+        <uipath:inputOutput id="caaAssessments" name="caaAssessments" type="jsonSchema" elementId="Process_1" default="" custom="true"><![CDATA[{"type":"object","$schema":"http://json-schema.org/draft-07/schema#"}]]></uipath:inputOutput>
+        <uipath:inputOutput id="rcaComplianceStatus" name="rcaComplianceStatus" type="string" elementId="Process_1" default="" custom="true" />
+        <uipath:inputOutput id="rcaFrameworks" name="rcaFrameworks" type="jsonSchema" elementId="Process_1" default="" custom="true"><![CDATA[{"type":"object","$schema":"http://json-schema.org/draft-07/schema#"}]]></uipath:inputOutput>
+        <uipath:inputOutput id="rcaFindings" name="rcaFindings" type="jsonSchema" elementId="Process_1" default="" custom="true"><![CDATA[{"type":"object","$schema":"http://json-schema.org/draft-07/schema#"}]]></uipath:inputOutput>
+        <uipath:inputOutput id="rcaAdverseActionRequired" name="rcaAdverseActionRequired" type="boolean" elementId="Process_1" default="" custom="true" />
+        <uipath:inputOutput id="rcaDisclosuresRequired" name="rcaDisclosuresRequired" type="jsonSchema" elementId="Process_1" default="" custom="true"><![CDATA[{"type":"object","$schema":"http://json-schema.org/draft-07/schema#"}]]></uipath:inputOutput>
+        <uipath:inputOutput id="rcaReasoning" name="rcaReasoning" type="string" elementId="Process_1" default="" custom="true" />
+        <uipath:inputOutput id="error12" name="Error" type="jsonSchema" elementId="Activity_3XBXMK"><![CDATA[{"type":"object","properties":{"code":{"type":"string"},"message":{"type":"string"},"detail":{"type":"string"},"category":{"type":"string"},"status":{"type":"number"},"element":{"type":"string"}}}]]></uipath:inputOutput>
+        <uipath:inputOutput id="complianceStatus" name="compliance_status" type="string" elementId="Activity_3XBXMK" />
+        <uipath:inputOutput id="regulatoryFrameworksApplied" name="regulatory_frameworks_applied" type="jsonSchema" subType="string" elementId="Activity_3XBXMK"><![CDATA[{"type":"array","items":{"type":"string"},"$schema":"http://json-schema.org/draft-07/schema#"}]]></uipath:inputOutput>
+        <uipath:inputOutput id="complianceFindings" name="compliance_findings" type="jsonSchema" subType="object" elementId="Activity_3XBXMK"><![CDATA[{"type":"array","items":{"type":"object","properties":{"framework":{"type":"string"},"requirement":{"type":"string"},"status":{"type":"string"},"notes":{"type":"string"}}},"$schema":"http://json-schema.org/draft-07/schema#"}]]></uipath:inputOutput>
+        <uipath:inputOutput id="adverseActionRequired" name="adverse_action_required" type="boolean" elementId="Activity_3XBXMK" />
+        <uipath:inputOutput id="disclosuresRequired" name="disclosures_required" type="jsonSchema" subType="string" elementId="Activity_3XBXMK"><![CDATA[{"type":"array","items":{"type":"string"},"$schema":"http://json-schema.org/draft-07/schema#"}]]></uipath:inputOutput>
+        <uipath:inputOutput id="complianceReasoning" name="compliance_reasoning" type="string" elementId="Activity_3XBXMK" />
+        <uipath:inputOutput id="scriptResponse8" name="scriptResponse" type="jsonSchema" elementId="Activity_uXriUo"><![CDATA[{"type":"object","properties":{"compliance_output":{"type":"object","properties":{"compliance_status":{"type":"string"},"regulatory_frameworks_applied":{"type":"string"},"compliance_findings":{"type":"string"},"adverse_action_required":{"type":"string"},"disclosures_required":{"type":"string"},"reasoning":{"type":"string"},"assessed_at":{"type":"string"}}}},"$schema":"http://json-schema.org/draft-07/schema#"}]]></uipath:inputOutput>
+        <uipath:inputOutput id="error13" name="Error" type="jsonSchema" elementId="Activity_uXriUo"><![CDATA[{"type":"object","properties":{"code":{"type":"string"},"message":{"type":"string"},"detail":{"type":"string"},"category":{"type":"string"},"status":{"type":"number"},"element":{"type":"string"}}}]]></uipath:inputOutput>
+        <uipath:inputOutput id="cdaEmailSubject" name="cdaEmailSubject" type="string" elementId="Process_1" default="" custom="true" />
+        <uipath:inputOutput id="cdaEmailBody" name="cdaEmailBody" type="string" elementId="Process_1" default="" custom="true" />
+        <uipath:inputOutput id="cdaLetterTitle" name="cdaLetterTitle" type="string" elementId="Process_1" default="" custom="true" />
+        <uipath:inputOutput id="cdaLetterOpening" name="cdaLetterOpening" type="string" elementId="Process_1" default="" custom="true" />
+        <uipath:inputOutput id="cdaLetterReasons" name="cdaLetterReasons" type="string" elementId="Process_1" default="" custom="true" />
+        <uipath:inputOutput id="cdaLetterNextSteps" name="cdaLetterNextSteps" type="string" elementId="Process_1" default="" custom="true" />
+        <uipath:inputOutput id="cdaLetterDisclosuresNotice" name="cdaLetterDisclosuresNotice" type="string" elementId="Process_1" default="" custom="true" />
+        <uipath:inputOutput id="cdaNotificationChannel" name="cdaNotificationChannel" type="string" elementId="Process_1" default="" custom="true" />
+        <uipath:inputOutput id="cdaRequiredAttachments" name="cdaRequiredAttachments" type="jsonSchema" elementId="Process_1" default="" custom="true"><![CDATA[{"type":"object","$schema":"http://json-schema.org/draft-07/schema#"}]]></uipath:inputOutput>
+        <uipath:inputOutput id="cdaCommunicationPriority" name="cdaCommunicationPriority" type="string" elementId="Process_1" default="" custom="true" />
+        <uipath:inputOutput id="cdaDraftedReasoning" name="cdaDraftedReasoning" type="string" elementId="Process_1" default="" custom="true" />
+        <uipath:inputOutput id="error14" name="Error" type="jsonSchema" elementId="Activity_3sVvSL"><![CDATA[{"type":"object","properties":{"code":{"type":"string"},"message":{"type":"string"},"detail":{"type":"string"},"category":{"type":"string"},"status":{"type":"number"},"element":{"type":"string"}}}]]></uipath:inputOutput>
+        <uipath:inputOutput id="customerEmailSubject" name="customer_email_subject" type="string" elementId="Activity_3sVvSL" />
+        <uipath:inputOutput id="customerEmailBody" name="customer_email_body" type="string" elementId="Activity_3sVvSL" />
+        <uipath:inputOutput id="pdfLetterTitle" name="pdf_letter_title" type="string" elementId="Activity_3sVvSL" />
+        <uipath:inputOutput id="pdfLetterOpening" name="pdf_letter_opening" type="string" elementId="Activity_3sVvSL" />
+        <uipath:inputOutput id="pdfLetterReasons" name="pdf_letter_reasons" type="string" elementId="Activity_3sVvSL" />
+        <uipath:inputOutput id="pdfLetterNextSteps" name="pdf_letter_next_steps" type="string" elementId="Activity_3sVvSL" />
+        <uipath:inputOutput id="pdfLetterDisclosuresNotice" name="pdf_letter_disclosures_notice" type="string" elementId="Activity_3sVvSL" />
+        <uipath:inputOutput id="notificationChannel" name="notification_channel" type="string" elementId="Activity_3sVvSL" />
+        <uipath:inputOutput id="requiredAttachments" name="required_attachments" type="jsonSchema" subType="string" elementId="Activity_3sVvSL"><![CDATA[{"type":"array","items":{"type":"string"},"$schema":"http://json-schema.org/draft-07/schema#"}]]></uipath:inputOutput>
+        <uipath:inputOutput id="communicationPriority" name="communication_priority" type="string" elementId="Activity_3sVvSL" />
+        <uipath:inputOutput id="draftedReasoning" name="drafted_reasoning" type="string" elementId="Activity_3sVvSL" />
+        <uipath:inputOutput id="scriptResponse9" name="scriptResponse" type="jsonSchema" elementId="Activity_mVhRWo"><![CDATA[{"type":"object","properties":{"reference_number":{"type":"string"},"communication_output":{"type":"object","properties":{"email":{"type":"object","properties":{"subject":{"type":"string"},"body":{"type":"string"}}},"pdf_letter":{"type":"object","properties":{"title":{"type":"string"},"opening":{"type":"string"},"reasons":{"type":"string"},"next_steps":{"type":"string"},"disclosures_notice":{"type":"string"}}},"notification_channel":{"type":"string"},"required_attachments":{"type":"string"},"communication_priority":{"type":"string"},"drafted_reasoning":{"type":"string"},"drafted_at":{"type":"string"}}}},"$schema":"http://json-schema.org/draft-07/schema#"}]]></uipath:inputOutput>
+        <uipath:inputOutput id="error15" name="Error" type="jsonSchema" elementId="Activity_mVhRWo"><![CDATA[{"type":"object","properties":{"code":{"type":"string"},"message":{"type":"string"},"detail":{"type":"string"},"category":{"type":"string"},"status":{"type":"number"},"element":{"type":"string"}}}]]></uipath:inputOutput>
+        <uipath:inputOutput id="error17" name="Error" type="jsonSchema" elementId="Activity_xtTjw5"><![CDATA[{"type":"object","properties":{"code":{"type":"string"},"message":{"type":"string"},"detail":{"type":"string"},"category":{"type":"string"},"status":{"type":"number"},"element":{"type":"string"}}}]]></uipath:inputOutput>
+        <uipath:inputOutput id="outBucketPath" name="out_BucketPath" type="string" elementId="Activity_xtTjw5" />
+        <uipath:inputOutput id="scriptResponse10" name="scriptResponse" type="jsonSchema" elementId="Activity_vN1ybP"><![CDATA[{"type":"object","properties":{"communication_output":{"type":"object","properties":{"pdf_filename":{"type":"string"},"pdf_document_id":{"type":"string"},"pdf_archived_at":{"type":"string"}}}},"$schema":"http://json-schema.org/draft-07/schema#"}]]></uipath:inputOutput>
+        <uipath:inputOutput id="error18" name="Error" type="jsonSchema" elementId="Activity_vN1ybP"><![CDATA[{"type":"object","properties":{"code":{"type":"string"},"message":{"type":"string"},"detail":{"type":"string"},"category":{"type":"string"},"status":{"type":"number"},"element":{"type":"string"}}}]]></uipath:inputOutput>
+        <uipath:inputOutput id="error20" name="Error" type="jsonSchema" elementId="Activity_faP66e"><![CDATA[{"type":"object","properties":{"code":{"type":"string"},"message":{"type":"string"},"detail":{"type":"string"},"category":{"type":"string"},"status":{"type":"number"},"element":{"type":"string"}}}]]></uipath:inputOutput>
+        <uipath:inputOutput id="outPdfFile" name="out_PdfFile" type="file" elementId="Activity_faP66e"><![CDATA[{"$schema":"http://json-schema.org/draft-07/schema#","type":"object","properties":{"ID":{"type":"string","description":"Orchestrator attachment key"},"FullName":{"type":"string","description":"File name"},"MimeType":{"type":"string","description":"The MIME type of the content, such as application/json or image/png"},"Metadata":{"type":"object","description":"Dictionary<string, string> of metadata","additionalProperties":{"type":"string"}}},"required":["ID"],"x-uipath-resource-kind":"JobAttachment"}]]></uipath:inputOutput>
+        <uipath:inputOutput id="scriptResponse2" name="scriptResponse" type="jsonSchema" elementId="Activity_7JJNyD"><![CDATA[{"type":"object","properties":{"classification_output":{"type":"object","properties":{"event_type":{"type":"string"},"confidence":{"type":"string"},"reasoning":{"type":"string"},"classified_at":{"type":"string"}}},"event_type":{"type":"string"}},"$schema":"http://json-schema.org/draft-07/schema#"}]]></uipath:inputOutput>
+        <uipath:inputOutput id="error4" name="Error" type="jsonSchema" elementId="Activity_7JJNyD"><![CDATA[{"type":"object","properties":{"code":{"type":"string"},"message":{"type":"string"},"detail":{"type":"string"},"category":{"type":"string"},"status":{"type":"number"},"element":{"type":"string"}}}]]></uipath:inputOutput>
+        <uipath:inputOutput id="decisionEventId" name="decisionEventId" type="string" elementId="Process_1" default="" custom="true" />
+        <uipath:inputOutput id="error2" name="Error" type="jsonSchema" elementId="Event_start"><![CDATA[{"type":"object","properties":{"code":{"type":"string"},"message":{"type":"string"},"detail":{"type":"string"},"category":{"type":"string"},"status":{"type":"number"},"element":{"type":"string"}}}]]></uipath:inputOutput>
+        <uipath:inputOutput id="response" name="response" type="jsonSchema" elementId="Event_start"><![CDATA[{"$schema":"http://json-schema.org/draft-07/schema#","type":"object","properties":{"Attachments[*]":{"title":"Attachments","type":"array","items":{"$ref":"#/definitions/Attachments[*]"}},"BCC[*]":{"title":"Bcc","type":"array","items":{"$ref":"#/definitions/BCC[*]"}},"CC[*]":{"title":"Cc","type":"array","items":{"$ref":"#/definitions/CC[*]"}},"HasAttachments":{"title":"With attachments only","type":"boolean"},"Categories[*]":{"title":"Categories","type":"array","items":{"$ref":"#/definitions/Categories[*]"}},"To[*]":{"title":"To","type":"array","items":{"$ref":"#/definitions/To[*]"}},"From":{"title":"From","$ref":"#/definitions/From"},"Subject":{"title":"Subject","type":"string"},"ParentFolders[*]":{"title":"Parent folders","type":"array","items":{"$ref":"#/definitions/ParentFolders[*]"}},"Importance":{"title":"Importance","type":"string"},"Sensitivity":{"title":"Sensitivity","type":"string"},"Type":{"title":"Type","type":"string"},"ThreadID":{"title":"Thread","type":"string"},"ID":{"title":"Id","type":"string"},"Body":{"title":"Body","type":"string"}},"definitions":{"Attachments[*]":{"type":"object","properties":{"MIMEType":{"title":"Attachment mime type","type":"string"},"ID":{"title":"Attachment ID","type":"string"},"Name":{"title":"Attachment name","type":"string"},"Size":{"title":"Attachment size","type":"integer"}}},"BCC[*]":{"type":"object","properties":{"Name":{"title":"Bcc name","type":"string"},"Email":{"title":"Bcc email","type":"string"}}},"CC[*]":{"type":"object","properties":{"Email":{"title":"Cc","type":"string"},"Name":{"title":"Cc name","type":"string"}}},"Categories[*]":{"type":"object","properties":{"ID":{"title":"Category ID","type":"string"},"Name":{"title":"Category name","type":"string"}}},"To[*]":{"type":"object","properties":{"Email":{"title":"To","type":"string"},"Name":{"title":"Recipient name","type":"string"}}},"From":{"type":"object","properties":{"Email":{"title":"From","type":"string"},"Name":{"title":"Sender name","type":"string"}}},"ParentFolders[*]":{"type":"object","properties":{"ID":{"title":"Email folder or label","type":"string"},"Name":{"title":"Label","type":"string"}}}}}]]></uipath:inputOutput>
+        <uipath:inputOutput id="error21" name="Error" type="jsonSchema" elementId="Activity_yr6Lq9"><![CDATA[{"type":"object","properties":{"code":{"type":"string"},"message":{"type":"string"},"detail":{"type":"string"},"category":{"type":"string"},"status":{"type":"number"},"element":{"type":"string"}}}]]></uipath:inputOutput>
+        <uipath:inputOutput id="id3" name="id" type="string" elementId="Activity_yr6Lq9" />
+        <uipath:inputOutput id="response4" name="response" type="jsonSchema" elementId="Activity_yr6Lq9"><![CDATA[{"$schema":"http://json-schema.org/draft-07/schema#","type":"object","properties":{"threadId":{"title":"Email thread identifier","type":"string","description":"A unique identifier for the email thread."},"labelIds[*]":{"title":"Email label identifiers","type":"string","description":"A list of identifiers for labels associated with the email."},"id":{"title":"Email message identifier","type":"string","description":"A unique identifier for the specific email message."}},"definitions":{}}]]></uipath:inputOutput>
+        <uipath:inputOutput id="scriptResponse11" name="scriptResponse" type="jsonSchema" elementId="Activity_H0u8CG"><![CDATA[{"type":"object","properties":{"decision_event_id":{"type":"string"},"event_type":{"type":"string"},"risk_output":{"type":"object","properties":{"decision_type":{"type":"string"}}},"final_disposition":{"type":"string"},"human_touchpoints":{"type":"array"}},"$schema":"http://json-schema.org/draft-07/schema#"}]]></uipath:inputOutput>
+        <uipath:inputOutput id="error22" name="Error" type="jsonSchema" elementId="Activity_H0u8CG"><![CDATA[{"type":"object","properties":{"code":{"type":"string"},"message":{"type":"string"},"detail":{"type":"string"},"category":{"type":"string"},"status":{"type":"number"},"element":{"type":"string"}}}]]></uipath:inputOutput>
+        <uipath:inputOutput id="scriptResponse5" name="scriptResponse" type="jsonSchema" elementId="Activity_AJs7v2"><![CDATA[{"type":"object","properties":{"intake_output":{"type":"object","properties":{"days_since_incident":{"type":"null"},"timely_filing_status":{"type":"string"},"description_word_count":{"type":"integer"},"claim_amount_tier":{"type":"string"},"intake_status":{"type":"string"},"data_quality_issues":{"type":"array","items":{"type":"string"}},"intake_completed_at":{"type":"string"}}}},"$schema":"http://json-schema.org/draft-07/schema#"}]]></uipath:inputOutput>
+        <uipath:inputOutput id="error7" name="Error" type="jsonSchema" elementId="Activity_AJs7v2"><![CDATA[{"type":"object","properties":{"code":{"type":"string"},"message":{"type":"string"},"detail":{"type":"string"},"category":{"type":"string"},"status":{"type":"number"},"element":{"type":"string"}}}]]></uipath:inputOutput>
+        <uipath:inputOutput id="scriptResponse3" name="scriptResponse" type="jsonSchema" elementId="Activity_caXvIn"><![CDATA[{"type":"object","properties":{"decision_event_id":{"type":"string"},"created_at":{"type":"string"},"event_type":{"type":"string"},"source_channel":{"type":"string"},"intake_output":{"type":"object","properties":{"applicant_name":{"type":"string"},"applicant_age":{"type":"integer"},"last_four_ssn":{"type":"string"},"employer_name":{"type":"string"},"loan_purpose":{"type":"string"},"email":{"type":"string"},"requested_amount":{"type":"integer"},"annual_income":{"type":"integer"},"credit_score":{"type":"integer"},"credit_score_age_days":{"type":"integer"},"credit_score_freshness":{"type":"string"},"loan_to_income_ratio":{"type":"number"},"estimated_monthly_payment":{"type":"number"},"payment_to_income_ratio":{"type":"number"},"intake_status":{"type":"string"},"data_quality_issues":{"type":"array"},"intake_completed_at":{"type":"string"}}},"risk_output":{"type":"null"},"compliance_output":{"type":"null"},"communication_output":{"type":"null"},"final_disposition":{"type":"string"},"human_touchpoints":{"type":"array"}},"$schema":"http://json-schema.org/draft-07/schema#"}]]></uipath:inputOutput>
+        <uipath:inputOutput id="error5" name="Error" type="jsonSchema" elementId="Activity_caXvIn"><![CDATA[{"type":"object","properties":{"code":{"type":"string"},"message":{"type":"string"},"detail":{"type":"string"},"category":{"type":"string"},"status":{"type":"number"},"element":{"type":"string"}}}]]></uipath:inputOutput>
+        <uipath:inputOutput id="decisionEvent" name="decisionEvent" type="jsonSchema" elementId="Process_1" default="{&#34;decision_event_id&#34;:&#34;&#34;,&#34;created_at&#34;:&#34;&#34;,&#34;event_type&#34;:&#34;&#34;,&#34;source_channel&#34;:&#34;&#34;,&#34;intake_output&#34;:null,&#34;risk_output&#34;:null,&#34;compliance_output&#34;:null,&#34;communication_output&#34;:null,&#34;final_disposition&#34;:&#34;&#34;,&#34;human_touchpoints&#34;:[]}" custom="true"><![CDATA[{"type":"object","properties":{"decision_event_id":{"type":"string"},"created_at":{"type":"string"},"event_type":{"type":"string"},"source_channel":{"type":"string"},"intake_output":{"type":"null"},"risk_output":{"type":"null"},"compliance_output":{"type":"null"},"communication_output":{"type":"null"},"final_disposition":{"type":"string"},"human_touchpoints":{"type":"array"}},"$schema":"http://json-schema.org/draft-07/schema#"}]]></uipath:inputOutput>
+        <uipath:inputOutput id="error16" name="Error" type="jsonSchema" elementId="Activity_S5pjul"><![CDATA[{"type":"object","properties":{"code":{"type":"string"},"message":{"type":"string"},"detail":{"type":"string"},"category":{"type":"string"},"status":{"type":"number"},"element":{"type":"string"}}}]]></uipath:inputOutput>
+        <uipath:inputOutput id="id" name="id" type="string" elementId="Activity_S5pjul" />
+        <uipath:inputOutput id="response2" name="response" type="jsonSchema" elementId="Activity_S5pjul"><![CDATA[{"$schema":"http://json-schema.org/draft-07/schema#","type":"object","properties":{"created_at":{"title":"Created at","type":"string","description":"Document created at time"},"filename":{"title":"Filename","type":"string","description":"Filename of the document"},"updated_at":{"title":"Updated at","type":"string","description":"Updated at time of the document"},"public_share_link":{"title":"Public share link","type":"string","description":"Publicly shareable link of the document"},"payload":{"title":"Data","type":"string","description":"The JSON object containing the key-value pair of data to be added to PDF"},"meta":{"title":"Metadata","type":"string","description":"The JSON object containing the key-value pair of metadata to be added to PDF"},"preview_url":{"title":"Preview url","type":"string","description":"Preview url of the document"},"download_url":{"title":"Download url","type":"string","description":"Download url of the document"},"checksum":{"title":"Checksum","type":"string","description":"Checksum of the document"},"failure_cause":{"title":"Failure cause","type":"string","description":"Failure cause of the document generation"},"id":{"title":"Document ID","type":"string","description":"ID of the document"},"app_id":{"title":"App ID","type":"string","description":"The workspace ID of the document"},"document_template_id":{"title":"Template","type":"string","description":"The ID of the source template"},"status":{"title":"Status","type":"string","description":"Status of the document"}},"definitions":{}}]]></uipath:inputOutput>
+        <uipath:inputOutput id="pdfMonkeyDownloadUrl" name="pdfMonkeyDownloadUrl" type="string" elementId="Process_1" default="" custom="true" />
+        <uipath:inputOutput id="pdfMonkeyDocumentId" name="pdfMonkeyDocumentId" type="string" elementId="Process_1" default="" custom="true" />
+        <uipath:inputOutput id="pdfMonkeyStatus" name="pdfMonkeyStatus" type="string" elementId="Process_1" default="" custom="true" />
+        <uipath:inputOutput id="error19" name="Error" type="jsonSchema" elementId="Activity_dl28ss"><![CDATA[{"type":"object","properties":{"code":{"type":"string"},"message":{"type":"string"},"detail":{"type":"string"},"category":{"type":"string"},"status":{"type":"number"},"element":{"type":"string"}}}]]></uipath:inputOutput>
+        <uipath:inputOutput id="id2" name="id" type="string" elementId="Activity_dl28ss" />
+        <uipath:inputOutput id="response3" name="response" type="jsonSchema" elementId="Activity_dl28ss"><![CDATA[{"$schema":"http://json-schema.org/draft-07/schema#","type":"object","properties":{"Importance":{"title":"Importance","type":"string","description":"The importance of the mail"},"id":{"title":"Id","type":"string"},"labelIds[*]":{"title":"Label ids","type":"string"},"threadId":{"title":"Thread ID","type":"string"}},"definitions":{}}]]></uipath:inputOutput>
+      </uipath:variables>
+      <uipath:bindings version="v1">
+        <uipath:binding id="bnLx6IWat" name="folderPath" type="string" resource="process" resourceKey="LoanIntake.Extractor" propertyAttribute="folderPath" />
+        <uipath:binding id="b7QSwViDa" name="name" type="string" default="LoanIntake.Extractor" resource="process" resourceKey="LoanIntake.Extractor" propertyAttribute="name" />
+        <uipath:binding id="b7oxVXh3v" name="folderPath" type="string" resource="process" resourceSubType="Agent" resourceKey="DocumentClassificationAgent" propertyAttribute="folderPath" />
+        <uipath:binding id="by3wR5CAA" name="name" type="string" default="DocumentClassificationAgent" resource="process" resourceSubType="Agent" resourceKey="DocumentClassificationAgent" propertyAttribute="name" />
+        <uipath:binding id="byTStJtom" name="uipath-google-gmail connection" type="string" default="0e72d4c2-f94a-4fc6-9612-98b39a07a3ec" resource="Connection" resourceKey="0e72d4c2-f94a-4fc6-9612-98b39a07a3ec" propertyAttribute="ConnectionId" />
+        <uipath:binding id="bGvWuvqzJ" name="FolderKey" type="string" default="6c28dedd-8475-447e-a707-28a8cd64d588" resource="Connection" resourceKey="0e72d4c2-f94a-4fc6-9612-98b39a07a3ec" propertyAttribute="folderKey" />
+        <uipath:binding id="b4UPmS8rL" name="folderPath" type="string" resource="process" resourceSubType="Agent" resourceKey="ClaimsAdjudicationAgent" propertyAttribute="folderPath" />
+        <uipath:binding id="bhqIoa7MJ" name="name" type="string" default="ClaimsAdjudicationAgent" resource="process" resourceSubType="Agent" resourceKey="ClaimsAdjudicationAgent" propertyAttribute="name" />
+        <uipath:binding id="bliugU8J8" name="folderPath" type="string" resource="app" resourceKey="RDDApprovalApp" propertyAttribute="folderPath" />
+        <uipath:binding id="bnH6rFJj0" name="name" type="string" default="RDDApprovalApp" resource="app" resourceKey="RDDApprovalApp" propertyAttribute="name" />
+        <uipath:binding id="bTUIVxkKt" name="folderPath" type="string" resource="process" resourceSubType="Agent" resourceKey="RegulatoryComplianceAgent" propertyAttribute="folderPath" />
+        <uipath:binding id="bEcQn0Qey" name="name" type="string" default="RegulatoryComplianceAgent" resource="process" resourceSubType="Agent" resourceKey="RegulatoryComplianceAgent" propertyAttribute="name" />
+        <uipath:binding id="bMPTnxiyk" name="folderPath" type="string" resource="process" resourceSubType="Agent" resourceKey="CustomerDisclosureAgent" propertyAttribute="folderPath" />
+        <uipath:binding id="bGORIDMW9" name="name" type="string" default="CustomerDisclosureAgent" resource="process" resourceSubType="Agent" resourceKey="CustomerDisclosureAgent" propertyAttribute="name" />
+        <uipath:binding id="b0ZBEqYob" name="uipath-google-sheets connection" type="string" default="48d715f9-b27c-4210-9954-14cf145e818f" resource="Connection" resourceKey="48d715f9-b27c-4210-9954-14cf145e818f" propertyAttribute="ConnectionId" />
+        <uipath:binding id="b5DRX1kNU" name="FolderKey" type="string" default="d536de47-b121-4a9e-964a-1bfdf6a537eb" resource="Connection" resourceKey="48d715f9-b27c-4210-9954-14cf145e818f" propertyAttribute="folderKey" />
+        <uipath:binding id="bzAxgk4th" name="uipath-google-docs connection" type="string" default="9b40f4a0-9ec3-4016-8ddf-15c5629d513d" resource="Connection" resourceKey="9b40f4a0-9ec3-4016-8ddf-15c5629d513d" propertyAttribute="ConnectionId" />
+        <uipath:binding id="brlaAf4ij" name="FolderKey" type="string" default="fa3d85eb-7756-4983-b2f1-0f771101a5ff" resource="Connection" resourceKey="9b40f4a0-9ec3-4016-8ddf-15c5629d513d" propertyAttribute="folderKey" />
+        <uipath:binding id="beltHoObD" name="uipath-google-drive connection" type="string" default="83825278-21e6-45ec-bcbe-10dc268b11dd" resource="Connection" resourceKey="83825278-21e6-45ec-bcbe-10dc268b11dd" propertyAttribute="ConnectionId" />
+        <uipath:binding id="bXXptPrnu" name="FolderKey" type="string" default="fa3d85eb-7756-4983-b2f1-0f771101a5ff" resource="Connection" resourceKey="83825278-21e6-45ec-bcbe-10dc268b11dd" propertyAttribute="folderKey" />
+        <uipath:binding id="bGYe3kNus" name="uipath-pdfmonkey-pdfmonkey connection" type="string" default="33881aee-7ba0-485d-9664-2546aeda6e2f" resource="Connection" resourceKey="33881aee-7ba0-485d-9664-2546aeda6e2f" propertyAttribute="ConnectionId" />
+        <uipath:binding id="brFxVbebA" name="FolderKey" type="string" default="fa3d85eb-7756-4983-b2f1-0f771101a5ff" resource="Connection" resourceKey="33881aee-7ba0-485d-9664-2546aeda6e2f" propertyAttribute="folderKey" />
+        <uipath:binding id="bxhEs13Q5" name="folderPath" type="string" resource="process" resourceKey="UploadPDFtoBucket" propertyAttribute="folderPath" />
+        <uipath:binding id="b9zD84qJq" name="name" type="string" default="UploadPDFtoBucket" resource="process" resourceKey="UploadPDFtoBucket" propertyAttribute="name" />
+        <uipath:binding id="bjTcvUxqf" name="folderPath" type="string" resource="process" resourceKey="DownloadPDFfromBucket" propertyAttribute="folderPath" />
+        <uipath:binding id="bqOBBK9wo" name="name" type="string" default="DownloadPDFfromBucket" resource="process" resourceKey="DownloadPDFfromBucket" propertyAttribute="name" />
+      </uipath:bindings>
+      <uipath:migrationVersion version="14" />
+    </bpmn:extensionElements>
+    <bpmn:startEvent id="Event_start" name="Email Received">
+      <bpmn:extensionElements>
+        <uipath:entryPointId value="9120fa42-6cbb-4eed-a5c2-f9561d2fb0b0" />
+        <uipath:event version="v1">
+          <uipath:type value="Intsvc.EventTrigger" version="v1" />
+          <uipath:context>
+            <uipath:input name="connectorKey" type="string" value="uipath-google-gmail" />
+            <uipath:input name="connection" type="string" value="=bindings.byTStJtom" />
+            <uipath:input name="folderKey" type="string" value="=bindings.bGvWuvqzJ" />
+            <uipath:input name="resourceKey" type="string" value="0e72d4c2-f94a-4fc6-9612-98b39a07a3ec" />
+            <uipath:input name="operation" type="string" value="EMAIL_RECEIVED" />
+            <uipath:input name="objectName" type="string" value="Message" />
+            <uipath:input name="metadata" type="json"><![CDATA[{"designTimeMetadata":{"connectorLogoUrl":"https://cloud.uipath.com/elements_/scaleunit_/58cb4f17-4581-4130-a2ae-52448b37dc03/v3/element/elements/uipath-google-gmail/image","activityDisplayName":"Email Received","activityDescription":"Triggers when an email is received in your inbox.","activityHelpUrlTemplate":"https://docs.uipath.com/{0}/activities/other/latest/integration-service/uipath-google-gmail-Email-Received","activityConfig":{"isCurated":true,"operation":"EMAIL_RECEIVED"},"triggerActivity":{"eventFields":{"ParentFolders[*].ID":"INBOX"},"filterBuilder":{"expression":"(starts_with(Subject, '[REGDOC]'))"}},"designTimeLookups":{"ParentFolders[*].ID":[{"id":"INBOX","title":"Inbox"}]}},"metadataState":{"jsonSchema":{"$schema":"http://json-schema.org/draft-07/schema#","type":"object","properties":{"Attachments[*]":{"title":"Attachments","type":"array","items":{"$ref":"#/definitions/Attachments[*]"}},"BCC[*]":{"title":"Bcc","type":"array","items":{"$ref":"#/definitions/BCC[*]"}},"CC[*]":{"title":"Cc","type":"array","items":{"$ref":"#/definitions/CC[*]"}},"HasAttachments":{"title":"With attachments only","type":"boolean"},"Categories[*]":{"title":"Categories","type":"array","items":{"$ref":"#/definitions/Categories[*]"}},"To[*]":{"title":"To","type":"array","items":{"$ref":"#/definitions/To[*]"}},"From":{"title":"From","$ref":"#/definitions/From"},"Subject":{"title":"Subject","type":"string"},"ParentFolders[*]":{"title":"Parent folders","type":"array","items":{"$ref":"#/definitions/ParentFolders[*]"}},"Importance":{"title":"Importance","type":"string"},"Sensitivity":{"title":"Sensitivity","type":"string"},"Type":{"title":"Type","type":"string"},"ThreadID":{"title":"Thread","type":"string"},"ID":{"title":"Id","type":"string"},"Body":{"title":"Body","type":"string"}},"definitions":{"Attachments[*]":{"type":"object","properties":{"MIMEType":{"title":"Attachment mime type","type":"string"},"ID":{"title":"Attachment ID","type":"string"},"Name":{"title":"Attachment name","type":"string"},"Size":{"title":"Attachment size","type":"integer"}}},"BCC[*]":{"type":"object","properties":{"Name":{"title":"Bcc name","type":"string"},"Email":{"title":"Bcc email","type":"string"}}},"CC[*]":{"type":"object","properties":{"Email":{"title":"Cc","type":"string"},"Name":{"title":"Cc name","type":"string"}}},"Categories[*]":{"type":"object","properties":{"ID":{"title":"Category ID","type":"string"},"Name":{"title":"Category name","type":"string"}}},"To[*]":{"type":"object","properties":{"Email":{"title":"To","type":"string"},"Name":{"title":"Recipient name","type":"string"}}},"From":{"type":"object","properties":{"Email":{"title":"From","type":"string"},"Name":{"title":"Sender name","type":"string"}}},"ParentFolders[*]":{"type":"object","properties":{"ID":{"title":"Email folder or label","type":"string"},"Name":{"title":"Label","type":"string"}}}}}},"telemetryData":{"operation":"EMAIL_RECEIVED","objectName":"Message","connectorKey":"uipath-google-gmail","connectorName":"Gmail","primaryKeyName":""},"inputMetadata":{},"errorState":{"hasError":false},"bindings":[{"resource":"Property","key":"EMAIL_RECEIVED","value":{"ParentFolders[*].ID":{"defaultValue":"INBOX","isExpression":false}},"metadata":{"TriggerCreateParameters":"ParentFolders[*].ID","DebugQueryParameters":"ParentFolders[*].ID","BindingsVersion":"2.2","ObjectName":"Message"}}]}]]></uipath:input>
+          </uipath:context>
+          <uipath:input name="body" type="json" target="body"><![CDATA[{"filters":{"expression":"(ParentFolders[?ID == 'INBOX']) && ((starts_with(Subject, '[REGDOC]')))","variables":{}}}]]></uipath:input>
+          <uipath:output name="response" type="jsonSchema" source="=response" var="response" />
+          <uipath:output name="Error" type="jsonSchema" source="=Error" var="error2" />
+        </uipath:event>
+      </bpmn:extensionElements>
+      <bpmn:outgoing>edge_w9ZYS4</bpmn:outgoing>
+      <bpmn:messageEventDefinition />
+    </bpmn:startEvent>
+    <bpmn:endEvent id="Event_MWEP0R" name="End - Decision Complete">
+      <bpmn:incoming>edge_mKyQnk</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:serviceTask id="Activity_yyh2BX" name="Document Classification Agent">
+      <bpmn:extensionElements>
+        <uipath:activity version="v1">
+          <uipath:type value="Orchestrator.StartAgentJob" version="v2" />
+          <uipath:context>
+            <uipath:input name="name" type="string" value="=bindings.by3wR5CAA" />
+            <uipath:input name="folderPath" type="string" value="=bindings.b7oxVXh3v" />
+            <uipath:input name="_label" type="string" value="DocumentClassificationAgent" />
+            <uipath:inputSchema type="jsonSchema"><![CDATA[{"$schema":"http://json-schema.org/draft-07/schema#","type":"object","properties":{"payload":{"type":"object"}},"required":[]}]]></uipath:inputSchema>
+          </uipath:context>
+          <uipath:input name="JobArguments" type="json" target="bodyField"><![CDATA[{"payload":"=js:vars.payload"}]]></uipath:input>
+          <uipath:output name="Error" type="jsonSchema" source="=Error" var="error" />
+          <uipath:output name="event_type" type="string" source="=event_type" var="eventType" />
+          <uipath:output name="confidence" type="number" source="=confidence" var="confidence" />
+          <uipath:output name="reasoning" type="string" source="=reasoning" var="reasoning" />
+          <uipath:output name="dcaEventType" type="string" source="=js:vars.eventType" var="dcaEventType" custom="true" target="" />
+          <uipath:output name="dcaConfidence" type="float" source="=js:vars.confidence" var="dcaConfidence" custom="true" target="" />
+          <uipath:output name="dcaReasoning" type="string" source="=js:vars.reasoning" var="dcaReasoning" custom="true" target="" />
+        </uipath:activity>
+      </bpmn:extensionElements>
+      <bpmn:incoming>edge_7NGzQX</bpmn:incoming>
+      <bpmn:outgoing>edge_lNZKW8</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:exclusiveGateway id="Gateway_kgYyqQ" name="Route by event_type">
+      <bpmn:incoming>edge_8VpIWr</bpmn:incoming>
+      <bpmn:outgoing>edge_zQP7pc</bpmn:outgoing>
+      <bpmn:outgoing>edge_l5iZks</bpmn:outgoing>
+      <bpmn:outgoing>edge_gEPN02</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:scriptTask id="Activity_caXvIn" name="Loan Application Intake Agent" scriptFormat="JavaScript">
+      <bpmn:extensionElements>
+        <uipath:mapping version="v1">
+          <uipath:type value="BPMN.Variables" version="v1" />
+          <uipath:context>
+            <uipath:inputSchema type="jsonSchema"><![CDATA[{"$schema":"http://json-schema.org/draft-07/schema#","type":"object","properties":{"vars":{"type":"object"},"metadata":{"type":"object"}},"required":[]}]]></uipath:inputSchema>
+          </uipath:context>
+          <uipath:input name="args" type="json" target="bodyField"><![CDATA[{"vars":"=vars","metadata":"=metadata"}]]></uipath:input>
+          <uipath:output name="scriptResponse" type="jsonSchema" source="=result.response" var="scriptResponse3" />
+          <uipath:output name="Error" type="jsonSchema" source="=Error" var="error5" />
+          <uipath:output name="decisionEvent" type="jsonSchema" source="" var="decisionEvent" custom="true" target=""><![CDATA[=js:vars.scriptResponse3]]></uipath:output>
+        </uipath:mapping>
+        <uipath:scriptVersion value="v3" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>edge_zQP7pc</bpmn:incoming>
+      <bpmn:outgoing>edge_gSeLYX</bpmn:outgoing>
+      <bpmn:script><![CDATA[const p = vars.payload;
+    const issues = [];
+
+    const required = ['ApplicantName', 'DateOfBirth', 'LastFourSSN', 'RequestedAmount',
+                      'LoanPurpose', 'EmployerName', 'AnnualIncome', 'CreditScore',
+                      'PortalCreditScoreAge_Days', 'Email'];
+    required.forEach(f => {
+      if (p[f] === undefined || p[f] === null || p[f] === '') issues.push(`missing_${f}`);
+    });
+
+    const dob = new Date(p.DateOfBirth);
+    const today = new Date();
+    let age = today.getFullYear() - dob.getFullYear();
+    const m = today.getMonth() - dob.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) age--;
+    if (age < 18) issues.push('underage_applicant');
+
+    const lti = p.AnnualIncome > 0 ? p.RequestedAmount / p.AnnualIncome : null;
+
+    const apr = 0.08;
+    const months = 60;
+    const monthlyRate = apr / 12;
+    const estimatedMonthlyPayment =
+      (p.RequestedAmount * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -months));
+
+    const monthlyIncome = p.AnnualIncome / 12;
+    const pti = monthlyIncome > 0 ? estimatedMonthlyPayment / monthlyIncome : null;
+
+    const creditScoreFreshness = p.PortalCreditScoreAge_Days <= 30 ? 'fresh' : 'stale';
+
+    const intakeOutput = {
+      applicant_name: p.ApplicantName,
+      applicant_age: age,
+      last_four_ssn: p.LastFourSSN,
+      employer_name: p.EmployerName,
+      loan_purpose: p.LoanPurpose,
+      email: p.Email,
+      requested_amount: p.RequestedAmount,
+      annual_income: p.AnnualIncome,
+      credit_score: p.CreditScore,
+      credit_score_age_days: p.PortalCreditScoreAge_Days,
+      credit_score_freshness: creditScoreFreshness,
+      loan_to_income_ratio: Math.round(lti * 10000) / 10000,
+      estimated_monthly_payment: Math.round(estimatedMonthlyPayment * 100) / 100,
+      payment_to_income_ratio: Math.round(pti * 10000) / 10000,
+      intake_status: issues.length > 0 ? 'flagged' : 'clean',
+      data_quality_issues: issues,
+      intake_completed_at: new Date().toISOString()
+    };
+
+    return {
+      ...vars.decisionEvent,
+      intake_output: intakeOutput
+    };]]></bpmn:script>
+    </bpmn:scriptTask>
+    <bpmn:scriptTask id="Activity_tKIAf0" name="Credit Decisioning Agent" scriptFormat="JavaScript">
+      <bpmn:extensionElements>
+        <uipath:mapping version="v1">
+          <uipath:type value="BPMN.Variables" version="v1" />
+          <uipath:context>
+            <uipath:inputSchema type="jsonSchema"><![CDATA[{"$schema":"http://json-schema.org/draft-07/schema#","type":"object","properties":{"vars":{"type":"object"},"metadata":{"type":"object"}},"required":[]}]]></uipath:inputSchema>
+          </uipath:context>
+          <uipath:input name="args" type="json" target="bodyField"><![CDATA[{"vars":"=vars","metadata":"=metadata"}]]></uipath:input>
+          <uipath:output name="scriptResponse" type="jsonSchema" source="=result.response" var="scriptResponse4" />
+          <uipath:output name="Error" type="jsonSchema" source="=Error" var="error6" />
+          <uipath:output name="decisionEvent" type="jsonSchema" source="" var="decisionEvent" custom="true" target=""><![CDATA[=js:vars.scriptResponse4]]></uipath:output>
+        </uipath:mapping>
+        <uipath:scriptVersion value="v3" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>edge_gSeLYX</bpmn:incoming>
+      <bpmn:outgoing>edge_KgXUNm</bpmn:outgoing>
+      <bpmn:script><![CDATA[const intake = vars.decisionEvent.intake_output;
+
+  const reasons = [];
+  let thresholds_applied = {};
+  let decision_type = "manual_review";
+  let risk_level = "medium";
+
+  // Auto-decline: severe credit risk
+  if (intake.credit_score < 580) {
+    decision_type = "auto_decline";
+    risk_level = "high";
+    reasons.push(`Credit score ${intake.credit_score} below 580 minimum (Reg B §1002.6 — documented underwriting standard)`);
+    thresholds_applied = { credit_score_floor: 580 };
+  }
+  // Auto-decline: severely over-leveraged
+  else if (intake.loan_to_income_ratio > 2.0) {
+    decision_type = "auto_decline";
+    risk_level = "high";
+    reasons.push(`Loan-to-income ratio ${intake.loan_to_income_ratio} exceeds 2.0 ceiling (requested amount more than 2x annual income)`);
+    thresholds_applied = { lti_ceiling: 2.0 };
+  }
+  // Manual review: data quality flagged at intake
+  else if (intake.intake_status === "flagged") {
+    decision_type = "manual_review";
+    risk_level = "medium";
+    reasons.push(`Intake flagged with data quality issues: ${intake.data_quality_issues.join(", ")}`);
+  }
+  // Escalate: high-amount request
+  else if (intake.requested_amount > 50000) {
+    decision_type = "escalate_senior_review";
+    risk_level = "escalated";
+    reasons.push(`Requested amount $${intake.requested_amount} exceeds $50,000 senior approval threshold`);
+    thresholds_applied = { amount_escalation_floor: 50000 };
+  }
+  // Escalate: moderately over-leveraged
+  else if (intake.loan_to_income_ratio > 1.0) {
+    decision_type = "escalate_senior_review";
+    risk_level = "escalated";
+    reasons.push(`Loan-to-income ratio ${intake.loan_to_income_ratio} exceeds 1.0 (requesting more than annual income)`);
+    thresholds_applied = { lti_escalation_threshold: 1.0 };
+  }
+  // Escalate: high payment burden
+  else if (intake.payment_to_income_ratio > 0.40) {
+    decision_type = "escalate_senior_review";
+    risk_level = "escalated";
+    reasons.push(`Payment-to-income ratio ${intake.payment_to_income_ratio} exceeds 0.40 (excessive monthly burden)`);
+    thresholds_applied = { pti_escalation_threshold: 0.40 };
+  }
+  // Auto-approve: all criteria met
+  else if (
+    intake.credit_score >= 720 &&
+    intake.requested_amount <= 10000 &&
+    intake.payment_to_income_ratio <= 0.15 &&
+    intake.loan_to_income_ratio <= 0.30 &&
+    intake.credit_score_freshness === "fresh"
+  ) {
+    decision_type = "auto_approve";
+    risk_level = "low";
+    reasons.push(`Credit score ${intake.credit_score} meets auto-approve floor (>=720)`);
+    reasons.push(`Requested amount $${intake.requested_amount} within auto-approve ceiling ($10,000)`);
+    reasons.push(`Payment-to-income ratio ${intake.payment_to_income_ratio} within tolerance (<=0.15)`);
+    reasons.push(`Loan-to-income ratio ${intake.loan_to_income_ratio} within tolerance (<=0.30)`);
+    reasons.push(`Credit score data is fresh (<=30 days)`);
+    thresholds_applied = {
+      credit_score_floor: 720,
+      amount_ceiling: 10000,
+      pti_ceiling: 0.15,
+      lti_ceiling: 0.30,
+      freshness_required: "fresh"
+    };
+  }
+  // Default: manual review
+  else {
+    decision_type = "manual_review";
+    risk_level = "medium";
+    reasons.push(`Application meets baseline thresholds but does not qualify for auto-approval`);
+    reasons.push(`Credit score: ${intake.credit_score}, amount: $${intake.requested_amount}, LTI: ${intake.loan_to_income_ratio}, PTI: ${intake.payment_to_income_ratio}`);
+  }
+
+  const riskOutput = {
+    decision_type: decision_type,
+    risk_level: risk_level,
+    reasons: reasons,
+    thresholds_applied: thresholds_applied,
+    sanctions_status: "pending_check",
+    fair_lending_review: "no_protected_class_proxies_used",
+    applicant_name: intake.applicant_name,
+    credit_score_evaluated: intake.credit_score,
+    amount_evaluated: intake.requested_amount,
+    policy_version: "v1.0-2026Q2",
+    decision_completed_at: new Date().toISOString()
+  };
+
+  return {
+    ...vars.decisionEvent,
+    risk_output: riskOutput
+  };]]></bpmn:script>
+    </bpmn:scriptTask>
+    <bpmn:scriptTask id="Activity_AJs7v2" name="Claim Submission Intake Agent" scriptFormat="JavaScript">
+      <bpmn:extensionElements>
+        <uipath:mapping version="v1">
+          <uipath:type value="BPMN.Variables" version="v1" />
+          <uipath:context>
+            <uipath:inputSchema type="jsonSchema"><![CDATA[{"$schema":"http://json-schema.org/draft-07/schema#","type":"object","properties":{"vars":{"type":"object"},"metadata":{"type":"object"}},"required":[]}]]></uipath:inputSchema>
+          </uipath:context>
+          <uipath:input name="args" type="json" target="bodyField"><![CDATA[{"vars":"=vars","metadata":"=metadata"}]]></uipath:input>
+          <uipath:output name="scriptResponse" type="jsonSchema" source="=result.response" var="scriptResponse5" />
+          <uipath:output name="Error" type="jsonSchema" source="=Error" var="error7" />
+          <uipath:output name="decisionEvent" type="jsonSchema" source="" var="decisionEvent" custom="true" target=""><![CDATA[=vars.scriptResponse5]]></uipath:output>
+        </uipath:mapping>
+        <uipath:scriptVersion value="v3" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>edge_l5iZks</bpmn:incoming>
+      <bpmn:outgoing>edge_uoTGyw</bpmn:outgoing>
+      <bpmn:script><![CDATA[const p = vars.payload;
+    const issues = [];
+
+    const required = ['MemberID', 'MemberName', 'PolicyNumber', 'ClaimAmount', 'DateOfIncident',
+                      'CoverageType', 'ProviderName', 'ClaimType', 'ClaimDescription', 'Email'];
+    required.forEach(f => {
+      if (p[f] === undefined || p[f] === null || p[f] === '') issues.push(`missing_${f}`);
+    });
+
+    const incidentDate = new Date(p.DateOfIncident);
+    const today = new Date();
+    const daysSinceIncident = Math.floor((today - incidentDate) / (1000 * 60 * 60 * 24));
+
+    if (daysSinceIncident < 0) issues.push('future_dated_incident');
+
+    let timely_filing_status;
+    if (daysSinceIncident < 0) timely_filing_status = 'invalid_future_date';
+    else if (daysSinceIncident <= 90) timely_filing_status = 'within_window';
+    else if (daysSinceIncident <= 365) timely_filing_status = 'late';
+    else timely_filing_status = 'severely_late';
+
+    const descriptionWordCount = (p.ClaimDescription || '').trim().split(/\s+/).filter(w => w.length > 0).length;
+    if (descriptionWordCount < 5) issues.push('insufficient_description');
+
+    let claim_amount_tier;
+    if (p.ClaimAmount < 1000) claim_amount_tier = 'small';
+    else if (p.ClaimAmount < 10000) claim_amount_tier = 'medium';
+    else if (p.ClaimAmount < 50000) claim_amount_tier = 'large';
+    else claim_amount_tier = 'very_large';
+
+    const intakeOutput = {
+      member_id: p.MemberID,
+      member_name: p.MemberName,
+      policy_number: p.PolicyNumber,
+      provider_name: p.ProviderName,
+      claim_amount: p.ClaimAmount,
+      claim_type: p.ClaimType,
+      coverage_type: p.CoverageType,
+      date_of_incident: p.DateOfIncident,
+      claim_description: p.ClaimDescription,
+      email: p.Email,
+      days_since_incident: daysSinceIncident,
+      timely_filing_status: timely_filing_status,
+      description_word_count: descriptionWordCount,
+      claim_amount_tier: claim_amount_tier,
+      intake_status: issues.length > 0 ? 'flagged' : 'clean',
+      data_quality_issues: issues,
+      intake_completed_at: new Date().toISOString()
+    };
+
+    return {
+      ...vars.decisionEvent,
+      intake_output: intakeOutput
+    };]]></bpmn:script>
+    </bpmn:scriptTask>
+    <bpmn:serviceTask id="Activity_pD89wQ" name="Claims Adjudication Agent">
+      <bpmn:extensionElements>
+        <uipath:activity version="v1">
+          <uipath:type value="Orchestrator.StartAgentJob" version="v2" />
+          <uipath:context>
+            <uipath:input name="name" type="string" value="=bindings.bhqIoa7MJ" />
+            <uipath:input name="folderPath" type="string" value="=bindings.b4UPmS8rL" />
+            <uipath:input name="_label" type="string" value="ClaimsAdjudicationAgent" />
+            <uipath:inputSchema type="jsonSchema"><![CDATA[{"$schema":"http://json-schema.org/draft-07/schema#","type":"object","properties":{"member_id":{"type":"string"},"policy_number":{"type":"string"},"provider_name":{"type":"string"},"claim_amount":{"type":"number"},"claim_type":{"type":"string"},"coverage_type":{"type":"string"},"date_of_incident":{"type":"string"},"claim_description":{"type":"string"},"intake_status":{"type":"string"},"data_quality_issues":{"type":"array"}},"required":[]}]]></uipath:inputSchema>
+          </uipath:context>
+          <uipath:input name="JobArguments" type="json" target="bodyField"><![CDATA[{"member_id":"=vars.decisionEvent.intake_output.member_id","policy_number":"=vars.decisionEvent.intake_output.policy_number","provider_name":"=vars.decisionEvent.intake_output.provider_name","claim_amount":"=vars.decisionEvent.intake_output.claim_amount","claim_type":"=vars.decisionEvent.intake_output.claim_type","coverage_type":"=vars.decisionEvent.intake_output.coverage_type","date_of_incident":"=vars.decisionEvent.intake_output.date_of_incident","claim_description":"=vars.decisionEvent.intake_output.claim_description","intake_status":"=vars.decisionEvent.intake_output.intake_status","data_quality_issues":"=vars.decisionEvent.intake_output.data_quality_issues"}]]></uipath:input>
+          <uipath:output name="Error" type="jsonSchema" source="=Error" var="error8" />
+          <uipath:output name="disposition" type="string" source="=disposition" var="disposition" />
+          <uipath:output name="escalation_required" type="boolean" source="=escalation_required" var="escalationRequired" />
+          <uipath:output name="reasoning" type="string" source="=reasoning" var="reasoning2" />
+          <uipath:output name="claim_assessments" type="jsonSchema" subType="object" source="=claim_assessments" var="claimAssessments" />
+          <uipath:output name="caaDisposition" type="string" source="=vars.disposition" var="caaDisposition" custom="true" target="" />
+          <uipath:output name="caaEscalationRequired" type="boolean" source="=vars.escalationRequired" var="caaEscalationRequired" custom="true" target="" />
+          <uipath:output name="caaReasoning" type="string" source="=vars.reasoning2" var="caaReasoning" custom="true" target="" />
+          <uipath:output name="caaAssessments" type="jsonSchema" source="" var="caaAssessments" custom="true" target=""><![CDATA[=js:vars.claimAssessments]]></uipath:output>
+        </uipath:activity>
+      </bpmn:extensionElements>
+      <bpmn:incoming>edge_uoTGyw</bpmn:incoming>
+      <bpmn:outgoing>edge_JALo3v</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="Event_Il1AZP" name="End - Unknown">
+      <bpmn:incoming>edge_gEPN02</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:serviceTask id="Activity_3XBXMK" name="Regulatory Compliance Agent">
+      <bpmn:extensionElements>
+        <uipath:activity version="v1">
+          <uipath:type value="Orchestrator.StartAgentJob" version="v2" />
+          <uipath:context>
+            <uipath:input name="name" type="string" value="=bindings.bEcQn0Qey" />
+            <uipath:input name="folderPath" type="string" value="=bindings.bTUIVxkKt" />
+            <uipath:input name="_label" type="string" value="RegulatoryComplianceAgent" />
+            <uipath:inputSchema type="jsonSchema"><![CDATA[{"$schema":"http://json-schema.org/draft-07/schema#","type":"object","properties":{"event_type":{"type":"string"},"branch_origin":{"type":"string"},"final_disposition":{"type":"string"},"risk_decision_type":{"type":"string"},"risk_reasoning":{"type":"string"},"intake_status":{"type":"string"},"data_quality_issues":{"type":"array"},"human_touchpoints":{"type":"array"},"applicant_or_member_id":{"type":"string"},"amount":{"type":"number"},"sanctions_status":{"type":"string"},"policy_version":{"type":"string"}},"required":[]}]]></uipath:inputSchema>
+          </uipath:context>
+          <uipath:input name="JobArguments" type="json" target="bodyField"><![CDATA[{"event_type":"=vars.eventType","branch_origin":"=js:vars.decisionEvent.risk_output.branch_origin","final_disposition":"=vars.decisionEvent.final_disposition","risk_decision_type":"=js:vars.decisionEvent.risk_output.decision_type","risk_reasoning":"=js:vars.decisionEvent.risk_output.reasoning","intake_status":"=js:vars.decisionEvent.intake_output.intake_status","data_quality_issues":"=js:vars.decisionEvent.intake_output.data_quality_issues","human_touchpoints":"=js:vars.decisionEvent.human_touchpoints","applicant_or_member_id":"=js:vars.decisionEvent.event_type === \"loan_application\" ? vars.decisionEvent.intake_output.applicant_name : vars.decisionEvent.intake_output.member_id","amount":"=js:vars.decisionEvent.event_type === \"loan_application\" ? vars.decisionEvent.intake_output.requested_amount : vars.decisionEvent.intake_output.claim_amount","sanctions_status":"=js:vars.decisionEvent.risk_output.sanctions_status || \"not_applicable\"","policy_version":"=js:vars.decisionEvent.risk_output.policy_version"}]]></uipath:input>
+          <uipath:output name="Error" type="jsonSchema" source="=Error" var="error12" />
+          <uipath:output name="compliance_status" type="string" source="=compliance_status" var="complianceStatus" />
+          <uipath:output name="regulatory_frameworks_applied" type="jsonSchema" subType="string" source="=regulatory_frameworks_applied" var="regulatoryFrameworksApplied" />
+          <uipath:output name="compliance_findings" type="jsonSchema" subType="object" source="=compliance_findings" var="complianceFindings" />
+          <uipath:output name="adverse_action_required" type="boolean" source="=adverse_action_required" var="adverseActionRequired" />
+          <uipath:output name="disclosures_required" type="jsonSchema" subType="string" source="=disclosures_required" var="disclosuresRequired" />
+          <uipath:output name="compliance_reasoning" type="string" source="=compliance_reasoning" var="complianceReasoning" />
+          <uipath:output name="rcaComplianceStatus" type="string" source="=vars.complianceStatus" var="rcaComplianceStatus" custom="true" target="" />
+          <uipath:output name="rcaFrameworks" type="jsonSchema" source="" var="rcaFrameworks" custom="true" target=""><![CDATA[=vars.regulatoryFrameworksApplied]]></uipath:output>
+          <uipath:output name="rcaFindings" type="jsonSchema" source="" var="rcaFindings" custom="true" target=""><![CDATA[=vars.complianceFindings]]></uipath:output>
+          <uipath:output name="rcaAdverseActionRequired" type="boolean" source="=vars.adverseActionRequired" var="rcaAdverseActionRequired" custom="true" target="" />
+          <uipath:output name="rcaDisclosuresRequired" type="jsonSchema" source="" var="rcaDisclosuresRequired" custom="true" target=""><![CDATA[=vars.disclosuresRequired]]></uipath:output>
+          <uipath:output name="rcaReasoning" type="string" source="=vars.complianceReasoning" var="rcaReasoning" custom="true" target="" />
+        </uipath:activity>
+      </bpmn:extensionElements>
+      <bpmn:incoming>edge_JoY3Io</bpmn:incoming>
+      <bpmn:incoming>edge_jBcOl7</bpmn:incoming>
+      <bpmn:outgoing>edge_HX5YRI</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Activity_3sVvSL" name="Customer Disclosure Agent">
+      <bpmn:extensionElements>
+        <uipath:activity version="v1">
+          <uipath:type value="Orchestrator.StartAgentJob" version="v2" />
+          <uipath:context>
+            <uipath:input name="name" type="string" value="=bindings.bGORIDMW9" />
+            <uipath:input name="folderPath" type="string" value="=bindings.bMPTnxiyk" />
+            <uipath:input name="_label" type="string" value="CustomerDisclosureAgent" />
+            <uipath:inputSchema type="jsonSchema"><![CDATA[{"$schema":"http://json-schema.org/draft-07/schema#","type":"object","properties":{"event_type":{"type":"string"},"branch_origin":{"type":"string"},"final_disposition":{"type":"string"},"applicant_or_member_name":{"type":"string"},"amount":{"type":"number"},"risk_decision_type":{"type":"string"},"risk_reasoning":{"type":"string"},"adverse_action_required":{"type":"boolean"},"disclosures_required":{"type":"array"},"compliance_findings":{"type":"array"},"human_touchpoints":{"type":"array"},"reference_number":{"type":"string"}},"required":[]}]]></uipath:inputSchema>
+          </uipath:context>
+          <uipath:input name="JobArguments" type="json" target="bodyField"><![CDATA[{"event_type":"=js:vars.decisionEvent.event_type","branch_origin":"=js:vars.decisionEvent.risk_output.branch_origin","final_disposition":"=js:vars.decisionEvent.final_disposition","applicant_or_member_name":"=js:vars.decisionEvent.event_type === \"loan_application\" ? vars.decisionEvent.intake_output.applicant_name : vars.decisionEvent.intake_output.member_name","amount":"=js:vars.decisionEvent.event_type === \"loan_application\" ? vars.decisionEvent.intake_output.requested_amount : vars.decisionEvent.intake_output.claim_amount","risk_decision_type":"=js:vars.decisionEvent.risk_output.decision_type","risk_reasoning":"=js:vars.decisionEvent.risk_output.reasoning","adverse_action_required":"=js:vars.decisionEvent.compliance_output.adverse_action_required","disclosures_required":"=js:vars.decisionEvent.compliance_output.disclosures_required","compliance_findings":"=js:vars.decisionEvent.compliance_output.compliance_findings","human_touchpoints":"=js:vars.decisionEvent.human_touchpoints","reference_number":"=js:vars.decisionEvent.decision_event_id || (\"REF-\" + Date.now())"}]]></uipath:input>
+          <uipath:output name="Error" type="jsonSchema" source="=Error" var="error14" />
+          <uipath:output name="customer_email_subject" type="string" source="=customer_email_subject" var="customerEmailSubject" />
+          <uipath:output name="customer_email_body" type="string" source="=customer_email_body" var="customerEmailBody" />
+          <uipath:output name="pdf_letter_title" type="string" source="=pdf_letter_title" var="pdfLetterTitle" />
+          <uipath:output name="pdf_letter_opening" type="string" source="=pdf_letter_opening" var="pdfLetterOpening" />
+          <uipath:output name="pdf_letter_reasons" type="string" source="=pdf_letter_reasons" var="pdfLetterReasons" />
+          <uipath:output name="pdf_letter_next_steps" type="string" source="=pdf_letter_next_steps" var="pdfLetterNextSteps" />
+          <uipath:output name="pdf_letter_disclosures_notice" type="string" source="=pdf_letter_disclosures_notice" var="pdfLetterDisclosuresNotice" />
+          <uipath:output name="notification_channel" type="string" source="=notification_channel" var="notificationChannel" />
+          <uipath:output name="required_attachments" type="jsonSchema" subType="string" source="=required_attachments" var="requiredAttachments" />
+          <uipath:output name="communication_priority" type="string" source="=communication_priority" var="communicationPriority" />
+          <uipath:output name="drafted_reasoning" type="string" source="=drafted_reasoning" var="draftedReasoning" />
+          <uipath:output name="cdaEmailSubject" type="string" source="=vars.customerEmailSubject" var="cdaEmailSubject" custom="true" target="" />
+          <uipath:output name="cdaEmailBody" type="string" source="=vars.customerEmailBody" var="cdaEmailBody" custom="true" target="" />
+          <uipath:output name="cdaLetterTitle" type="string" source="=vars.pdfLetterTitle" var="cdaLetterTitle" custom="true" target="" />
+          <uipath:output name="cdaLetterOpening" type="string" source="=vars.pdfLetterOpening" var="cdaLetterOpening" custom="true" target="" />
+          <uipath:output name="cdaLetterReasons" type="string" source="=vars.pdfLetterReasons" var="cdaLetterReasons" custom="true" target="" />
+          <uipath:output name="cdaLetterNextSteps" type="string" source="=vars.pdfLetterNextSteps" var="cdaLetterNextSteps" custom="true" target="" />
+          <uipath:output name="cdaLetterDisclosuresNotice" type="string" source="=vars.pdfLetterDisclosuresNotice" var="cdaLetterDisclosuresNotice" custom="true" target="" />
+          <uipath:output name="cdaNotificationChannel" type="string" source="=vars.notificationChannel" var="cdaNotificationChannel" custom="true" target="" />
+          <uipath:output name="cdaRequiredAttachments" type="jsonSchema" source="" var="cdaRequiredAttachments" custom="true" target=""><![CDATA[=vars.requiredAttachments]]></uipath:output>
+          <uipath:output name="cdaCommunicationPriority" type="string" source="=vars.communicationPriority" var="cdaCommunicationPriority" custom="true" target="" />
+          <uipath:output name="cdaDraftedReasoning" type="string" source="=vars.draftedReasoning" var="cdaDraftedReasoning" custom="true" target="" />
+        </uipath:activity>
+      </bpmn:extensionElements>
+      <bpmn:incoming>edge_vcUJrx</bpmn:incoming>
+      <bpmn:outgoing>edge_6PrORn</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:scriptTask id="Activity_J9nSWo" name="Extract Payload" scriptFormat="JavaScript">
+      <bpmn:extensionElements>
+        <uipath:mapping version="v1">
+          <uipath:type value="BPMN.Variables" version="v1" />
+          <uipath:context>
+            <uipath:inputSchema type="jsonSchema"><![CDATA[{"$schema":"http://json-schema.org/draft-07/schema#","type":"object","properties":{"vars":{"type":"object"},"metadata":{"type":"object"}},"required":[]}]]></uipath:inputSchema>
+          </uipath:context>
+          <uipath:input name="args" type="json" target="bodyField"><![CDATA[{"vars":"=vars","metadata":"=metadata"}]]></uipath:input>
+          <uipath:output name="scriptResponse" type="jsonSchema" source="=result.response" var="scriptResponse" />
+          <uipath:output name="Error" type="jsonSchema" source="=Error" var="error3" />
+          <uipath:output name="payload" type="jsonSchema" source="" var="payload" custom="true" target=""><![CDATA[=js:vars.scriptResponse.parsedPayload]]></uipath:output>
+          <uipath:output name="decisionEventId" type="string" source="=js:vars.scriptResponse.decisionEventId" var="decisionEventId" custom="true" target="" />
+        </uipath:mapping>
+        <uipath:scriptVersion value="v3" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>edge_w9ZYS4</bpmn:incoming>
+      <bpmn:outgoing>edge_fbrvkz</bpmn:outgoing>
+      <bpmn:script><![CDATA[const emailBody = vars.response.Body;
+  const parsedPayload = JSON.parse(emailBody);
+
+  const now = new Date();
+  const datePart = now.getFullYear().toString()
+    + String(now.getMonth() + 1).padStart(2, "0")
+    + String(now.getDate()).padStart(2, "0");
+  const randPart = Math.random().toString(36).slice(2, 8).toUpperCase();
+  const decisionEventId = "RDD-" + datePart + "-" + randPart;
+
+  return { parsedPayload, decisionEventId };]]></bpmn:script>
+    </bpmn:scriptTask>
+    <bpmn:scriptTask id="Activity_7JJNyD" name="Merge Classification" scriptFormat="JavaScript">
+      <bpmn:extensionElements>
+        <uipath:mapping version="v1">
+          <uipath:type value="BPMN.Variables" version="v1" />
+          <uipath:context>
+            <uipath:inputSchema type="jsonSchema"><![CDATA[{"$schema":"http://json-schema.org/draft-07/schema#","type":"object","properties":{"vars":{"type":"object"},"metadata":{"type":"object"}},"required":[]}]]></uipath:inputSchema>
+          </uipath:context>
+          <uipath:input name="args" type="json" target="bodyField"><![CDATA[{"vars":"=vars","metadata":"=metadata"}]]></uipath:input>
+          <uipath:output name="scriptResponse" type="jsonSchema" source="=result.response" var="scriptResponse2" />
+          <uipath:output name="Error" type="jsonSchema" source="=Error" var="error4" />
+          <uipath:output name="decisionEvent" type="jsonSchema" source="" var="decisionEvent" custom="true" target=""><![CDATA[=js:vars.scriptResponse2]]></uipath:output>
+        </uipath:mapping>
+        <uipath:scriptVersion value="v3" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>edge_lNZKW8</bpmn:incoming>
+      <bpmn:outgoing>edge_8VpIWr</bpmn:outgoing>
+      <bpmn:script><![CDATA[return {
+      ...vars.decisionEvent,
+      decision_event_id: vars.decisionEventId,
+      classification_output: {
+        event_type: vars.dcaEventType,
+        confidence: vars.dcaConfidence,
+        reasoning: vars.dcaReasoning,
+        classified_at: new Date().toISOString()
+      },
+      event_type: vars.dcaEventType
+};]]></bpmn:script>
+    </bpmn:scriptTask>
+    <bpmn:scriptTask id="Activity_iQuyyS" name="Merge Claims Adjudication" scriptFormat="JavaScript">
+      <bpmn:extensionElements>
+        <uipath:mapping version="v1">
+          <uipath:type value="BPMN.Variables" version="v1" />
+          <uipath:context>
+            <uipath:inputSchema type="jsonSchema"><![CDATA[{"$schema":"http://json-schema.org/draft-07/schema#","type":"object","properties":{"vars":{"type":"object"},"metadata":{"type":"object"}},"required":[]}]]></uipath:inputSchema>
+          </uipath:context>
+          <uipath:input name="args" type="json" target="bodyField"><![CDATA[{"vars":"=vars","metadata":"=metadata"}]]></uipath:input>
+          <uipath:output name="scriptResponse" type="jsonSchema" source="=result.response" var="scriptResponse6" />
+          <uipath:output name="Error" type="jsonSchema" source="=Error" var="error9" />
+          <uipath:output name="decisionEvent" type="jsonSchema" source="" var="decisionEvent" custom="true" target=""><![CDATA[=vars.scriptResponse6]]></uipath:output>
+        </uipath:mapping>
+        <uipath:scriptVersion value="v3" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>edge_JALo3v</bpmn:incoming>
+      <bpmn:outgoing>edge_xBty4h</bpmn:outgoing>
+      <bpmn:script><![CDATA[const riskOutput = {
+    decision_type: vars.caaDisposition,
+    escalation_required: vars.caaEscalationRequired,
+    reasoning: vars.caaReasoning,
+    claim_assessments: vars.caaAssessments,
+    branch_origin: "claim",
+    policy_version: "v1.0-2026Q2",
+    decision_completed_at: new Date().toISOString()
+  };
+
+  return {
+    ...vars.decisionEvent,
+    risk_output: riskOutput
+  };]]></bpmn:script>
+    </bpmn:scriptTask>
+    <bpmn:exclusiveGateway id="Gateway_9GxYH8" name="Requires Human Review?" default="edge_bzGJtv">
+      <bpmn:incoming>edge_KgXUNm</bpmn:incoming>
+      <bpmn:incoming>edge_xBty4h</bpmn:incoming>
+      <bpmn:outgoing>edge_JqiPvv</bpmn:outgoing>
+      <bpmn:outgoing>edge_bzGJtv</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:userTask id="Activity_nB46VC" name="Human Review">
+      <bpmn:extensionElements>
+        <uipath:activity version="v1">
+          <uipath:type value="Actions.HITL" version="v2" />
+          <uipath:context>
+            <uipath:input name="name" type="string" value="=bindings.bnH6rFJj0" />
+            <uipath:input name="folderPath" type="string" value="=bindings.bliugU8J8" />
+            <uipath:input name="_label" type="string" value="SimpleApprovalApp" />
+            <uipath:input name="taskTitle" type="string" value="=js:`Review: ${vars.decisionEvent.event_type === &#34;loan_application&#34; ? &#34;Loan&#34; : &#34;Claim&#34;} — ${vars.decisionEvent.intake_output.applicant_name ||&#10;  vars.decisionEvent.intake_output.member_id}, $${(vars.decisionEvent.intake_output.requested_amount || vars.decisionEvent.intake_output.claim_amount).toLocaleString()}&#10;  (${vars.decisionEvent.risk_output.decision_type})`" />
+            <uipath:input name="assignmentCriteria" type="string" value="user" />
+            <uipath:input name="recipient" type="json"><![CDATA[{"Type":2,"Value":"c.williams101198@gmail.com"}]]></uipath:input>
+            <uipath:input name="priority" type="string" value="Medium" />
+            <uipath:input name="labels" type="string" />
+            <uipath:input name="actionCatalogName" type="string" />
+            <uipath:input name="enableActionableNotifications" type="boolean" value="false" />
+            <uipath:inputSchema type="jsonSchema"><![CDATA[{"$schema":"http://json-schema.org/draft-07/schema#","type":"object","properties":{"Content":{"type":"string"},"Comment":{"type":"string"}},"required":[]}]]></uipath:inputSchema>
+          </uipath:context>
+          <uipath:input name="HitlTaskArguments" type="json" target="bodyField"><![CDATA[{"Content":"=js:`Event: ${vars.decisionEvent.event_type}\n  Branch: ${vars.decisionEvent.risk_output.branch_origin || \"loan\"}\n  Subject: ${vars.decisionEvent.intake_output.applicant_name || vars.decisionEvent.intake_output.member_id}\n  Amount: $${vars.decisionEvent.intake_output.requested_amount || vars.decisionEvent.intake_output.claim_amount}\n  Agent Decision: ${vars.decisionEvent.risk_output.decision_type}\n  Escalation Required: ${vars.decisionEvent.risk_output.escalation_required || false}\n\n  Agent Reasoning:\n  ${vars.decisionEvent.risk_output.reasoning || (vars.decisionEvent.risk_output.reasons || []).join(\" • \")}`","Comment":null}]]></uipath:input>
+          <uipath:output name="Error" type="jsonSchema" source="=Error" var="error10" />
+          <uipath:output name="Comment" type="string" source="=Comment" var="comment" />
+          <uipath:output name="Action" type="string" source="=Action" var="action" options="[{&#34;value&#34;:&#34;approve&#34;,&#34;label&#34;:&#34;approve&#34;},{&#34;value&#34;:&#34;reject&#34;,&#34;label&#34;:&#34;reject&#34;}]" />
+          <uipath:output name="hitlTask" type="jsonSchema" source="=hitlTask" var="hitlTask" />
+          <uipath:output name="humanReviewerDecision" type="string" source="=vars.action" var="humanReviewerDecision" custom="true" target="" />
+          <uipath:output name="humanReviewerComment" type="string" source="=js:vars.comment" var="humanReviewerComment" custom="true" target="" />
+        </uipath:activity>
+      </bpmn:extensionElements>
+      <bpmn:incoming>edge_JqiPvv</bpmn:incoming>
+      <bpmn:outgoing>edge_i048NJ</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:scriptTask id="Activity_v5hZAa" name="Merge Human Decision" scriptFormat="JavaScript">
+      <bpmn:extensionElements>
+        <uipath:mapping version="v1">
+          <uipath:type value="BPMN.Variables" version="v1" />
+          <uipath:context>
+            <uipath:inputSchema type="jsonSchema"><![CDATA[{"$schema":"http://json-schema.org/draft-07/schema#","type":"object","properties":{"vars":{"type":"object"},"metadata":{"type":"object"}},"required":[]}]]></uipath:inputSchema>
+          </uipath:context>
+          <uipath:input name="args" type="json" target="bodyField"><![CDATA[{"vars":"=vars","metadata":"=metadata"}]]></uipath:input>
+          <uipath:output name="scriptResponse" type="jsonSchema" source="=result.response" var="scriptResponse7" />
+          <uipath:output name="Error" type="jsonSchema" source="=Error" var="error11" />
+          <uipath:output name="decisionEvent" type="jsonSchema" source="" var="decisionEvent" custom="true" target=""><![CDATA[=vars.scriptResponse7]]></uipath:output>
+        </uipath:mapping>
+        <uipath:scriptVersion value="v3" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>edge_i048NJ</bpmn:incoming>
+      <bpmn:outgoing>edge_JoY3Io</bpmn:outgoing>
+      <bpmn:script><![CDATA[const reviewerAction = (vars.humanReviewerDecision || "").toLowerCase();
+  const reviewerComment = vars.humanReviewerComment;
+  const agentDecision = vars.decisionEvent.risk_output.decision_type;
+
+  const reviewerApproved = reviewerAction === "approve";
+  const reviewerRejected = reviewerAction === "reject";
+
+  const finalDisposition = reviewerApproved ? "approved" : (reviewerRejected ? "declined" : "unknown");
+
+  const agentApproved = ["auto_approve", "APPROVE"].includes(agentDecision);
+  const agentDeclined = ["auto_decline", "DENY"].includes(agentDecision);
+  const agentAbstained = !agentApproved && !agentDeclined;
+
+  let was_override = false;
+  if (agentApproved && reviewerRejected) was_override = true;
+  if (agentDeclined && reviewerApproved) was_override = true;
+
+  const humanTouchpoint = {
+    reviewer_action: vars.humanReviewerDecision,
+    reviewer_comment: reviewerComment,
+    reviewed_at: new Date().toISOString(),
+    agent_decision_at_review: agentDecision,
+    was_override: was_override,
+    agent_abstained: agentAbstained
+  };
+
+  return {
+    ...vars.decisionEvent,
+    human_touchpoints: [...(vars.decisionEvent.human_touchpoints || []), humanTouchpoint],
+    final_disposition: finalDisposition
+  };]]></bpmn:script>
+    </bpmn:scriptTask>
+    <bpmn:scriptTask id="Activity_uXriUo" name="Merge Compliance Response" scriptFormat="JavaScript">
+      <bpmn:extensionElements>
+        <uipath:mapping version="v1">
+          <uipath:type value="BPMN.Variables" version="v1" />
+          <uipath:context>
+            <uipath:inputSchema type="jsonSchema"><![CDATA[{"$schema":"http://json-schema.org/draft-07/schema#","type":"object","properties":{"vars":{"type":"object"},"metadata":{"type":"object"}},"required":[]}]]></uipath:inputSchema>
+          </uipath:context>
+          <uipath:input name="args" type="json" target="bodyField"><![CDATA[{"vars":"=vars","metadata":"=metadata"}]]></uipath:input>
+          <uipath:output name="scriptResponse" type="jsonSchema" source="=result.response" var="scriptResponse8" />
+          <uipath:output name="Error" type="jsonSchema" source="=Error" var="error13" />
+          <uipath:output name="decisionEvent" type="jsonSchema" source="" var="decisionEvent" custom="true" target=""><![CDATA[=js:vars.scriptResponse8]]></uipath:output>
+        </uipath:mapping>
+        <uipath:scriptVersion value="v3" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>edge_HX5YRI</bpmn:incoming>
+      <bpmn:outgoing>edge_vcUJrx</bpmn:outgoing>
+      <bpmn:script><![CDATA[ const complianceOutput = {
+    compliance_status: vars.rcaComplianceStatus,
+    regulatory_frameworks_applied: vars.rcaFrameworks,
+    compliance_findings: vars.rcaFindings,
+    adverse_action_required: vars.rcaAdverseActionRequired,
+    disclosures_required: vars.rcaDisclosuresRequired,
+    reasoning: vars.rcaReasoning,
+    assessed_at: new Date().toISOString()
+  };
+  return { ...vars.decisionEvent, compliance_output: complianceOutput };]]></bpmn:script>
+    </bpmn:scriptTask>
+    <bpmn:scriptTask id="Activity_mVhRWo" name="Merge Disclosure Response" scriptFormat="JavaScript">
+      <bpmn:extensionElements>
+        <uipath:mapping version="v1">
+          <uipath:type value="BPMN.Variables" version="v1" />
+          <uipath:context>
+            <uipath:inputSchema type="jsonSchema"><![CDATA[{"$schema":"http://json-schema.org/draft-07/schema#","type":"object","properties":{"vars":{"type":"object"},"metadata":{"type":"object"}},"required":[]}]]></uipath:inputSchema>
+          </uipath:context>
+          <uipath:input name="args" type="json" target="bodyField"><![CDATA[{"vars":"=vars","metadata":"=metadata"}]]></uipath:input>
+          <uipath:output name="scriptResponse" type="jsonSchema" source="=result.response" var="scriptResponse9" />
+          <uipath:output name="Error" type="jsonSchema" source="=Error" var="error15" />
+          <uipath:output name="decisionEvent" type="jsonSchema" source="" var="decisionEvent" custom="true" target=""><![CDATA[=js:vars.scriptResponse9]]></uipath:output>
+        </uipath:mapping>
+        <uipath:scriptVersion value="v3" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>edge_6PrORn</bpmn:incoming>
+      <bpmn:outgoing>edge_uEUlD7</bpmn:outgoing>
+      <bpmn:script><![CDATA[const referenceNumber = vars.decisionEvent.decision_event_id || ("REF-" + Date.now());
+
+  const communicationOutput = {
+    email: {
+      subject: vars.cdaEmailSubject,
+      body: vars.cdaEmailBody
+    },
+    pdf_letter: {
+      title: vars.cdaLetterTitle,
+      opening: vars.cdaLetterOpening,
+      reasons: vars.cdaLetterReasons,
+      next_steps: vars.cdaLetterNextSteps,
+      disclosures_notice: vars.cdaLetterDisclosuresNotice
+    },
+    notification_channel: vars.cdaNotificationChannel,
+    required_attachments: vars.cdaRequiredAttachments,
+    communication_priority: vars.cdaCommunicationPriority,
+    drafted_reasoning: vars.cdaDraftedReasoning,
+    drafted_at: new Date().toISOString()
+  };
+
+  return {
+    ...vars.decisionEvent,
+    reference_number: referenceNumber,
+    communication_output: communicationOutput
+  };]]></bpmn:script>
+    </bpmn:scriptTask>
+    <bpmn:sendTask id="Activity_S5pjul" name="Generate PDF Letter">
+      <bpmn:extensionElements>
+        <uipath:activity version="v1">
+          <uipath:type value="Intsvc.ActivityExecution" version="v1" />
+          <uipath:context>
+            <uipath:input name="connectorKey" type="string" value="uipath-pdfmonkey-pdfmonkey" />
+            <uipath:input name="connection" type="string" value="=bindings.bGYe3kNus" />
+            <uipath:input name="folderKey" type="string" value="=bindings.brFxVbebA" />
+            <uipath:input name="resourceKey" type="string" value="33881aee-7ba0-485d-9664-2546aeda6e2f" />
+            <uipath:input name="operation" type="string" value="CreateDocument" />
+            <uipath:input name="objectName" type="string" value="documents" />
+            <uipath:input name="method" type="string" value="POST" />
+            <uipath:input name="path" type="string" value="/documents" />
+            <uipath:input name="metadata" type="json"><![CDATA[{"designTimeMetadata":{"connectorLogoUrl":"https://cloud.uipath.com/elements_/scaleunit_/58cb4f17-4581-4130-a2ae-52448b37dc03/v3/element/elements/uipath-pdfmonkey-pdfmonkey/image","activityDesignerVersion":"2","activityDisplayName":"Generate Document","activityDescription":"Generate a PDF document using PDFMonkey.","activityHelpUrlTemplate":"https://docs.uipath.com/{0}/activities/other/latest/integration-service/uipath-pdfmonkey-pdfmonkey-Generate-Document","activityConfig":{"isCurated":true,"operation":null},"designTimeLookups":{"document_template_id":[{"id":"acd9f4ac-ef3e-40cd-98ec-d287292e8913","title":"Meridian_Bank_Regulatory_Decision_Letter_v1 - acd9f4ac-ef3e-40cd-98ec-d287292e8913"}]}},"metadataState":{"jsonSchema":{"$schema":"http://json-schema.org/draft-07/schema#","type":"object","properties":{"created_at":{"title":"Created at","type":"string","description":"Document created at time"},"filename":{"title":"Filename","type":"string","description":"Filename of the document"},"updated_at":{"title":"Updated at","type":"string","description":"Updated at time of the document"},"public_share_link":{"title":"Public share link","type":"string","description":"Publicly shareable link of the document"},"payload":{"title":"Data","type":"string","description":"The JSON object containing the key-value pair of data to be added to PDF"},"meta":{"title":"Metadata","type":"string","description":"The JSON object containing the key-value pair of metadata to be added to PDF"},"preview_url":{"title":"Preview url","type":"string","description":"Preview url of the document"},"download_url":{"title":"Download url","type":"string","description":"Download url of the document"},"checksum":{"title":"Checksum","type":"string","description":"Checksum of the document"},"failure_cause":{"title":"Failure cause","type":"string","description":"Failure cause of the document generation"},"id":{"title":"Document ID","type":"string","description":"ID of the document"},"app_id":{"title":"App ID","type":"string","description":"The workspace ID of the document"},"document_template_id":{"title":"Template","type":"string","description":"The ID of the source template"},"status":{"title":"Status","type":"string","description":"Status of the document"}},"definitions":{}}},"telemetryData":{"operationType":"Create","objectName":"documents","objectDisplayName":"Document","connectorKey":"uipath-pdfmonkey-pdfmonkey","connectorName":"PDFMonkey","primaryKeyName":"id"},"inputMetadata":{},"errorState":{"hasError":false},"bindings":[]}]]></uipath:input>
+          </uipath:context>
+          <uipath:input name="body" type="json" target="body"><![CDATA[{"document_template_id":"acd9f4ac-ef3e-40cd-98ec-d287292e8913","_filename":"=js:\"RDD_Letter_\" + vars.decisionEvent.reference_number + \".pdf\"","payload":"=js:({\n    reference_number: vars.decisionEvent.reference_number,\n    date: new Date().toLocaleDateString(\"en-US\", { year: \"numeric\", month: \"long\", day: \"numeric\" }),\n    customer_name: vars.decisionEvent.event_type === \"loan_application\"\n      ? vars.decisionEvent.intake_output.applicant_name\n      : vars.decisionEvent.intake_output.member_name,\n    letter_title: vars.decisionEvent.communication_output.pdf_letter.title,\n    letter_opening: vars.decisionEvent.communication_output.pdf_letter.opening,\n    letter_reasons: vars.decisionEvent.communication_output.pdf_letter.reasons,\n    letter_next_steps: vars.decisionEvent.communication_output.pdf_letter.next_steps,\n    letter_disclosures_notice: vars.decisionEvent.communication_output.pdf_letter.disclosures_notice\n  })"}]]></uipath:input>
+          <uipath:output name="id" type="string" source="=response.id" var="id" />
+          <uipath:output name="response" type="jsonSchema" source="=response" var="response2" />
+          <uipath:output name="Error" type="jsonSchema" source="=Error" var="error16" />
+          <uipath:output name="pdfMonkeyDownloadUrl" type="string" source="=vars.response2.download_url" var="pdfMonkeyDownloadUrl" custom="true" target="" />
+          <uipath:output name="pdfMonkeyDocumentId" type="string" source="=vars.response2.id" var="pdfMonkeyDocumentId" custom="true" target="" />
+          <uipath:output name="pdfMonkeyStatus" type="string" source="=vars.response2.status" var="pdfMonkeyStatus" custom="true" target="" />
+        </uipath:activity>
+      </bpmn:extensionElements>
+      <bpmn:incoming>edge_uEUlD7</bpmn:incoming>
+      <bpmn:outgoing>edge_TNvFia</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:serviceTask id="Activity_xtTjw5" name="Save PDF to Audit Bucket">
+      <bpmn:extensionElements>
+        <uipath:activity version="v1">
+          <uipath:type value="Orchestrator.StartJob" version="v2" />
+          <uipath:context>
+            <uipath:input name="name" type="string" value="=bindings.b9zD84qJq" />
+            <uipath:input name="folderPath" type="string" value="=bindings.bxhEs13Q5" />
+            <uipath:input name="_label" type="string" value="UploadPDFtoBucket" />
+            <uipath:inputSchema type="jsonSchema"><![CDATA[{"$schema":"http://json-schema.org/draft-07/schema#","type":"object","properties":{"in_DocumentId":{"type":"string"},"in_Filename":{"type":"string"}},"required":[]}]]></uipath:inputSchema>
+          </uipath:context>
+          <uipath:input name="JobArguments" type="json" target="bodyField"><![CDATA[{"in_DocumentId":"=vars.pdfMonkeyDocumentId","in_Filename":"=js:vars.decisionEvent.reference_number + \".pdf\""}]]></uipath:input>
+          <uipath:output name="Error" type="jsonSchema" source="=Error" var="error17" />
+          <uipath:output name="out_BucketPath" type="string" source="=out_BucketPath" var="outBucketPath" />
+        </uipath:activity>
+      </bpmn:extensionElements>
+      <bpmn:incoming>edge_TNvFia</bpmn:incoming>
+      <bpmn:outgoing>edge_LD8NJ6</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:scriptTask id="Activity_vN1ybP" name="Update Communication Metadata" scriptFormat="JavaScript">
+      <bpmn:extensionElements>
+        <uipath:mapping version="v1">
+          <uipath:type value="BPMN.Variables" version="v1" />
+          <uipath:context>
+            <uipath:inputSchema type="jsonSchema"><![CDATA[{"$schema":"http://json-schema.org/draft-07/schema#","type":"object","properties":{"vars":{"type":"object"},"metadata":{"type":"object"}},"required":[]}]]></uipath:inputSchema>
+          </uipath:context>
+          <uipath:input name="args" type="json" target="bodyField"><![CDATA[{"vars":"=vars","metadata":"=metadata"}]]></uipath:input>
+          <uipath:output name="scriptResponse" type="jsonSchema" source="=result.response" var="scriptResponse10" />
+          <uipath:output name="Error" type="jsonSchema" source="=Error" var="error18" />
+          <uipath:output name="decisionEvent" type="jsonSchema" source="" var="decisionEvent" custom="true" target=""><![CDATA[=vars.scriptResponse10]]></uipath:output>
+        </uipath:mapping>
+        <uipath:scriptVersion value="v3" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>edge_LD8NJ6</bpmn:incoming>
+      <bpmn:outgoing>edge_GRmIlx</bpmn:outgoing>
+      <bpmn:script><![CDATA[const updatedCommunicationOutput = {
+    ...vars.decisionEvent.communication_output,
+    bucket_path: vars.out_BucketPath,
+    pdf_filename: vars.decisionEvent.reference_number + ".pdf",
+    pdf_document_id: vars.pdfMonkeyDocumentId,
+    pdf_archived_at: new Date().toISOString()
+  };
+
+  return {
+    ...vars.decisionEvent,
+    communication_output: updatedCommunicationOutput
+  };]]></bpmn:script>
+    </bpmn:scriptTask>
+    <bpmn:sendTask id="Activity_dl28ss" name="Send Customer Email with PDF">
+      <bpmn:extensionElements>
+        <uipath:activity version="v1">
+          <uipath:type value="Intsvc.ActivityExecution" version="v1" />
+          <uipath:context>
+            <uipath:input name="connectorKey" type="string" value="uipath-google-gmail" />
+            <uipath:input name="connection" type="string" value="=bindings.byTStJtom" />
+            <uipath:input name="folderKey" type="string" value="=bindings.bGvWuvqzJ" />
+            <uipath:input name="resourceKey" type="string" value="0e72d4c2-f94a-4fc6-9612-98b39a07a3ec" />
+            <uipath:input name="operation" type="string" value="SendEmail" />
+            <uipath:input name="objectName" type="string" value="SendEmail" />
+            <uipath:input name="method" type="string" value="POST" />
+            <uipath:input name="path" type="string" value="/SendEmail" />
+            <uipath:input name="metadata" type="json"><![CDATA[{"designTimeMetadata":{"connectorLogoUrl":"https://cloud.uipath.com/elements_/scaleunit_/58cb4f17-4581-4130-a2ae-52448b37dc03/v3/element/elements/uipath-google-gmail/image","activityDesignerVersion":"2","activityDisplayName":"Send Email","activityDescription":"Sends an email message","activityHelpUrlTemplate":"https://docs.uipath.com/{0}/activities/other/latest/integration-service/uipath-google-gmail-Send-Email","activityConfig":{"isCurated":true,"operation":null}},"metadataState":{"jsonSchema":{"$schema":"http://json-schema.org/draft-07/schema#","type":"object","properties":{"Importance":{"title":"Importance","type":"string","description":"The importance of the mail"},"id":{"title":"Id","type":"string"},"labelIds[*]":{"title":"Label ids","type":"string"},"threadId":{"title":"Thread ID","type":"string"}},"definitions":{}}},"telemetryData":{"operationType":"Create","objectName":"SendEmail","objectDisplayName":"Email","connectorKey":"uipath-google-gmail","connectorName":"Gmail","primaryKeyName":"id"},"inputMetadata":{"type":"multipart","multipart":{"bodyFieldName":"body"}},"errorState":{"hasError":false},"bindings":[]}]]></uipath:input>
+          </uipath:context>
+          <uipath:input name="SaveAsDraft" type="string" value="false" target="query" />
+          <uipath:input name="file" type="file" value="=vars.outPdfFile" target="file" />
+          <uipath:input name="body" type="json" target="body"><![CDATA[{"Importance":"normal","Subject":"=js:vars.decisionEvent.communication_output.email.subject","Body":"=js:vars.decisionEvent.communication_output.email.body","To":"=js:vars.decisionEvent.intake_output.email || \"c.williams101198@gmail.com\""}]]></uipath:input>
+          <uipath:output name="id" type="string" source="=response.id" var="id2" />
+          <uipath:output name="response" type="jsonSchema" source="=response" var="response3" />
+          <uipath:output name="Error" type="jsonSchema" source="=Error" var="error19" />
+        </uipath:activity>
+      </bpmn:extensionElements>
+      <bpmn:incoming>edge_T17MkA</bpmn:incoming>
+      <bpmn:outgoing>edge_mKyQnk</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:serviceTask id="Activity_faP66e" name="Retrieve File From Bucket">
+      <bpmn:extensionElements>
+        <uipath:activity version="v1">
+          <uipath:type value="Orchestrator.StartJob" version="v2" />
+          <uipath:context>
+            <uipath:input name="name" type="string" value="=bindings.bqOBBK9wo" />
+            <uipath:input name="folderPath" type="string" value="=bindings.bjTcvUxqf" />
+            <uipath:input name="_label" type="string" value="DownloadPDFfromBucket" />
+            <uipath:inputSchema type="jsonSchema"><![CDATA[{"$schema":"http://json-schema.org/draft-07/schema#","type":"object","properties":{"in_BucketName":{"type":"string"},"in_BucketPath":{"type":"string"}},"required":[]}]]></uipath:inputSchema>
+          </uipath:context>
+          <uipath:input name="JobArguments" type="json" target="bodyField"><![CDATA[{"in_BucketName":"rdd-decision-letters-archive","in_BucketPath":"=vars.outBucketPath"}]]></uipath:input>
+          <uipath:output name="Error" type="jsonSchema" source="=Error" var="error20" />
+          <uipath:output name="out_PdfFile" type="file" source="=out_PdfFile" var="outPdfFile" target="=orchestrator.JobAttachments" />
+        </uipath:activity>
+      </bpmn:extensionElements>
+      <bpmn:incoming>edge_GRmIlx</bpmn:incoming>
+      <bpmn:outgoing>edge_T17MkA</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sendTask id="Activity_yr6Lq9" name="Mark Email Processed">
+      <bpmn:extensionElements>
+        <uipath:activity version="v1">
+          <uipath:type value="Intsvc.ActivityExecution" version="v1" />
+          <uipath:context>
+            <uipath:input name="connectorKey" type="string" value="uipath-google-gmail" />
+            <uipath:input name="connection" type="string" value="=bindings.byTStJtom" />
+            <uipath:input name="folderKey" type="string" value="=bindings.bGvWuvqzJ" />
+            <uipath:input name="resourceKey" type="string" value="0e72d4c2-f94a-4fc6-9612-98b39a07a3ec" />
+            <uipath:input name="operation" type="string" value="MoveEmail" />
+            <uipath:input name="objectName" type="string" value="MoveEmail" />
+            <uipath:input name="method" type="string" value="POST" />
+            <uipath:input name="path" type="string" value="/MoveEmail" />
+            <uipath:input name="metadata" type="json"><![CDATA[{"designTimeMetadata":{"connectorLogoUrl":"https://cloud.uipath.com/elements_/scaleunit_/58cb4f17-4581-4130-a2ae-52448b37dc03/v3/element/elements/uipath-google-gmail/image","activityDesignerVersion":"2","activityDisplayName":"Move Email","activityDescription":"Move an email in Gmail to a folder or label","activityHelpUrlTemplate":"https://docs.uipath.com/{0}/activities/other/latest/integration-service/uipath-google-gmail-Move-Email","activityConfig":{"isCurated":true,"operation":null},"designTimeLookups":{"addLabelId":[{"id":"Label_4285832833558101980","title":"RDD/Processed"}]}},"metadataState":{"jsonSchema":{"$schema":"http://json-schema.org/draft-07/schema#","type":"object","properties":{"threadId":{"title":"Email thread identifier","type":"string","description":"A unique identifier for the email thread."},"labelIds[*]":{"title":"Email label identifiers","type":"string","description":"A list of identifiers for labels associated with the email."},"id":{"title":"Email message identifier","type":"string","description":"A unique identifier for the specific email message."}},"definitions":{}}},"telemetryData":{"operationType":"Create","objectName":"MoveEmail","objectDisplayName":"Email","connectorKey":"uipath-google-gmail","connectorName":"Gmail","primaryKeyName":"id"},"inputMetadata":{},"errorState":{"hasError":false},"bindings":[]}]]></uipath:input>
+          </uipath:context>
+          <uipath:input name="id" type="string" value="=vars.response.ID" target="query" />
+          <uipath:input name="addLabelId" type="string" value="Label_4285832833558101980" target="query" />
+          <uipath:output name="id" type="string" source="=response.id" var="id3" />
+          <uipath:output name="response" type="jsonSchema" source="=response" var="response4" />
+          <uipath:output name="Error" type="jsonSchema" source="=Error" var="error21" />
+        </uipath:activity>
+      </bpmn:extensionElements>
+      <bpmn:incoming>edge_fbrvkz</bpmn:incoming>
+      <bpmn:outgoing>edge_7NGzQX</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:scriptTask id="Activity_H0u8CG" name="Set Auto Final Disposition" scriptFormat="JavaScript">
+      <bpmn:extensionElements>
+        <uipath:mapping version="v1">
+          <uipath:type value="BPMN.Variables" version="v1" />
+          <uipath:context>
+            <uipath:inputSchema type="jsonSchema"><![CDATA[{"$schema":"http://json-schema.org/draft-07/schema#","type":"object","properties":{"vars":{"type":"object"},"metadata":{"type":"object"}},"required":[]}]]></uipath:inputSchema>
+          </uipath:context>
+          <uipath:input name="args" type="json" target="bodyField"><![CDATA[{"vars":"=vars","metadata":"=metadata"}]]></uipath:input>
+          <uipath:output name="scriptResponse" type="jsonSchema" source="=result.response" var="scriptResponse11" />
+          <uipath:output name="Error" type="jsonSchema" source="=Error" var="error22" />
+          <uipath:output name="decisionEvent" type="jsonSchema" source="" var="decisionEvent" custom="true" target=""><![CDATA[=js:vars.scriptResponse11]]></uipath:output>
+        </uipath:mapping>
+        <uipath:scriptVersion value="v3" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>edge_bzGJtv</bpmn:incoming>
+      <bpmn:outgoing>edge_jBcOl7</bpmn:outgoing>
+      <bpmn:script><![CDATA[const dt = vars.decisionEvent.risk_output.decision_type;
+
+  let finalDisposition = "unknown";
+  if (dt === "APPROVE" || dt === "auto_approve") {
+    finalDisposition = "approved";
+  } else if (dt === "DENY" || dt === "auto_decline") {
+    finalDisposition = "declined";
+  }
+
+  return {
+    ...vars.decisionEvent,
+    final_disposition: finalDisposition
+  };]]></bpmn:script>
+    </bpmn:scriptTask>
+    <bpmn:sequenceFlow id="edge_zQP7pc" name="Loan Branch" sourceRef="Gateway_kgYyqQ" targetRef="Activity_caXvIn">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=js:vars.decisionEvent.event_type === "loan_application"</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="edge_gSeLYX" sourceRef="Activity_caXvIn" targetRef="Activity_tKIAf0" />
+    <bpmn:sequenceFlow id="edge_l5iZks" name="Claim Branch" sourceRef="Gateway_kgYyqQ" targetRef="Activity_AJs7v2">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=js:vars.decisionEvent.event_type === "insurance_claim"</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="edge_uoTGyw" sourceRef="Activity_AJs7v2" targetRef="Activity_pD89wQ" />
+    <bpmn:sequenceFlow id="edge_gEPN02" name="Unknown Branch" sourceRef="Gateway_kgYyqQ" targetRef="Event_Il1AZP">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=js:vars.decisionEvent.event_type === "unknown"</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="edge_w9ZYS4" sourceRef="Event_start" targetRef="Activity_J9nSWo" />
+    <bpmn:sequenceFlow id="edge_lNZKW8" sourceRef="Activity_yyh2BX" targetRef="Activity_7JJNyD" />
+    <bpmn:sequenceFlow id="edge_8VpIWr" sourceRef="Activity_7JJNyD" targetRef="Gateway_kgYyqQ" />
+    <bpmn:sequenceFlow id="edge_JALo3v" sourceRef="Activity_pD89wQ" targetRef="Activity_iQuyyS" />
+    <bpmn:sequenceFlow id="edge_JqiPvv" name="Needs Review" sourceRef="Gateway_9GxYH8" targetRef="Activity_nB46VC">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=js:vars.decisionEvent.risk_output.decision_type === "manual_review" || vars.decisionEvent.risk_output.decision_type === "escalate_senior_review" || vars.decisionEvent.risk_output.decision_type === "REVIEW" || vars.decisionEvent.risk_output.escalation_required === true</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="edge_i048NJ" sourceRef="Activity_nB46VC" targetRef="Activity_v5hZAa" />
+    <bpmn:sequenceFlow id="edge_JoY3Io" sourceRef="Activity_v5hZAa" targetRef="Activity_3XBXMK" />
+    <bpmn:sequenceFlow id="edge_HX5YRI" sourceRef="Activity_3XBXMK" targetRef="Activity_uXriUo" />
+    <bpmn:sequenceFlow id="edge_vcUJrx" sourceRef="Activity_uXriUo" targetRef="Activity_3sVvSL" />
+    <bpmn:sequenceFlow id="edge_6PrORn" sourceRef="Activity_3sVvSL" targetRef="Activity_mVhRWo" />
+    <bpmn:sequenceFlow id="edge_uEUlD7" sourceRef="Activity_mVhRWo" targetRef="Activity_S5pjul" />
+    <bpmn:sequenceFlow id="edge_TNvFia" sourceRef="Activity_S5pjul" targetRef="Activity_xtTjw5" />
+    <bpmn:sequenceFlow id="edge_LD8NJ6" sourceRef="Activity_xtTjw5" targetRef="Activity_vN1ybP" />
+    <bpmn:sequenceFlow id="edge_mKyQnk" sourceRef="Activity_dl28ss" targetRef="Event_MWEP0R" />
+    <bpmn:sequenceFlow id="edge_GRmIlx" sourceRef="Activity_vN1ybP" targetRef="Activity_faP66e" />
+    <bpmn:sequenceFlow id="edge_T17MkA" sourceRef="Activity_faP66e" targetRef="Activity_dl28ss" />
+    <bpmn:sequenceFlow id="edge_7NGzQX" sourceRef="Activity_yr6Lq9" targetRef="Activity_yyh2BX" />
+    <bpmn:sequenceFlow id="edge_fbrvkz" sourceRef="Activity_J9nSWo" targetRef="Activity_yr6Lq9" />
+    <bpmn:sequenceFlow id="edge_KgXUNm" sourceRef="Activity_tKIAf0" targetRef="Gateway_9GxYH8" />
+    <bpmn:sequenceFlow id="edge_xBty4h" sourceRef="Activity_iQuyyS" targetRef="Gateway_9GxYH8" />
+    <bpmn:sequenceFlow id="edge_bzGJtv" sourceRef="Gateway_9GxYH8" targetRef="Activity_H0u8CG" />
+    <bpmn:sequenceFlow id="edge_jBcOl7" sourceRef="Activity_H0u8CG" targetRef="Activity_3XBXMK" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1">
+      <bpmndi:BPMNShape id="S_Event_start" bpmnElement="Event_start">
+        <dc:Bounds x="252" y="417.5" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="252" y="458.5" width="36" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_Event_MWEP0R" bpmnElement="Event_MWEP0R">
+        <dc:Bounds x="3536" y="416.66666666666663" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="3536" y="457.66666666666663" width="36" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_Activity_yyh2BX" bpmnElement="Activity_yyh2BX">
+        <dc:Bounds x="638" y="395.5" width="100" height="80" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="638" y="480.5" width="100" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_Gateway_kgYyqQ" bpmnElement="Gateway_kgYyqQ">
+        <dc:Bounds x="938" y="410.5" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="938" y="465.5" width="50" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_Activity_caXvIn" bpmnElement="Activity_caXvIn">
+        <dc:Bounds x="1194" y="408" width="100" height="80" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1194" y="493" width="100" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_Activity_tKIAf0" bpmnElement="Activity_tKIAf0">
+        <dc:Bounds x="1494" y="408" width="100" height="80" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1494" y="493" width="100" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_Activity_AJs7v2" bpmnElement="Activity_AJs7v2">
+        <dc:Bounds x="1194" y="278" width="100" height="80" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1194" y="363" width="100" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_Activity_pD89wQ" bpmnElement="Activity_pD89wQ">
+        <dc:Bounds x="1344" y="278" width="100" height="80" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1344" y="363" width="100" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_Event_Il1AZP" bpmnElement="Event_Il1AZP">
+        <dc:Bounds x="1194" y="192" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1194" y="233" width="36" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_Activity_3XBXMK" bpmnElement="Activity_3XBXMK">
+        <dc:Bounds x="2186" y="394.66666666666663" width="100" height="80" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2186" y="479.66666666666663" width="100" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_Activity_3sVvSL" bpmnElement="Activity_3sVvSL">
+        <dc:Bounds x="2486" y="394.66666666666663" width="100" height="80" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2486" y="479.66666666666663" width="100" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_Activity_J9nSWo" bpmnElement="Activity_J9nSWo">
+        <dc:Bounds x="338" y="395.5" width="100" height="80" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="338" y="480.5" width="100" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_Activity_7JJNyD" bpmnElement="Activity_7JJNyD">
+        <dc:Bounds x="788" y="395.5" width="100" height="80" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="788" y="480.5" width="100" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_Activity_iQuyyS" bpmnElement="Activity_iQuyyS">
+        <dc:Bounds x="1494" y="278" width="100" height="80" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1494" y="363" width="100" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_Gateway_9GxYH8" bpmnElement="Gateway_9GxYH8">
+        <dc:Bounds x="1644" y="414.66666666666663" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1644" y="469.66666666666663" width="50" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_Activity_nB46VC" bpmnElement="Activity_nB46VC">
+        <dc:Bounds x="1886" y="408" width="100" height="80" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1886" y="493" width="100" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_Activity_v5hZAa" bpmnElement="Activity_v5hZAa">
+        <dc:Bounds x="2036" y="408" width="100" height="80" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2036" y="493" width="100" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_Activity_uXriUo" bpmnElement="Activity_uXriUo">
+        <dc:Bounds x="2336" y="394.66666666666663" width="100" height="80" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2336" y="479.66666666666663" width="100" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_Activity_mVhRWo" bpmnElement="Activity_mVhRWo">
+        <dc:Bounds x="2636" y="394.66666666666663" width="100" height="80" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2636" y="479.66666666666663" width="100" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_Activity_S5pjul" bpmnElement="Activity_S5pjul">
+        <dc:Bounds x="2786" y="394.66666666666663" width="100" height="80" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2786" y="479.66666666666663" width="100" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_Activity_xtTjw5" bpmnElement="Activity_xtTjw5">
+        <dc:Bounds x="2936" y="394.66666666666663" width="100" height="80" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2936" y="479.66666666666663" width="100" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_Activity_vN1ybP" bpmnElement="Activity_vN1ybP">
+        <dc:Bounds x="3086" y="394.66666666666663" width="100" height="80" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="3086" y="479.66666666666663" width="100" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_Activity_dl28ss" bpmnElement="Activity_dl28ss">
+        <dc:Bounds x="3386" y="394.66666666666663" width="100" height="80" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="3386" y="479.66666666666663" width="100" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_Activity_faP66e" bpmnElement="Activity_faP66e">
+        <dc:Bounds x="3236" y="394.66666666666663" width="100" height="80" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="3236" y="479.66666666666663" width="100" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_Activity_yr6Lq9" bpmnElement="Activity_yr6Lq9">
+        <dc:Bounds x="488" y="395.5" width="100" height="80" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="488" y="480.5" width="100" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_Activity_H0u8CG" bpmnElement="Activity_H0u8CG">
+        <dc:Bounds x="1886" y="278" width="100" height="80" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1886" y="363" width="100" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="BPMNEdge_edge_zQP7pc" bpmnElement="edge_zQP7pc">
+        <di:waypoint x="988" y="435.5" />
+        <di:waypoint x="1091" y="435.5" />
+        <di:waypoint x="1091" y="448" />
+        <di:waypoint x="1194" y="448" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_edge_gSeLYX" bpmnElement="edge_gSeLYX">
+        <di:waypoint x="1294" y="448" />
+        <di:waypoint x="1494" y="448" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_edge_l5iZks" bpmnElement="edge_l5iZks">
+        <di:waypoint x="988" y="435.5" />
+        <di:waypoint x="1091" y="435.5" />
+        <di:waypoint x="1091" y="318" />
+        <di:waypoint x="1194" y="318" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_edge_uoTGyw" bpmnElement="edge_uoTGyw">
+        <di:waypoint x="1294" y="318" />
+        <di:waypoint x="1344" y="318" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_edge_gEPN02" bpmnElement="edge_gEPN02">
+        <di:waypoint x="988" y="435.5" />
+        <di:waypoint x="1091" y="435.5" />
+        <di:waypoint x="1091" y="210" />
+        <di:waypoint x="1194" y="210" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_edge_w9ZYS4" bpmnElement="edge_w9ZYS4">
+        <di:waypoint x="288" y="435.5" />
+        <di:waypoint x="338" y="435.5" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_edge_lNZKW8" bpmnElement="edge_lNZKW8">
+        <di:waypoint x="738" y="435.5" />
+        <di:waypoint x="788" y="435.5" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_edge_8VpIWr" bpmnElement="edge_8VpIWr">
+        <di:waypoint x="888" y="435.5" />
+        <di:waypoint x="938" y="435.5" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_edge_JALo3v" bpmnElement="edge_JALo3v">
+        <di:waypoint x="1444" y="318" />
+        <di:waypoint x="1494" y="318" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_edge_JqiPvv" bpmnElement="edge_JqiPvv">
+        <di:waypoint x="1694" y="439.66666666666663" />
+        <di:waypoint x="1790" y="439.66666666666663" />
+        <di:waypoint x="1790" y="448" />
+        <di:waypoint x="1886" y="448" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_edge_i048NJ" bpmnElement="edge_i048NJ">
+        <di:waypoint x="1986" y="448" />
+        <di:waypoint x="2036" y="448" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_edge_JoY3Io" bpmnElement="edge_JoY3Io">
+        <di:waypoint x="2136" y="448" />
+        <di:waypoint x="2161" y="448" />
+        <di:waypoint x="2161" y="434.66666666666663" />
+        <di:waypoint x="2186" y="434.66666666666663" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_edge_HX5YRI" bpmnElement="edge_HX5YRI">
+        <di:waypoint x="2286" y="434.66666666666663" />
+        <di:waypoint x="2336" y="434.66666666666663" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_edge_vcUJrx" bpmnElement="edge_vcUJrx">
+        <di:waypoint x="2436" y="434.66666666666663" />
+        <di:waypoint x="2486" y="434.66666666666663" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_edge_6PrORn" bpmnElement="edge_6PrORn">
+        <di:waypoint x="2586" y="434.66666666666663" />
+        <di:waypoint x="2636" y="434.66666666666663" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_edge_uEUlD7" bpmnElement="edge_uEUlD7">
+        <di:waypoint x="2736" y="434.66666666666663" />
+        <di:waypoint x="2786" y="434.66666666666663" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_edge_TNvFia" bpmnElement="edge_TNvFia">
+        <di:waypoint x="2886" y="434.66666666666663" />
+        <di:waypoint x="2936" y="434.66666666666663" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_edge_LD8NJ6" bpmnElement="edge_LD8NJ6">
+        <di:waypoint x="3036" y="434.66666666666663" />
+        <di:waypoint x="3086" y="434.66666666666663" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_edge_mKyQnk" bpmnElement="edge_mKyQnk">
+        <di:waypoint x="3486" y="434.66666666666663" />
+        <di:waypoint x="3536" y="434.66666666666663" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_edge_GRmIlx" bpmnElement="edge_GRmIlx">
+        <di:waypoint x="3186" y="434.66666666666663" />
+        <di:waypoint x="3236" y="434.66666666666663" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_edge_T17MkA" bpmnElement="edge_T17MkA">
+        <di:waypoint x="3336" y="434.66666666666663" />
+        <di:waypoint x="3386" y="434.66666666666663" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_edge_7NGzQX" bpmnElement="edge_7NGzQX">
+        <di:waypoint x="588" y="435.5" />
+        <di:waypoint x="638" y="435.5" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_edge_fbrvkz" bpmnElement="edge_fbrvkz">
+        <di:waypoint x="438" y="435.5" />
+        <di:waypoint x="488" y="435.5" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_edge_KgXUNm" bpmnElement="edge_KgXUNm">
+        <di:waypoint x="1594" y="448" />
+        <di:waypoint x="1619" y="448" />
+        <di:waypoint x="1619" y="439.66666666666663" />
+        <di:waypoint x="1644" y="439.66666666666663" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_edge_xBty4h" bpmnElement="edge_xBty4h">
+        <di:waypoint x="1594" y="318" />
+        <di:waypoint x="1619" y="318" />
+        <di:waypoint x="1619" y="439.66666666666663" />
+        <di:waypoint x="1644" y="439.66666666666663" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_edge_bzGJtv" bpmnElement="edge_bzGJtv">
+        <di:waypoint x="1694" y="439.66666666666663" />
+        <di:waypoint x="1790" y="439.66666666666663" />
+        <di:waypoint x="1790" y="318" />
+        <di:waypoint x="1886" y="318" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_edge_jBcOl7" bpmnElement="edge_jBcOl7">
+        <di:waypoint x="1986" y="318" />
+        <di:waypoint x="2086" y="318" />
+        <di:waypoint x="2086" y="434.66666666666663" />
+        <di:waypoint x="2186" y="434.66666666666663" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

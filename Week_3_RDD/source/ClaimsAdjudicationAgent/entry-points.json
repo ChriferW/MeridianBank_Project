@@ -1,0 +1,112 @@
+{
+  "$schema": "https://cloud.uipath.com/draft/2024-12/entry-point",
+  "$id": "entry-points.json",
+  "entryPoints": [
+    {
+      "filePath": "/content/agent.json",
+      "type": "agent",
+      "uniqueId": "417a7a3b-5f1a-4f7e-8d7b-2409329fc567",
+      "input": {
+        "type": "object",
+        "required": [
+          "member_id",
+          "policy_number",
+          "provider_name",
+          "claim_amount",
+          "claim_type",
+          "coverage_type",
+          "date_of_incident",
+          "claim_description",
+          "intake_status",
+          "data_quality_issues"
+        ],
+        "properties": {
+          "member_id": {
+            "type": "string"
+          },
+          "policy_number": {
+            "type": "string"
+          },
+          "provider_name": {
+            "type": "string"
+          },
+          "claim_amount": {
+            "type": "number"
+          },
+          "claim_type": {
+            "type": "string"
+          },
+          "coverage_type": {
+            "type": "string"
+          },
+          "date_of_incident": {
+            "type": "string"
+          },
+          "claim_description": {
+            "type": "string"
+          },
+          "intake_status": {
+            "type": "string"
+          },
+          "data_quality_issues": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "title": "Inputs"
+      },
+      "output": {
+        "type": "object",
+        "required": [
+          "disposition",
+          "escalation_required",
+          "reasoning",
+          "claim_assessments"
+        ],
+        "properties": {
+          "disposition": {
+            "type": "string"
+          },
+          "escalation_required": {
+            "type": "boolean"
+          },
+          "reasoning": {
+            "type": "string"
+          },
+          "claim_assessments": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "claim_type",
+                "coverage_type",
+                "medically_necessary",
+                "justification",
+                "coverage_status"
+              ],
+              "properties": {
+                "claim_type": {
+                  "type": "string"
+                },
+                "coverage_type": {
+                  "type": "string"
+                },
+                "medically_necessary": {
+                  "type": "string"
+                },
+                "justification": {
+                  "type": "string"
+                },
+                "coverage_status": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

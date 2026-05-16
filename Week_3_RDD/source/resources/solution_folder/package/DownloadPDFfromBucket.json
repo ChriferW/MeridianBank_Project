@@ -1,0 +1,26 @@
+{
+  "docVersion": "1.0.0",
+  "resource": {
+    "name": "DownloadPDFfromBucket",
+    "kind": "package",
+    "apiVersion": "orchestrator.uipath.com/v1",
+    "projectKey": "b7196231-a389-4763-8f44-62fadf601baa",
+    "isOverridable": true,
+    "dependencies": [],
+    "runtimeDependencies": [],
+    "files": [],
+    "folders": [
+      {
+        "fullyQualifiedName": "solution_folder"
+      }
+    ],
+    "spec": {
+      "fileName": null,
+      "fileReference": null,
+      "name": "DownloadPDFfromBucket",
+      "description": null
+    },
+    "locks": [],
+    "key": "b827d0e3-9120-4211-b7fe-79de496eeb92"
+  }
+}

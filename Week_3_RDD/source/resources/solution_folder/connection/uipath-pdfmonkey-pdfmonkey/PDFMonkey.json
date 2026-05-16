@@ -1,0 +1,29 @@
+{
+  "docVersion": "1.0.0",
+  "resource": {
+    "name": "PDFMonkey",
+    "kind": "connection",
+    "type": "uipath-pdfmonkey-pdfmonkey",
+    "apiVersion": "integrationservice.uipath.com/v1",
+    "isOverridable": true,
+    "dependencies": [],
+    "runtimeDependencies": [],
+    "files": [],
+    "folders": [
+      {
+        "fullyQualifiedName": "solution_folder"
+      }
+    ],
+    "spec": {
+      "connectorName": "PDFMonkey",
+      "name": "PDFMonkey",
+      "description": null,
+      "authenticationType": "AuthenticateAfterDeployment",
+      "connectorVersion": "1.1.5",
+      "connectorKey": "uipath-pdfmonkey-pdfmonkey",
+      "pollingInterval": 5
+    },
+    "locks": [],
+    "key": "33881aee-7ba0-485d-9664-2546aeda6e2f"
+  }
+}

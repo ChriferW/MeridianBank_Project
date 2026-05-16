@@ -1,0 +1,148 @@
+{
+  "$schema": "https://cloud.uipath.com/draft/2024-12/entry-point",
+  "$id": "entry-points.json",
+  "entryPoints": [
+    {
+      "filePath": "/content/agent.json",
+      "type": "agent",
+      "uniqueId": "c244788e-fec5-4b3d-9a9b-e7e4f023807e",
+      "input": {
+        "type": "object",
+        "required": [
+          "event_type",
+          "branch_origin",
+          "final_disposition",
+          "risk_decision_type",
+          "risk_reasoning",
+          "intake_status",
+          "data_quality_issues",
+          "human_touchpoints",
+          "applicant_or_member_id",
+          "amount",
+          "sanctions_status",
+          "policy_version"
+        ],
+        "properties": {
+          "event_type": {
+            "type": "string"
+          },
+          "branch_origin": {
+            "type": "string"
+          },
+          "final_disposition": {
+            "type": "string"
+          },
+          "risk_decision_type": {
+            "type": "string"
+          },
+          "risk_reasoning": {
+            "type": "string"
+          },
+          "intake_status": {
+            "type": "string"
+          },
+          "data_quality_issues": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "human_touchpoints": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "reviewer_action": {
+                  "type": "string"
+                },
+                "reviewer_comment": {
+                  "type": "string"
+                },
+                "reviewed_at": {
+                  "type": "string"
+                },
+                "agent_decision_at_review": {
+                  "type": "string"
+                },
+                "was_override": {
+                  "type": "boolean"
+                },
+                "agent_abstained": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "applicant_or_member_id": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "number"
+          },
+          "sanctions_status": {
+            "type": "string"
+          },
+          "policy_version": {
+            "type": "string"
+          }
+        },
+        "title": "Inputs"
+      },
+      "output": {
+        "type": "object",
+        "required": [
+          "compliance_status",
+          "regulatory_frameworks_applied",
+          "compliance_findings",
+          "adverse_action_required",
+          "disclosures_required",
+          "compliance_reasoning"
+        ],
+        "properties": {
+          "compliance_status": {
+            "type": "string"
+          },
+          "regulatory_frameworks_applied": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "compliance_findings": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "framework": {
+                  "type": "string"
+                },
+                "requirement": {
+                  "type": "string"
+                },
+                "status": {
+                  "type": "string"
+                },
+                "notes": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "adverse_action_required": {
+            "type": "boolean"
+          },
+          "disclosures_required": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "compliance_reasoning": {
+            "type": "string"
+          }
+        },
+        "title": "Outputs"
+      }
+    }
+  ]
+}

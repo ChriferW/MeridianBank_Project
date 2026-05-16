@@ -1,0 +1,244 @@
+{
+  "version": "2.0",
+  "resources": [
+    {
+      "resource": "EventTrigger",
+      "key": "0e72d4c2-f94a-4fc6-9612-98b39a07a3ec",
+      "id": "EventTrigger0e72d4c2-f94a-4fc6-9612-98b39a07a3ec",
+      "value": {
+        "ConnectionId": {
+          "defaultValue": "0e72d4c2-f94a-4fc6-9612-98b39a07a3ec",
+          "isExpression": false
+        },
+        "EntryPointUniqueId": {
+          "defaultValue": "9120fa42-6cbb-4eed-a5c2-f9561d2fb0b0",
+          "isExpression": false
+        }
+      },
+      "metadata": {
+        "UseConnectionService": "true",
+        "Connector": "uipath-google-gmail",
+        "ActivityName": "Email Received",
+        "BindingsVersion": "2.2",
+        "ObjectName": "Message",
+        "Operation": "EMAIL_RECEIVED",
+        "FilterExpression": "(ParentFolders[?ID == 'INBOX']) && ((starts_with(Subject, '[REGDOC]')))"
+      }
+    },
+    {
+      "resource": "Property",
+      "key": "EMAIL_RECEIVED",
+      "value": {
+        "ParentFolders[*].ID": {
+          "defaultValue": "INBOX",
+          "isExpression": false
+        }
+      },
+      "metadata": {
+        "TriggerCreateParameters": "ParentFolders[*].ID",
+        "DebugQueryParameters": "ParentFolders[*].ID",
+        "BindingsVersion": "2.2",
+        "ObjectName": "Message",
+        "ActivityName": "Email Received",
+        "ParentResourceKey": "EventTrigger.0e72d4c2-f94a-4fc6-9612-98b39a07a3ec"
+      },
+      "id": "Property_Event_start"
+    },
+    {
+      "resource": "process",
+      "key": "DocumentClassificationAgent",
+      "id": "processDocumentClassificationAgent",
+      "value": {
+        "folderPath": {
+          "isExpression": false,
+          "displayName": "Folder path"
+        },
+        "name": {
+          "defaultValue": "DocumentClassificationAgent",
+          "isExpression": false,
+          "displayName": "Process name"
+        }
+      },
+      "metadata": {
+        "ActivityName": "Document Classification Agent",
+        "BindingsVersion": "2.2",
+        "DisplayLabel": "name",
+        "SolutionsSupport": "true",
+        "subType": "Agent"
+      }
+    },
+    {
+      "resource": "Connection",
+      "key": "0e72d4c2-f94a-4fc6-9612-98b39a07a3ec",
+      "id": "Connection0e72d4c2-f94a-4fc6-9612-98b39a07a3ec",
+      "value": {
+        "ConnectionId": {
+          "defaultValue": "0e72d4c2-f94a-4fc6-9612-98b39a07a3ec",
+          "isExpression": false,
+          "displayName": "uipath-google-gmail connection"
+        }
+      },
+      "metadata": {
+        "ActivityName": "Email Received",
+        "BindingsVersion": "2.2",
+        "DisplayLabel": "uipath-google-gmail connection",
+        "UseConnectionService": "true",
+        "Connector": "uipath-google-gmail"
+      }
+    },
+    {
+      "resource": "process",
+      "key": "ClaimsAdjudicationAgent",
+      "id": "processClaimsAdjudicationAgent",
+      "value": {
+        "folderPath": {
+          "isExpression": false,
+          "displayName": "Folder path"
+        },
+        "name": {
+          "defaultValue": "ClaimsAdjudicationAgent",
+          "isExpression": false,
+          "displayName": "Process name"
+        }
+      },
+      "metadata": {
+        "ActivityName": "Claims Adjudication Agent",
+        "BindingsVersion": "2.2",
+        "DisplayLabel": "name",
+        "SolutionsSupport": "true",
+        "subType": "Agent"
+      }
+    },
+    {
+      "resource": "app",
+      "key": "RDDApprovalApp",
+      "id": "appRDDApprovalApp",
+      "value": {
+        "folderPath": {
+          "isExpression": false,
+          "displayName": "Folder path"
+        },
+        "name": {
+          "defaultValue": "RDDApprovalApp",
+          "isExpression": false,
+          "displayName": "App name"
+        }
+      },
+      "metadata": {
+        "ActivityName": "Human Review",
+        "BindingsVersion": "2.2",
+        "DisplayLabel": "name",
+        "SolutionsSupport": "true"
+      }
+    },
+    {
+      "resource": "process",
+      "key": "RegulatoryComplianceAgent",
+      "id": "processRegulatoryComplianceAgent",
+      "value": {
+        "folderPath": {
+          "isExpression": false,
+          "displayName": "Folder path"
+        },
+        "name": {
+          "defaultValue": "RegulatoryComplianceAgent",
+          "isExpression": false,
+          "displayName": "Process name"
+        }
+      },
+      "metadata": {
+        "ActivityName": "Regulatory Compliance Agent",
+        "BindingsVersion": "2.2",
+        "DisplayLabel": "name",
+        "SolutionsSupport": "true",
+        "subType": "Agent"
+      }
+    },
+    {
+      "resource": "process",
+      "key": "CustomerDisclosureAgent",
+      "id": "processCustomerDisclosureAgent",
+      "value": {
+        "folderPath": {
+          "isExpression": false,
+          "displayName": "Folder path"
+        },
+        "name": {
+          "defaultValue": "CustomerDisclosureAgent",
+          "isExpression": false,
+          "displayName": "Process name"
+        }
+      },
+      "metadata": {
+        "ActivityName": "Customer Disclosure Agent",
+        "BindingsVersion": "2.2",
+        "DisplayLabel": "name",
+        "SolutionsSupport": "true",
+        "subType": "Agent"
+      }
+    },
+    {
+      "resource": "Connection",
+      "key": "33881aee-7ba0-485d-9664-2546aeda6e2f",
+      "id": "Connection33881aee-7ba0-485d-9664-2546aeda6e2f",
+      "value": {
+        "ConnectionId": {
+          "defaultValue": "33881aee-7ba0-485d-9664-2546aeda6e2f",
+          "isExpression": false,
+          "displayName": "uipath-pdfmonkey-pdfmonkey connection"
+        }
+      },
+      "metadata": {
+        "ActivityName": "Generate PDF Letter",
+        "BindingsVersion": "2.2",
+        "DisplayLabel": "uipath-pdfmonkey-pdfmonkey connection",
+        "UseConnectionService": "true",
+        "Connector": "uipath-pdfmonkey-pdfmonkey"
+      }
+    },
+    {
+      "resource": "process",
+      "key": "UploadPDFtoBucket",
+      "id": "processUploadPDFtoBucket",
+      "value": {
+        "folderPath": {
+          "isExpression": false,
+          "displayName": "Folder path"
+        },
+        "name": {
+          "defaultValue": "UploadPDFtoBucket",
+          "isExpression": false,
+          "displayName": "Process name"
+        }
+      },
+      "metadata": {
+        "ActivityName": "Save PDF to Audit Bucket",
+        "BindingsVersion": "2.2",
+        "DisplayLabel": "name",
+        "SolutionsSupport": "true"
+      }
+    },
+    {
+      "resource": "process",
+      "key": "DownloadPDFfromBucket",
+      "id": "processDownloadPDFfromBucket",
+      "value": {
+        "folderPath": {
+          "isExpression": false,
+          "displayName": "Folder path"
+        },
+        "name": {
+          "defaultValue": "DownloadPDFfromBucket",
+          "isExpression": false,
+          "displayName": "Process name"
+        }
+      },
+      "metadata": {
+        "ActivityName": "Retrieve File From Bucket",
+        "BindingsVersion": "2.2",
+        "DisplayLabel": "name",
+        "SolutionsSupport": "true"
+      }
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "docVersion": "1.0.0",
+  "resource": {
+    "name": "DocumentClassificationAgent",
+    "kind": "package",
+    "apiVersion": "orchestrator.uipath.com/v1",
+    "projectKey": "83bd0bd5-e758-4e6d-8882-e046534ef2b9",
+    "isOverridable": true,
+    "dependencies": [],
+    "runtimeDependencies": [],
+    "files": [],
+    "folders": [
+      {
+        "fullyQualifiedName": "solution_folder"
+      }
+    ],
+    "spec": {
+      "fileName": null,
+      "fileReference": null,
+      "name": "DocumentClassificationAgent",
+      "description": null
+    },
+    "locks": [],
+    "key": "370eccc8-0e39-46c0-9efe-100026520605"
+  }
+}

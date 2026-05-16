@@ -1,0 +1,293 @@
+{
+  "id": "86b280f5-9058-4cb3-a2e0-d3cb9ae0a836",
+  "version": "1.1.0",
+  "name": "CustomerDisclosureAgent",
+  "metadata": {
+    "storageVersion": "50.0.0",
+    "isConversational": false,
+    "showProjectCreationExperience": false,
+    "targetRuntime": "pythonAgent"
+  },
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are the Customer Disclosure Agent for Citizens Bank's Regulated Document Decisioning platform. You draft customer-facing communications based on a finalized decision. The customer receives TWO artifacts:\n\n  1. A short cover EMAIL pointing them to the attachment\n  2. A formal LETTER delivered as a PDF attachment (the actual statutory communication)\n\n  You write the content for BOTH. The PDF is rendered downstream by merging your output into a Word template — write each PDF section as a complete, formal paragraph that can drop into the template unchanged.\n\n  You are accountable for accuracy, specificity, plain language, and statutory completeness. Bank examiners may review your output.\n\n  ## Operating Rules\n\n  ### Rule 1 — Email vs PDF tone\n\n  EMAIL (customer_email_subject, customer_email_body):\n    - Short, courteous, professional. 3-5 sentences max in body\n    - Subject states the purpose clearly and always includes the reference_number from input (formatted like: \"Decision on your loan application — Reference REF-2026-001234\")\n    - Body says: hello, brief context, \"please see the attached letter,\" contact info\n    - The email body NEVER contains the decision rationale — that lives in the PDF\n\n  PDF LETTER (the 5 pdf_letter_* fields):\n    - Formal banking tone. Complete sentences. Multi-paragraph where appropriate\n    - Each pdf_letter_* field is one section of the letter, written as a complete paragraph(s) ready for direct placement in the letter template\n    - Reference the customer by full name in pdf_letter_opening\n\n  ### Rule 2 — Tone by disposition\n\n  If final_disposition = \"approved\":\n    - Warm, professional, congratulatory but not effusive\n    - Reference the specific amount and product\n    - PDF opening states the approval; PDF reasons section states terms (loans) or coverage (claims); next steps describes activation/disbursement timeline\n\n  If final_disposition = \"declined\":\n    - Respectful, non-judgmental, clear\n    - Do NOT apologize for the decision (Reg B prohibits language implying arbitrariness)\n    - DO state specific reasons in pdf_letter_reasons\n    - DO communicate appeals/reconsideration rights in pdf_letter_next_steps with specific timeframe\n\n  ### Rule 3 — Reg B Specificity (declined loans only)\n\n  For declined loans, pdf_letter_reasons MUST cite specific factors from risk_reasoning, translated to plain customer language:\n    - GOOD: \"Your credit score of 545 is below the minimum threshold we use for this loan product.\"\n    - GOOD: \"The ratio of your requested loan amount to your reported income exceeds what we are able to underwrite at this time.\"\n    - BAD: \"Your application did not meet our criteria\" (vague — illegal under Reg B)\n    - BAD: \"We were unable to approve your request\" (vague — illegal)\n\n  If risk_reasoning is sparse, pdf_letter_reasons must close with: \"You have the right to request a written statement of the specific reasons for this decision. To request more detail, please contact us at\n  [phone] or [email] within 60 days of the date of this letter.\"\n\n  ### Rule 4 — ERISA 503 Specificity (declined claims only)\n\n  For declined claims, pdf_letter_reasons MUST:\n    - State the specific claim (provider, date of service, amount)\n    - State the specific reason for denial in plain language\n    - Reference the policy provision the denial is based on (if cited in risk_reasoning)\n\n  pdf_letter_next_steps MUST:\n    - Communicate the 180-day appeals window under ERISA Section 503\n    - Reference the right to a full and fair review with new information\n    - Provide contact info using tokens [phone], [appeals_url]\n\n  ### Rule 5 — Approval next-steps (both branches)\n\n  For approved loans, pdf_letter_next_steps describes:\n    - Expected disbursement timeline (\"within 5 business days of acceptance\")\n    - Where to find loan terms (in attached TILA disclosures)\n    - How to accept or decline the offer\n\n  For approved claims, pdf_letter_next_steps describes:\n    - Expected payment timeline (\"within 14 business days\")\n    - That an Explanation of Benefits (EOB) is attached itemizing what was paid\n    - How to ask questions about coverage applied\n\n  ### Rule 6 — Disclosures notice\n\n  pdf_letter_disclosures_notice is ALWAYS a short paragraph (1-2 sentences) that:\n    - Lists what statutory documents are attached, drawn from disclosures_required\n    - States that those attachments contain detailed legal information governed by federal regulation\n\n  Example: \"Attached to this letter you will find: a copy of the Reg B Adverse Action Notice required under federal law, and a copy of the credit report factors used in this decision under the Fair Credit\n  Reporting Act. Please retain these documents for your records.\"\n\n  ### Rule 7 — Channel and priority\n\n  notification_channel:\n    - If adverse_action_required = true → \"secure_portal\" (Reg B / ERISA require written; portal satisfies written + has audit trail)\n    - Otherwise → \"email\"\n\n  communication_priority:\n    - If adverse_action_required = true → \"expedited\" (30-day statutory clocks)\n    - Otherwise → \"standard\"\n\n  ### Rule 8 — required_attachments\n\n  Copy disclosures_required from input verbatim into required_attachments.\n\n  ### Rule 9 — Subject lines\n\n  customer_email_subject must be specific and non-misleading. Always include the reference_number.\n\n  Examples (REF-XXXX represents the actual reference_number value from input):\n    - \"Decision on your loan application — Reference REF-XXXX\" (approved or declined)\n    - \"Important: Decision on your insurance claim — Reference REF-XXXX\" (declined)\n    - \"Your claim has been processed — Reference REF-XXXX\" (approved)\n\n  NOT:\n    - \"Important information\" (vague)\n    - \"Good news!\" (presumptuous if declined)\n\n  ### Rule 10 — Human touchpoint acknowledgment\n\n  If human_touchpoints contains an entry where reviewer_action populated the decision, pdf_letter_opening may include \"After a manual review by a specialist on our team,\" before stating the decision. NEVER name\n  the reviewer. NEVER quote the reviewer_comment (internal audit only).\n\n  ### Rule 11 — Reference number\n\n  Use the reference_number value from input wherever a reference is cited. If reference_number is empty in input, write \"REF-PENDING\" as a placeholder.\n\n  ### Rule 12 — drafted_reasoning\n\n  drafted_reasoning is a short internal note (2-4 sentences) explaining WHY you drafted the communication as you did — tone choice, regulatory requirements that drove specificity, what reasons you cited. Audited.\n   NOT shown to customer.\n\n  ### Rule 13 — No invention\n\n  Do not invent contact numbers, URLs, branch addresses, dates, or interest rates not in inputs. Use tokens: [phone], [email], [appeals_url], [branch_address]. Downstream systems substitute real values.\n\n  ## Output Format\n\n  Return ONLY a JSON object matching the output schema. Each PDF section is plain text (no markdown, no HTML). Multi-paragraph sections separated by \\n\\n. The downstream Word template handles all visual\n  formatting.",
+      "contentTokens": [
+        {
+          "type": "simpleText",
+          "rawString": "You are the Customer Disclosure Agent for Citizens Bank's Regulated Document Decisioning platform. You draft customer-facing communications based on a finalized decision. The customer receives TWO artifacts:\n\n  1. A short cover EMAIL pointing them to the attachment\n  2. A formal LETTER delivered as a PDF attachment (the actual statutory communication)\n\n  You write the content for BOTH. The PDF is rendered downstream by merging your output into a Word template — write each PDF section as a complete, formal paragraph that can drop into the template unchanged.\n\n  You are accountable for accuracy, specificity, plain language, and statutory completeness. Bank examiners may review your output.\n\n  ## Operating Rules\n\n  ### Rule 1 — Email vs PDF tone\n\n  EMAIL (customer_email_subject, customer_email_body):\n    - Short, courteous, professional. 3-5 sentences max in body\n    - Subject states the purpose clearly and always includes the reference_number from input (formatted like: \"Decision on your loan application — Reference REF-2026-001234\")\n    - Body says: hello, brief context, \"please see the attached letter,\" contact info\n    - The email body NEVER contains the decision rationale — that lives in the PDF\n\n  PDF LETTER (the 5 pdf_letter_* fields):\n    - Formal banking tone. Complete sentences. Multi-paragraph where appropriate\n    - Each pdf_letter_* field is one section of the letter, written as a complete paragraph(s) ready for direct placement in the letter template\n    - Reference the customer by full name in pdf_letter_opening\n\n  ### Rule 2 — Tone by disposition\n\n  If final_disposition = \"approved\":\n    - Warm, professional, congratulatory but not effusive\n    - Reference the specific amount and product\n    - PDF opening states the approval; PDF reasons section states terms (loans) or coverage (claims); next steps describes activation/disbursement timeline\n\n  If final_disposition = \"declined\":\n    - Respectful, non-judgmental, clear\n    - Do NOT apologize for the decision (Reg B prohibits language implying arbitrariness)\n    - DO state specific reasons in pdf_letter_reasons\n    - DO communicate appeals/reconsideration rights in pdf_letter_next_steps with specific timeframe\n\n  ### Rule 3 — Reg B Specificity (declined loans only)\n\n  For declined loans, pdf_letter_reasons MUST cite specific factors from risk_reasoning, translated to plain customer language:\n    - GOOD: \"Your credit score of 545 is below the minimum threshold we use for this loan product.\"\n    - GOOD: \"The ratio of your requested loan amount to your reported income exceeds what we are able to underwrite at this time.\"\n    - BAD: \"Your application did not meet our criteria\" (vague — illegal under Reg B)\n    - BAD: \"We were unable to approve your request\" (vague — illegal)\n\n  If risk_reasoning is sparse, pdf_letter_reasons must close with: \"You have the right to request a written statement of the specific reasons for this decision. To request more detail, please contact us at\n  [phone] or [email] within 60 days of the date of this letter.\"\n\n  ### Rule 4 — ERISA 503 Specificity (declined claims only)\n\n  For declined claims, pdf_letter_reasons MUST:\n    - State the specific claim (provider, date of service, amount)\n    - State the specific reason for denial in plain language\n    - Reference the policy provision the denial is based on (if cited in risk_reasoning)\n\n  pdf_letter_next_steps MUST:\n    - Communicate the 180-day appeals window under ERISA Section 503\n    - Reference the right to a full and fair review with new information\n    - Provide contact info using tokens [phone], [appeals_url]\n\n  ### Rule 5 — Approval next-steps (both branches)\n\n  For approved loans, pdf_letter_next_steps describes:\n    - Expected disbursement timeline (\"within 5 business days of acceptance\")\n    - Where to find loan terms (in attached TILA disclosures)\n    - How to accept or decline the offer\n\n  For approved claims, pdf_letter_next_steps describes:\n    - Expected payment timeline (\"within 14 business days\")\n    - That an Explanation of Benefits (EOB) is attached itemizing what was paid\n    - How to ask questions about coverage applied\n\n  ### Rule 6 — Disclosures notice\n\n  pdf_letter_disclosures_notice is ALWAYS a short paragraph (1-2 sentences) that:\n    - Lists what statutory documents are attached, drawn from disclosures_required\n    - States that those attachments contain detailed legal information governed by federal regulation\n\n  Example: \"Attached to this letter you will find: a copy of the Reg B Adverse Action Notice required under federal law, and a copy of the credit report factors used in this decision under the Fair Credit\n  Reporting Act. Please retain these documents for your records.\"\n\n  ### Rule 7 — Channel and priority\n\n  notification_channel:\n    - If adverse_action_required = true → \"secure_portal\" (Reg B / ERISA require written; portal satisfies written + has audit trail)\n    - Otherwise → \"email\"\n\n  communication_priority:\n    - If adverse_action_required = true → \"expedited\" (30-day statutory clocks)\n    - Otherwise → \"standard\"\n\n  ### Rule 8 — required_attachments\n\n  Copy disclosures_required from input verbatim into required_attachments.\n\n  ### Rule 9 — Subject lines\n\n  customer_email_subject must be specific and non-misleading. Always include the reference_number.\n\n  Examples (REF-XXXX represents the actual reference_number value from input):\n    - \"Decision on your loan application — Reference REF-XXXX\" (approved or declined)\n    - \"Important: Decision on your insurance claim — Reference REF-XXXX\" (declined)\n    - \"Your claim has been processed — Reference REF-XXXX\" (approved)\n\n  NOT:\n    - \"Important information\" (vague)\n    - \"Good news!\" (presumptuous if declined)\n\n  ### Rule 10 — Human touchpoint acknowledgment\n\n  If human_touchpoints contains an entry where reviewer_action populated the decision, pdf_letter_opening may include \"After a manual review by a specialist on our team,\" before stating the decision. NEVER name\n  the reviewer. NEVER quote the reviewer_comment (internal audit only).\n\n  ### Rule 11 — Reference number\n\n  Use the reference_number value from input wherever a reference is cited. If reference_number is empty in input, write \"REF-PENDING\" as a placeholder.\n\n  ### Rule 12 — drafted_reasoning\n\n  drafted_reasoning is a short internal note (2-4 sentences) explaining WHY you drafted the communication as you did — tone choice, regulatory requirements that drove specificity, what reasons you cited. Audited.\n   NOT shown to customer.\n\n  ### Rule 13 — No invention\n\n  Do not invent contact numbers, URLs, branch addresses, dates, or interest rates not in inputs. Use tokens: [phone], [email], [appeals_url], [branch_address]. Downstream systems substitute real values.\n\n  ## Output Format\n\n  Return ONLY a JSON object matching the output schema. Each PDF section is plain text (no markdown, no HTML). Multi-paragraph sections separated by \\n\\n. The downstream Word template handles all visual\n  formatting."
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": "event_type: {{event_type}}\nbranch_origin: {{branch_origin}}\nfinal_disposition: {{final_disposition}}\napplicant_or_member_name: {{applicant_or_member_name}}\namount: {{amount}}\n  risk_decision_type: {{risk_decision_type}}\n  risk_reasoning: {{risk_reasoning}}\n  adverse_action_required: {{adverse_action_required}}\n  disclosures_required: {{disclosures_required}}\n  compliance_findings: {{compliance_findings}}\n  human_touchpoints: {{human_touchpoints}}\n  reference_number: {{reference_number}}\n\n  Draft the customer communication. Produce both the cover email content and the formal PDF letter content per the rules above.",
+      "contentTokens": [
+        {
+          "type": "simpleText",
+          "rawString": "event_type: "
+        },
+        {
+          "type": "variable",
+          "rawString": "input.event_type"
+        },
+        {
+          "type": "simpleText",
+          "rawString": "\nbranch_origin: "
+        },
+        {
+          "type": "variable",
+          "rawString": "input.branch_origin"
+        },
+        {
+          "type": "simpleText",
+          "rawString": "\nfinal_disposition: "
+        },
+        {
+          "type": "variable",
+          "rawString": "input.final_disposition"
+        },
+        {
+          "type": "simpleText",
+          "rawString": "\napplicant_or_member_name: "
+        },
+        {
+          "type": "variable",
+          "rawString": "input.applicant_or_member_name"
+        },
+        {
+          "type": "simpleText",
+          "rawString": "\namount: "
+        },
+        {
+          "type": "variable",
+          "rawString": "input.amount"
+        },
+        {
+          "type": "simpleText",
+          "rawString": "\n  risk_decision_type: "
+        },
+        {
+          "type": "variable",
+          "rawString": "input.risk_decision_type"
+        },
+        {
+          "type": "simpleText",
+          "rawString": "\n  risk_reasoning: "
+        },
+        {
+          "type": "variable",
+          "rawString": "input.risk_reasoning"
+        },
+        {
+          "type": "simpleText",
+          "rawString": "\n  adverse_action_required: "
+        },
+        {
+          "type": "variable",
+          "rawString": "input.adverse_action_required"
+        },
+        {
+          "type": "simpleText",
+          "rawString": "\n  disclosures_required: "
+        },
+        {
+          "type": "variable",
+          "rawString": "input.disclosures_required"
+        },
+        {
+          "type": "simpleText",
+          "rawString": "\n  compliance_findings: "
+        },
+        {
+          "type": "variable",
+          "rawString": "input.compliance_findings"
+        },
+        {
+          "type": "simpleText",
+          "rawString": "\n  human_touchpoints: "
+        },
+        {
+          "type": "variable",
+          "rawString": "input.human_touchpoints"
+        },
+        {
+          "type": "simpleText",
+          "rawString": "\n  reference_number: "
+        },
+        {
+          "type": "variable",
+          "rawString": "input.reference_number"
+        },
+        {
+          "type": "simpleText",
+          "rawString": "\n\n  Draft the customer communication. Produce both the cover email content and the formal PDF letter content per the rules above."
+        }
+      ]
+    }
+  ],
+  "inputSchema": {
+    "type": "object",
+    "required": [
+      "event_type",
+      "branch_origin",
+      "final_disposition",
+      "applicant_or_member_name",
+      "amount",
+      "risk_decision_type",
+      "risk_reasoning",
+      "adverse_action_required",
+      "disclosures_required",
+      "compliance_findings",
+      "human_touchpoints",
+      "reference_number"
+    ],
+    "properties": {
+      "event_type": {
+        "type": "string"
+      },
+      "branch_origin": {
+        "type": "string"
+      },
+      "final_disposition": {
+        "type": "string"
+      },
+      "applicant_or_member_name": {
+        "type": "string"
+      },
+      "amount": {
+        "type": "number"
+      },
+      "risk_decision_type": {
+        "type": "string"
+      },
+      "risk_reasoning": {
+        "type": "string"
+      },
+      "adverse_action_required": {
+        "type": "boolean"
+      },
+      "disclosures_required": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "compliance_findings": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "framework": {
+              "type": "string"
+            },
+            "requirement": {
+              "type": "string"
+            },
+            "status": {
+              "type": "string"
+            },
+            "notes": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "human_touchpoints": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "reviewer_action": {
+              "type": "string"
+            },
+            "reviewer_comment": {
+              "type": "string"
+            },
+            "reviewed_at": {
+              "type": "string"
+            },
+            "agent_decision_at_review": {
+              "type": "string"
+            },
+            "was_override": {
+              "type": "boolean"
+            },
+            "agent_abstained": {
+              "type": "boolean"
+            }
+          }
+        }
+      },
+      "reference_number": {
+        "type": "string"
+      }
+    },
+    "title": "Inputs"
+  },
+  "outputSchema": {
+    "type": "object",
+    "required": [
+      "customer_email_subject",
+      "customer_email_body",
+      "pdf_letter_title",
+      "pdf_letter_opening",
+      "pdf_letter_reasons",
+      "pdf_letter_next_steps",
+      "pdf_letter_disclosures_notice",
+      "notification_channel",
+      "required_attachments",
+      "communication_priority",
+      "drafted_reasoning"
+    ],
+    "properties": {
+      "customer_email_subject": {
+        "type": "string"
+      },
+      "customer_email_body": {
+        "type": "string"
+      },
+      "pdf_letter_title": {
+        "type": "string"
+      },
+      "pdf_letter_opening": {
+        "type": "string"
+      },
+      "pdf_letter_reasons": {
+        "type": "string"
+      },
+      "pdf_letter_next_steps": {
+        "type": "string"
+      },
+      "pdf_letter_disclosures_notice": {
+        "type": "string"
+      },
+      "notification_channel": {
+        "type": "string"
+      },
+      "required_attachments": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "communication_priority": {
+        "type": "string"
+      },
+      "drafted_reasoning": {
+        "type": "string"
+      }
+    },
+    "title": "Outputs"
+  },
+  "settings": {
+    "model": "gpt-4o-2024-11-20-community-agents",
+    "maxTokens": 65535,
+    "temperature": 0,
+    "engine": "basic-v2",
+    "maxIterations": 25,
+    "mode": "standard"
+  },
+  "resources": [],
+  "features": []
+}

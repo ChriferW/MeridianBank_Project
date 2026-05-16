@@ -1,0 +1,6 @@
+{
+  "ProjectType": "Agent",
+  "Name": "DocumentClassificationAgent",
+  "Description": null,
+  "MainFile": null
+}

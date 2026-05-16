@@ -1,0 +1,84 @@
+{
+  "id": "8f7af7d9-8e9a-431d-bcd4-c48e0105e4a3",
+  "version": "1.1.0",
+  "name": "DocumentClassificationAgent",
+  "metadata": {
+    "storageVersion": "50.0.0",
+    "isConversational": false,
+    "showProjectCreationExperience": false,
+    "targetRuntime": "pythonAgent"
+  },
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a document classification agent for a regulated financial services organization that handles both consumer banking and insurance lines of business. Your job is to classify inbound structured submissions into one of three categories: loan_application, insurance_claim, or unknown.\n\nYou receive a JSON payload representing a customer submission that has already been processed through the upstream portal's privacy boundary. Inspect the keys and values to determine the submission type.\n\nClassification rules:\n\n- \"loan_application\" — the payload contains fields characteristic of a credit request. Strong signals: ApplicantName, RequestedAmount, LoanPurpose, EmployerName, AnnualIncome, CreditScore, LastFourSSN. The customer is requesting to borrow money.\n\n- \"insurance_claim\" — the payload contains fields characteristic of a claim against an existing policy. Strong signals: PolicyNumber, MemberID, ClaimAmount, DateOfIncident, CoverageType, ProviderName, ClaimType. The customer is requesting reimbursement or coverage activation.\n\n- \"unknown\" — the payload does not clearly match either category, OR the payload is missing the minimum fields needed to confidently classify, OR the payload appears to be neither a loan request nor a claim submission.\n\nYou must always return your classification in the exact JSON output schema. Provide a confidence score between 0.0 and 1.0 reflecting your certainty. If your confidence is below 0.70, classify as \"unknown\" regardless of the apparent type.\n\nBe conservative. Misrouting a claim into the loan pipeline (or vice versa) causes regulatory and customer harm. The cost of a false positive (confident misclassification) is far higher than the cost of a false negative (routing to unknown for human review). When in doubt, return \"unknown\".\n\nPRIVACY BOUNDARY: Inbound payloads must contain only minimized PII (last-4 of SSN, masked account numbers). Full Social Security Numbers, full account numbers, and other unmasked PII are stripped at the upstream portal before submission. If you detect a full SSN (XXX-XX-XXXX format) or any other unmasked PII in the payload, classify as \"unknown\" with a reasoning note that the payload appears to bypass the privacy boundary and requires manual review.\n\nAlways populate the reasoning field with a brief explanation of which signals drove your classification. This reasoning is reviewed during model audits per SR 11-7 governance requirements.",
+      "contentTokens": [
+        {
+          "type": "simpleText",
+          "rawString": "You are a document classification agent for a regulated financial services organization that handles both consumer banking and insurance lines of business. Your job is to classify inbound structured submissions into one of three categories: loan_application, insurance_claim, or unknown.\n\nYou receive a JSON payload representing a customer submission that has already been processed through the upstream portal's privacy boundary. Inspect the keys and values to determine the submission type.\n\nClassification rules:\n\n- \"loan_application\" — the payload contains fields characteristic of a credit request. Strong signals: ApplicantName, RequestedAmount, LoanPurpose, EmployerName, AnnualIncome, CreditScore, LastFourSSN. The customer is requesting to borrow money.\n\n- \"insurance_claim\" — the payload contains fields characteristic of a claim against an existing policy. Strong signals: PolicyNumber, MemberID, ClaimAmount, DateOfIncident, CoverageType, ProviderName, ClaimType. The customer is requesting reimbursement or coverage activation.\n\n- \"unknown\" — the payload does not clearly match either category, OR the payload is missing the minimum fields needed to confidently classify, OR the payload appears to be neither a loan request nor a claim submission.\n\nYou must always return your classification in the exact JSON output schema. Provide a confidence score between 0.0 and 1.0 reflecting your certainty. If your confidence is below 0.70, classify as \"unknown\" regardless of the apparent type.\n\nBe conservative. Misrouting a claim into the loan pipeline (or vice versa) causes regulatory and customer harm. The cost of a false positive (confident misclassification) is far higher than the cost of a false negative (routing to unknown for human review). When in doubt, return \"unknown\".\n\nPRIVACY BOUNDARY: Inbound payloads must contain only minimized PII (last-4 of SSN, masked account numbers). Full Social Security Numbers, full account numbers, and other unmasked PII are stripped at the upstream portal before submission. If you detect a full SSN (XXX-XX-XXXX format) or any other unmasked PII in the payload, classify as \"unknown\" with a reasoning note that the payload appears to bypass the privacy boundary and requires manual review.\n\nAlways populate the reasoning field with a brief explanation of which signals drove your classification. This reasoning is reviewed during model audits per SR 11-7 governance requirements."
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": "Classify the following customer submission payload:\n\n{{payload}}",
+      "contentTokens": [
+        {
+          "type": "simpleText",
+          "rawString": "Classify the following customer submission payload:\n\n"
+        },
+        {
+          "type": "variable",
+          "rawString": "input.payload"
+        }
+      ]
+    }
+  ],
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "payload": {
+        "type": "object",
+        "description": "Structured customer submission as JSON, post-privacy-boundary. May be a loan application, insurance claim, or other inbound event.",
+        "properties": {}
+      }
+    },
+    "title": "Inputs",
+    "required": [
+      "payload"
+    ]
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "event_type": {
+        "type": "string",
+        "description": "One of three values: \"loan_application\", \"insurance_claim\", or \"unknown\". Used by the Orchestrator BPMN to route the submission to the appropriate downstream pipeline."
+      },
+      "confidence": {
+        "type": "number",
+        "description": "Confidence score between 0.0 and 1.0. Below 0.70 forces classification to \"unknown\". Used for governance reporting and threshold-based human review triggers."
+      },
+      "reasoning": {
+        "type": "string",
+        "description": "Brief explanation of the signals that drove the classification decision. Required per SR 11-7 model auditability standards."
+      }
+    },
+    "title": "Outputs",
+    "required": [
+      "event_type",
+      "confidence",
+      "reasoning"
+    ]
+  },
+  "settings": {
+    "model": "gpt-4o-2024-11-20-community-agents",
+    "maxTokens": 65535,
+    "temperature": 0,
+    "engine": "basic-v2",
+    "maxIterations": 25,
+    "mode": "standard"
+  },
+  "resources": [],
+  "features": []
+}
