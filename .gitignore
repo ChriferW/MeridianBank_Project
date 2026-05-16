@@ -1,0 +1,21 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*~
+
+# UiPath build artifacts
+**/.local/
+**/.objects/
+**/.entities/
+**/.tmh/
+**/project.json.lock
