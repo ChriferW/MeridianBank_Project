@@ -149,7 +149,7 @@ Human Override Audit Trail Standard.
 
 ## Author
 
-Christopher Williams · c.williams101198@gmail.com
+Christopher Williams · c.williams1011@proton.me
 
 This is a portfolio build. All companies, customers, claims, and
 applicants are fictional. Connection definitions in the repo use
