@@ -133,17 +133,15 @@ Built entirely on the UiPath platform across:
 - **UiPath Integration Service** — connectors for Gmail, Sheets, Claude, PDFMonkey
 
 ## Reading order
-
 If you have ten minutes and want the shortest path to evaluating this
 work, read in this order:
-
 1. **[Week 3 README](Week_3_RDD/README.md)** — the synthesis and the most fully-realized build
-2. **[Week 3 board memo](Week_3_RDD/docs/RDD%20Project%20Summary.docx)** — the strategic case the build defends
+2. **[Week 3 board memo](Week_3_RDD/docs/RDD_Board_Memo.pdf)** — the strategic case the build defends
 3. **[Week 2 governance packet](Week_2_CascadeHealth/docs/week2_governance_packet.md)** — the honest version of what's hard about agentic systems
 4. **[Week 1 README](Week_1_LoanIntake/README.md)** — for the foundational discipline that underpins the rest
 
 If you have an hour and want regulator-grade detail, add the **[Week 3
-Governance Packet](Week_3_RDD/docs/RDD%20Governance%20Packet.docx)** —
+Governance Packet](Week_3_RDD/docs/RDD_Governance_Packet.pdf)** —
 Model Card + Decision Logging Specification + Audit Retention Matrix +
 Human Override Audit Trail Standard.
 
